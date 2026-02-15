@@ -704,6 +704,7 @@ const (
 	Keyboard_KeyApostrophe = UnifiedKeyType(KeyboardMask) | UnifiedKeyType(KeyApostrophe)
 	Keyboard_KeyComma      = UnifiedKeyType(KeyboardMask) | UnifiedKeyType(KeyComma)
 	Keyboard_KeyMinus      = UnifiedKeyType(KeyboardMask) | UnifiedKeyType(KeyMinus)
+	Keyboard_KeyPlus       = Keyboard_KeyEqual
 	Keyboard_KeyPeriod     = UnifiedKeyType(KeyboardMask) | UnifiedKeyType(KeyPeriod)
 	Keyboard_KeySlash      = UnifiedKeyType(KeyboardMask) | UnifiedKeyType(KeySlash)
 	Keyboard_KeyZero       = UnifiedKeyType(KeyboardMask) | UnifiedKeyType(KeyZero)
