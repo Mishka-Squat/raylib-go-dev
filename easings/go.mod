@@ -1,12 +1,12 @@
 module github.com/igadmg/raylib-go/easings
 
-go 1.25
+go 1.25.0
 
 require (
-	github.com/igadmg/goex v0.0.0-20260207091515-91213be8da02
+	github.com/igadmg/goex v0.0.0-20260211205126-dbcbb32b8419
 )
 
 require (
 	github.com/chewxy/math32 v1.11.1 // indirect
-	golang.org/x/exp v0.0.0-20260112195511-716be5621a96 // indirect
+	golang.org/x/exp v0.0.0-20260212183809-81e46e3db34a // indirect
 )

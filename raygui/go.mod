@@ -1,12 +1,12 @@
 module github.com/igadmg/raylib-go/raygui
 
-go 1.25
+go 1.25.0
 
 require (
-	github.com/igadmg/gamemath v0.0.0-20260201211411-ef8e47ea1638
-	github.com/igadmg/goex v0.0.0-20260207091515-91213be8da02
+	github.com/igadmg/gamemath v0.0.0-20260207213656-a254d9863710
+	github.com/igadmg/goex v0.0.0-20260211205126-dbcbb32b8419
 	github.com/igadmg/raylib-go/raylib v0.0.0-20250502171607-bcf0fc4a100d
-	golang.org/x/exp v0.0.0-20260112195511-716be5621a96
+	golang.org/x/exp v0.0.0-20260212183809-81e46e3db34a
 )
 
 require (
@@ -16,6 +16,6 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/stretchr/testify v1.11.1 // indirect
 	go.yaml.in/yaml/v4 v4.0.0-rc.4 // indirect
-	golang.org/x/sys v0.40.0 // indirect
+	golang.org/x/sys v0.41.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
