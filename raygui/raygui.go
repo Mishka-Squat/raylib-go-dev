@@ -280,6 +280,13 @@ func SetStyle[T constraints.Integer](control Control, property ControlProperty, 
 	C.GuiSetStyle(ccontrol, cproperty, cvalue)
 }
 
+func SetStyleColor(control Control, property ControlProperty, color colorex.RGBA) {
+	ccontrol := C.int(control)
+	cproperty := C.int(property)
+	cvalue := C.int(rl.ColorToInt(color))
+	C.GuiSetStyle(ccontrol, cproperty, cvalue)
+}
+
 // GuiGetStyle - Get one style property
 func GetStyle[T constraints.Integer](control Control, property ControlProperty) T {
 	ccontrol := C.int(control)
@@ -1188,9 +1195,4 @@ func GetFont() rl.Font {
 // SetAlpha - set alpha (global state)
 func SetAlpha(alpha float32) {
 	C.GuiSetAlpha((C.float)(alpha))
-}
-
-// SetScale - set scale (global state)
-func SetScale(alpha float32) {
-	C.GuiSetScale((C.float)(alpha))
 }
