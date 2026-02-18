@@ -3,10 +3,10 @@ module github.com/igadmg/raylib-go/raygui
 go 1.25.0
 
 require (
-	github.com/igadmg/gamemath v0.0.0-20260207213656-a254d9863710
-	github.com/igadmg/goex v0.0.0-20260211205126-dbcbb32b8419
+	github.com/igadmg/gamemath v0.0.0-20260216122339-3c36b900dade
+	github.com/igadmg/goex v0.0.0-20260216122339-107b85204131
 	github.com/igadmg/raylib-go/raylib v0.0.0-20250502171607-bcf0fc4a100d
-	golang.org/x/exp v0.0.0-20260212183809-81e46e3db34a
+	golang.org/x/exp v0.0.0-20260218203240-3dfff04db8fa
 )
 
 require (

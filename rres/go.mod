@@ -9,9 +9,9 @@ require (
 require (
 	github.com/chewxy/math32 v1.11.1 // indirect
 	github.com/ebitengine/purego v0.9.1 // indirect
-	github.com/igadmg/gamemath v0.0.0-20260207213656-a254d9863710 // indirect
-	github.com/igadmg/goex v0.0.0-20260211205126-dbcbb32b8419 // indirect
+	github.com/igadmg/gamemath v0.0.0-20260216122339-3c36b900dade // indirect
+	github.com/igadmg/goex v0.0.0-20260216122339-107b85204131 // indirect
 	go.yaml.in/yaml/v4 v4.0.0-rc.4 // indirect
-	golang.org/x/exp v0.0.0-20260212183809-81e46e3db34a // indirect
+	golang.org/x/exp v0.0.0-20260218203240-3dfff04db8fa // indirect
 	golang.org/x/sys v0.41.0 // indirect
 )

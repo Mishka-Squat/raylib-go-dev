@@ -4,9 +4,9 @@ go 1.25.0
 
 require (
 	github.com/ebitengine/purego v0.9.1
-	github.com/igadmg/gamemath v0.0.0-20260207213656-a254d9863710
-	github.com/igadmg/goex v0.0.0-20260211205126-dbcbb32b8419
-	golang.org/x/exp v0.0.0-20260212183809-81e46e3db34a
+	github.com/igadmg/gamemath v0.0.0-20260216122339-3c36b900dade
+	github.com/igadmg/goex v0.0.0-20260216122339-107b85204131
+	golang.org/x/exp v0.0.0-20260218203240-3dfff04db8fa
 	golang.org/x/sys v0.41.0
 )
 
