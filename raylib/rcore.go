@@ -109,7 +109,6 @@ package rl
 #cgo nocallback IsWindowResized
 #cgo nocallback IsWindowState
 #cgo nocallback LoadAutomationEventList
-#cgo nocallback LoadShader
 #cgo nocallback LoadShaderFromMemory
 #cgo nocallback LoadVrStereoConfig
 #cgo nocallback MaximizeWindow

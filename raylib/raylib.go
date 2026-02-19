@@ -19,6 +19,7 @@ import (
 	"github.com/igadmg/gamemath/vector4"
 	"github.com/igadmg/goex/image/colorex"
 	"github.com/igadmg/goex/mathex"
+	"golang.org/x/exp/constraints"
 )
 
 func init() {
@@ -1514,48 +1515,32 @@ type PixelFormat int32
 // Texture formats
 // NOTE: Support depends on OpenGL version and platform
 const (
-	// 8 bit per pixel (no alpha)
-	UncompressedGrayscale PixelFormat = iota + 1
-	// 8*2 bpp (2 channels)
-	UncompressedGrayAlpha
-	// 16 bpp
-	UncompressedR5g6b5
-	// 24 bpp
-	UncompressedR8g8b8
-	// 16 bpp (1 bit alpha)
-	UncompressedR5g5b5a1
-	// 16 bpp (4 bit alpha)
-	UncompressedR4g4b4a4
-	// 32 bpp
-	UncompressedR8g8b8a8
-	// 32 bpp (1 channel - float)
-	UncompressedR32
-	// 32*3 bpp (3 channels - float)
-	UncompressedR32g32b32
-	// 32*4 bpp (4 channels - float)
-	UncompressedR32g32b32a32
-	// 4 bpp (no alpha)
-	CompressedDxt1Rgb
-	// 4 bpp (1 bit alpha)
-	CompressedDxt1Rgba
-	// 8 bpp
-	CompressedDxt3Rgba
-	// 8 bpp
-	CompressedDxt5Rgba
-	// 4 bpp
-	CompressedEtc1Rgb
-	// 4 bpp
-	CompressedEtc2Rgb
-	// 8 bpp
-	CompressedEtc2EacRgba
-	// 4 bpp
-	CompressedPvrtRgb
-	// 4 bpp
-	CompressedPvrtRgba
-	// 8 bpp
-	CompressedAstc4x4Rgba
-	// 2 bpp
-	CompressedAstc8x8Rgba
+	UncompressedGrayscale    PixelFormat = iota + 1 // 8 bit per pixel (no alpha)
+	UncompressedGrayAlpha                           // 8*2 bpp (2 channels)
+	UncompressedR5G6B5                              // 16 bpp
+	UncompressedR8G8B8                              // 24 bpp
+	UncompressedR5G5B5A1                            // 16 bpp (1 bit alpha)
+	UncompressedR4G4B4A4                            // 16 bpp (4 bit alpha)
+	UncompressedR8G8B8A8                            // 32 bpp
+	UncompressedR32                                 // 32 bpp (1 channel - float)
+	UncompressedR32G32B32                           // 32*3 bpp (3 channels - float)
+	UncompressedR32G32B32A32                        // 32*4 bpp (4 channels - float)
+	UncompressedR16                                 // 16 bpp (1 channel - half float)
+	UncompressedR16G16B16                           // 16*3 bpp (3 channels - half float)
+	UncompressedR16G16B16A16                        // 16*4 bpp (4 channels - half float)
+	UncompressedR16UI                               // 16 bit per pixel (no alpha)
+	UncompressedR32UI                               // 32 bit per pixel (no alpha)
+	CompressedDxt1Rgb                               // 4 bpp (no alpha)
+	CompressedDxt1Rgba                              // 4 bpp (1 bit alpha)
+	CompressedDxt3Rgba                              // 8 bpp
+	CompressedDxt5Rgba                              // 8 bpp
+	CompressedEtc1Rgb                               // 4 bpp
+	CompressedEtc2Rgb                               // 4 bpp
+	CompressedEtc2EacRgba                           // 8 bpp
+	CompressedPvrtRgb                               // 4 bpp
+	CompressedPvrtRgba                              // 4 bpp
+	CompressedAstc4x4Rgba                           // 8 bpp
+	CompressedAstc8x8Rgba                           // 2 bpp
 )
 
 // TextureFilterMode - Texture filter mode
@@ -1669,9 +1654,15 @@ type Texture2D struct {
 	Format PixelFormat
 }
 
-// NewTexture2D - Returns new Texture2D
-func NewTexture2D(id uint32, width, height, mipmaps int32, format PixelFormat) *Texture2D {
-	return &Texture2D{id, width, height, mipmaps, format}
+// NewTexture2D - creates new empty texture of given size and format
+func NewTexture2D[T constraints.Integer](width, height, mipmaps T, format PixelFormat) Texture2D {
+	return LoadTextureFromImage(
+		Image{
+			Width:   int32(width),
+			Height:  int32(height),
+			Mipmaps: int32(mipmaps),
+			Format:  format,
+		})
 }
 
 func (t *Texture2D) Unload() {
