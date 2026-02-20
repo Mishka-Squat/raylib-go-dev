@@ -1,12 +1,12 @@
 [submodule "external/raylib"]
 	path = external/raylib
-	url = git@github.com:igadmg/raylib.git
+	url = git@github.com:Mishka-Squat/raylib.git
 	branch = master_patched
 [submodule "external/raygui"]
 	path = external/raygui
-	url = git@github.com:igadmg/raygui.git
+	url = git@github.com:Mishka-Squat/raygui.git
 	branch = master_patched
 [submodule "external/rres"]
 	path = external/rres
-	url = git@github.com:igadmg/rres.git
+	url = git@github.com:Mishka-Squat/rres.git
 	branch = master_patched

@@ -9,7 +9,7 @@ import "C"
 import (
 	"unsafe"
 
-	"github.com/igadmg/goex/image/colorex"
+	"github.com/Mishka-Squat/goex/image/colorex"
 )
 
 // SetMatrixProjection - Set a custom projection matrix (replaces internal projection matrix)

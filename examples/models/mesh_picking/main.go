@@ -19,8 +19,8 @@ import (
 	"math"
 	"unsafe"
 
-	"github.com/igadmg/gamemath/vector3"
-	rl "github.com/igadmg/raylib-go/raylib"
+	"github.com/Mishka-Squat/gamemath/vector3"
+	rl "github.com/Mishka-Squat/raylib-go/raylib"
 )
 
 const (
@@ -123,7 +123,7 @@ func main() {
 		cursorColor := rl.White
 
 		// Get ray and test against objects
-		// See issue : https://github.com/igadmg/raylib-go/issues/457
+		// See issue : https://github.com/Mishka-Squat/raylib-go/issues/457
 		//ray = rl.GetScreenToWorldRay(rl.GetMousePosition(), camera)
 		ray = rl.GetMouseRay(rl.GetMousePosition(), camera)
 

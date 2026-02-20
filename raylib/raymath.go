@@ -5,9 +5,9 @@ package rl
 import (
 	"math"
 
-	mathex "github.com/igadmg/gamemath"
-	"github.com/igadmg/gamemath/vector2"
-	"github.com/igadmg/gamemath/vector3"
+	mathex "github.com/Mishka-Squat/gamemath"
+	"github.com/Mishka-Squat/gamemath/vector2"
+	"github.com/Mishka-Squat/gamemath/vector3"
 )
 
 // Vector2LineAngle - Calculate angle defined by a two vectors line

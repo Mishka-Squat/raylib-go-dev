@@ -1,9 +1,9 @@
-module github.com/igadmg/raylib-go/easings
+module github.com/Mishka-Squat/raylib-go/easings
 
 go 1.25.0
 
 require (
-	github.com/igadmg/goex v0.0.0-20260216122339-107b85204131
+	github.com/Mishka-Squat/goex v0.0.0-20260216122339-107b85204131
 )
 
 require (

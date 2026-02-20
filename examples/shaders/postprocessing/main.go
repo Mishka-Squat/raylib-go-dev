@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/igadmg/gamemath/vector2"
-	"github.com/igadmg/gamemath/vector3"
-	rl "github.com/igadmg/raylib-go/raylib"
+	"github.com/Mishka-Squat/gamemath/vector2"
+	"github.com/Mishka-Squat/gamemath/vector3"
+	rl "github.com/Mishka-Squat/raylib-go/raylib"
 )
 
 const MaxPostproShaders = 12
@@ -52,8 +52,8 @@ func main() {
 	camera.Up = vector3.NewFloat32(0.0, 1.0, 0.0)
 	camera.Fovy = 45.0
 
-	obj := rl.LoadModel("church.obj")                             // Load OBJ model
-	texture := rl.LoadTexture("church_diffuse.png")               // Load model texture
+	obj := rl.LoadModel("church.obj")                            // Load OBJ model
+	texture := rl.LoadTexture("church_diffuse.png")              // Load model texture
 	rl.SetMaterialTexture(obj.Materials, rl.MapDiffuse, texture) // Set obj model diffuse texture
 
 	position := vector3.NewFloat32(0.0, 0.0, 0.0) // Set model position

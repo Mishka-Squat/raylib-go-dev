@@ -1,4 +1,4 @@
-## raygui [![GoDoc](https://godoc.org/github.com/igadmg/raylib-go/raygui?status.svg)](https://godoc.org/github.com/igadmg/raylib-go/raygui)
+## raygui [![GoDoc](https://godoc.org/github.com/Mishka-Squat/raylib-go/raygui?status.svg)](https://godoc.org/github.com/Mishka-Squat/raylib-go/raygui)
 
 raygui is simple and easy-to-use IMGUI (immediate mode GUI API) library.
 

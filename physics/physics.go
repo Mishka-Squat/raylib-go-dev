@@ -10,9 +10,9 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/igadmg/gamemath/vector2"
-	"github.com/igadmg/goex/mathex"
-	rl "github.com/igadmg/raylib-go/raylib"
+	"github.com/Mishka-Squat/gamemath/vector2"
+	"github.com/Mishka-Squat/goex/mathex"
+	rl "github.com/Mishka-Squat/raylib-go/raylib"
 )
 
 // ShapeType type

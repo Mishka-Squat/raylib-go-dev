@@ -316,10 +316,10 @@ import "C"
 import (
 	"unsafe"
 
-	"github.com/igadmg/gamemath/vector2"
-	"github.com/igadmg/gamemath/vector3"
-	"github.com/igadmg/gamemath/vector4"
-	"github.com/igadmg/goex/image/colorex"
+	"github.com/Mishka-Squat/gamemath/vector2"
+	"github.com/Mishka-Squat/gamemath/vector3"
+	"github.com/Mishka-Squat/gamemath/vector4"
+	"github.com/Mishka-Squat/goex/image/colorex"
 	"golang.org/x/exp/constraints"
 )
 

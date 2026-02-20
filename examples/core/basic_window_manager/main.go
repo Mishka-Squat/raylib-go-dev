@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	rl "github.com/igadmg/raylib-go/raylib"
+	rl "github.com/Mishka-Squat/raylib-go/raylib"
 )
 
 const screenW = int32(1280)

@@ -5,8 +5,8 @@ import (
 	"math"
 	"time"
 
-	"github.com/igadmg/gamemath/vector2"
-	rl "github.com/igadmg/raylib-go/raylib"
+	"github.com/Mishka-Squat/gamemath/vector2"
+	rl "github.com/Mishka-Squat/raylib-go/raylib"
 )
 
 const (

@@ -10,9 +10,9 @@ import "C"
 import (
 	"unsafe"
 
-	"github.com/igadmg/gamemath/rect2"
-	"github.com/igadmg/gamemath/vector2"
-	"github.com/igadmg/gamemath/vector3"
+	"github.com/Mishka-Squat/gamemath/rect2"
+	"github.com/Mishka-Squat/gamemath/vector2"
+	"github.com/Mishka-Squat/gamemath/vector3"
 )
 
 // govec2ptr - Returns new Vector2 from pointer

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/igadmg/goex/image/colorex"
-	rl "github.com/igadmg/raylib-go/raylib"
+	"github.com/Mishka-Squat/goex/image/colorex"
+	rl "github.com/Mishka-Squat/raylib-go/raylib"
 )
 
 func main() {

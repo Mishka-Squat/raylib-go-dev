@@ -17,10 +17,10 @@
 package main
 
 import (
-	"github.com/igadmg/gamemath/rect2"
-	"github.com/igadmg/gamemath/vector2"
-	gm "github.com/igadmg/goex/mathex"
-	rl "github.com/igadmg/raylib-go/raylib"
+	"github.com/Mishka-Squat/gamemath/rect2"
+	"github.com/Mishka-Squat/gamemath/vector2"
+	gm "github.com/Mishka-Squat/goex/mathex"
+	rl "github.com/Mishka-Squat/raylib-go/raylib"
 )
 
 const (

@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"math"
 
-	rl "github.com/igadmg/raylib-go/raylib"
+	rl "github.com/Mishka-Squat/raylib-go/raylib"
 )
 
 const (

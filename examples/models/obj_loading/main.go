@@ -5,8 +5,8 @@ import (
 	"slices"
 	"unsafe"
 
-	"github.com/igadmg/gamemath/vector3"
-	rl "github.com/igadmg/raylib-go/raylib"
+	"github.com/Mishka-Squat/gamemath/vector3"
+	rl "github.com/Mishka-Squat/raylib-go/raylib"
 )
 
 var supportedFileTypes = []string{
@@ -56,7 +56,7 @@ func main() {
 
 			if len(droppedFiles) == 1 { // Only support one file dropped
 				if slices.Contains(supportedFileTypes, filepath.Ext(droppedFiles[0])) { // Model file formats supported
-					rl.UnloadModel(&obj)                                          // Unload previous model
+					rl.UnloadModel(&obj)                                         // Unload previous model
 					obj = rl.LoadModel(droppedFiles[0])                          // Load new model
 					rl.SetMaterialTexture(obj.Materials, rl.MapDiffuse, texture) // Set current map diffuse texture
 

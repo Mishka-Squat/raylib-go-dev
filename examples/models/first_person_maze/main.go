@@ -2,8 +2,8 @@
 *
 *   raylib [models] example - first person maze
 *
-*   This example has been created using raylib-go v0.0.0-20220104071325-2f072dc2d259 (https://github.com/igadmg/raylib-go)
-*   raylib-go is licensed under an unmodified zlib/libpng license (https://github.com/igadmg/raylib-go/blob/master/LICENSE)
+*   This example has been created using raylib-go v0.0.0-20220104071325-2f072dc2d259 (https://github.com/Mishka-Squat/raylib-go)
+*   raylib-go is licensed under an unmodified zlib/libpng license (https://github.com/Mishka-Squat/raylib-go/blob/master/LICENSE)
 *
 *   Original C version for Raylib 2.5 Copyright (c) 2019 Ramon Santamaria (@raysan5)
 *   Converted to Go by Michael Redman January 4, 2022
@@ -13,9 +13,9 @@
 package main
 
 import (
-	"github.com/igadmg/gamemath/vector2"
-	"github.com/igadmg/gamemath/vector3"
-	rl "github.com/igadmg/raylib-go/raylib"
+	"github.com/Mishka-Squat/gamemath/vector2"
+	"github.com/Mishka-Squat/gamemath/vector3"
+	rl "github.com/Mishka-Squat/raylib-go/raylib"
 )
 
 func main() {

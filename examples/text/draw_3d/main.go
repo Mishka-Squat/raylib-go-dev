@@ -34,10 +34,10 @@ import (
 	"unicode/utf8"
 	"unsafe"
 
-	"github.com/igadmg/gamemath/rect2"
-	"github.com/igadmg/gamemath/vector3"
-	"github.com/igadmg/goex/image/colorex"
-	rl "github.com/igadmg/raylib-go/raylib"
+	"github.com/Mishka-Squat/gamemath/rect2"
+	"github.com/Mishka-Squat/gamemath/vector3"
+	"github.com/Mishka-Squat/goex/image/colorex"
+	rl "github.com/Mishka-Squat/raylib-go/raylib"
 )
 
 // Globals
@@ -191,7 +191,7 @@ func main() {
 
 		// Handle clicking the cube
 		if rl.IsMouseButtonPressed(rl.MouseButtonLeft) {
-			// TODO : Missing function, see issue https://github.com/igadmg/raylib-go/issues/457
+			// TODO : Missing function, see issue https://github.com/Mishka-Squat/raylib-go/issues/457
 			//ray := rl.GetScreenToWorldRay(rl.GetMousePosition(), camera)
 			ray := rl.GetMouseRay(rl.GetMousePosition(), camera)
 

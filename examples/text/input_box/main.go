@@ -15,9 +15,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/igadmg/gamemath/rect2"
-	"github.com/igadmg/gamemath/vector2"
-	rl "github.com/igadmg/raylib-go/raylib"
+	"github.com/Mishka-Squat/gamemath/rect2"
+	"github.com/Mishka-Squat/gamemath/vector2"
+	rl "github.com/Mishka-Squat/raylib-go/raylib"
 )
 
 const (

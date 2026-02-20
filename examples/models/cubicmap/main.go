@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/igadmg/gamemath/vector2"
-	"github.com/igadmg/gamemath/vector3"
-	rl "github.com/igadmg/raylib-go/raylib"
+	"github.com/Mishka-Squat/gamemath/vector2"
+	"github.com/Mishka-Squat/gamemath/vector3"
+	rl "github.com/Mishka-Squat/raylib-go/raylib"
 )
 
 func main() {
@@ -25,7 +25,7 @@ func main() {
 	model := rl.LoadModelFromMesh(mesh)
 
 	// NOTE: By default each cube is mapped to one part of texture atlas
-	texture := rl.LoadTexture("cubicmap_atlas.png")                 // Load map texture
+	texture := rl.LoadTexture("cubicmap_atlas.png")                // Load map texture
 	rl.SetMaterialTexture(model.Materials, rl.MapDiffuse, texture) // Set map diffuse texture
 
 	mapPosition := vector3.NewFloat32(-16.0, 0.0, -8.0) // Set model position

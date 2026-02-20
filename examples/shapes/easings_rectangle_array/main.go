@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/igadmg/gamemath/rect2"
-	"github.com/igadmg/gamemath/vector2"
-	ez "github.com/igadmg/raylib-go/easings"
-	rl "github.com/igadmg/raylib-go/raylib"
+	"github.com/Mishka-Squat/gamemath/rect2"
+	"github.com/Mishka-Squat/gamemath/vector2"
+	ez "github.com/Mishka-Squat/raylib-go/easings"
+	rl "github.com/Mishka-Squat/raylib-go/raylib"
 )
 
 var (

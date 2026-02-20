@@ -6,7 +6,7 @@ package easings
 import (
 	"math"
 
-	"github.com/igadmg/goex/mathex"
+	"github.com/Mishka-Squat/goex/mathex"
 )
 
 // Linear Easing functions

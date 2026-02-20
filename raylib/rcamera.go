@@ -3,7 +3,7 @@
 package rl
 
 import (
-	"github.com/igadmg/gamemath/vector3"
+	"github.com/Mishka-Squat/gamemath/vector3"
 )
 
 // GetCameraForward - Returns the cameras forward vector (normalized)
@@ -137,7 +137,7 @@ func CameraPitch(camera *Camera, angle float32, lockView uint8, rotateAroundTarg
 
 		// Clamp view down
 		maxAngleDown := up.ScaleF(-1).Angle(targetPosition)
-		maxAngleDown = maxAngleDown * -1.0  // downwards angle is negative
+		maxAngleDown = maxAngleDown * -1.0   // downwards angle is negative
 		maxAngleDown = maWxAngleDown + 0.001 // avoid numerical errors
 		if angle < maxAngleDown {
 			angle = maxAngleDown

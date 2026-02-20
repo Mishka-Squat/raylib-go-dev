@@ -13,9 +13,9 @@ import (
 	"slices"
 	"unsafe"
 
-	"github.com/igadmg/gamemath/rect2"
-	"github.com/igadmg/gamemath/vector2"
-	"github.com/igadmg/goex/image/colorex"
+	"github.com/Mishka-Squat/gamemath/rect2"
+	"github.com/Mishka-Squat/gamemath/vector2"
+	"github.com/Mishka-Squat/goex/image/colorex"
 )
 
 type PackContext struct {

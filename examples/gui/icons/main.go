@@ -1,8 +1,8 @@
 package main
 
 import (
-	rg "github.com/igadmg/raylib-go/raygui"
-	rl "github.com/igadmg/raylib-go/raylib"
+	rg "github.com/Mishka-Squat/raylib-go/raygui"
+	rl "github.com/Mishka-Squat/raylib-go/raylib"
 )
 
 func main() {

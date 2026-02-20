@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/igadmg/gamemath/rect2"
-	rl "github.com/igadmg/raylib-go/raylib"
+	"github.com/Mishka-Squat/gamemath/rect2"
+	rl "github.com/Mishka-Squat/raylib-go/raylib"
 )
 
 var (

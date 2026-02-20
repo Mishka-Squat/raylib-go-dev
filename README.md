@@ -1,9 +1,9 @@
 ![logo](https://goo.gl/XlIcXz)
 ## raylib-go
-[![Build Status](https://github.com/igadmg/raylib-go/actions/workflows/build.yml/badge.svg)](https://github.com/igadmg/raylib-go/actions)
-[![GoDoc](https://godoc.org/github.com/igadmg/raylib-go/raylib?status.svg)](https://godoc.org/github.com/igadmg/raylib-go/raylib)
-[![Go Report Card](https://goreportcard.com/badge/github.com/igadmg/raylib-go/raylib)](https://goreportcard.com/report/github.com/igadmg/raylib-go/raylib)
-[![Examples](https://img.shields.io/badge/learn%20by-examples-0077b3.svg?style=flat-square)](https://github.com/igadmg/raylib-go/tree/master/examples)
+[![Build Status](https://github.com/Mishka-Squat/raylib-go/actions/workflows/build.yml/badge.svg)](https://github.com/Mishka-Squat/raylib-go/actions)
+[![GoDoc](https://godoc.org/github.com/Mishka-Squat/raylib-go/raylib?status.svg)](https://godoc.org/github.com/Mishka-Squat/raylib-go/raylib)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Mishka-Squat/raylib-go/raylib)](https://goreportcard.com/report/github.com/Mishka-Squat/raylib-go/raylib)
+[![Examples](https://img.shields.io/badge/learn%20by-examples-0077b3.svg?style=flat-square)](https://github.com/Mishka-Squat/raylib-go/tree/master/examples)
 
 Golang bindings for [raylib](http://www.raylib.com/), a simple and easy-to-use library to enjoy videogames programming.
 
@@ -45,11 +45,11 @@ It is also possible build the dll yourself. You can find more infos at [raylib's
 
 ##### Android
 
-[Android example](https://github.com/igadmg/raylib-go/tree/master/examples/others/android/example).
+[Android example](https://github.com/Mishka-Squat/raylib-go/tree/master/examples/others/android/example).
 
 ### Installation
 
-    go get -v -u github.com/igadmg/raylib-go/raylib
+    go get -v -u github.com/Mishka-Squat/raylib-go/raylib
 
 ### Build tags
 
@@ -65,14 +65,14 @@ It is also possible build the dll yourself. You can find more infos at [raylib's
 
 ### Documentation
 
-Documentation on [GoDoc](https://godoc.org/github.com/igadmg/raylib-go/raylib). Also check raylib [cheatsheet](http://www.raylib.com/cheatsheet/cheatsheet.html). If you have problems or need assistance there is an active community in the #raylib-go channel of the [Raylib Discord Server](https://discord.gg/raylib) that can help.
+Documentation on [GoDoc](https://godoc.org/github.com/Mishka-Squat/raylib-go/raylib). Also check raylib [cheatsheet](http://www.raylib.com/cheatsheet/cheatsheet.html). If you have problems or need assistance there is an active community in the #raylib-go channel of the [Raylib Discord Server](https://discord.gg/raylib) that can help.
 
 ### Example
 
 ```go
 package main
 
-import rl "github.com/igadmg/raylib-go/raylib"
+import rl "github.com/Mishka-Squat/raylib-go/raylib"
 
 func main() {
 	rl.InitWindow(800, 450, "raylib [core] example - basic window")
@@ -91,7 +91,7 @@ func main() {
 }
 ```
 
-Check more [examples](https://github.com/igadmg/raylib-go/tree/master/examples) organized by raylib modules.
+Check more [examples](https://github.com/Mishka-Squat/raylib-go/tree/master/examples) organized by raylib modules.
 
 ### Cross-compile (Linux)
 
@@ -121,4 +121,4 @@ basic_window: Mach-O 64-bit arm64 executable, flags:<NOUNDEFS|DYLDLINK|TWOLEVEL|
 
 ### License
 
-raylib-go is licensed under an unmodified zlib/libpng license. View [LICENSE](https://github.com/igadmg/raylib-go/blob/master/LICENSE).
+raylib-go is licensed under an unmodified zlib/libpng license. View [LICENSE](https://github.com/Mishka-Squat/raylib-go/blob/master/LICENSE).

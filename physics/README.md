@@ -1,4 +1,4 @@
-## physics [![GoDoc](https://godoc.org/github.com/igadmg/raylib-go/physics?status.svg)](https://godoc.org/github.com/igadmg/raylib-go/physics)
+## physics [![GoDoc](https://godoc.org/github.com/Mishka-Squat/raylib-go/physics?status.svg)](https://godoc.org/github.com/Mishka-Squat/raylib-go/physics)
 
 2D Physics library for videogames.
 

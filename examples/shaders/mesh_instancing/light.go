@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"unsafe"
 
-	"github.com/igadmg/gamemath/vector3"
-	"github.com/igadmg/goex/image/colorex"
-	rl "github.com/igadmg/raylib-go/raylib"
+	"github.com/Mishka-Squat/gamemath/vector3"
+	"github.com/Mishka-Squat/goex/image/colorex"
+	rl "github.com/Mishka-Squat/raylib-go/raylib"
 )
 
 type LightType int32

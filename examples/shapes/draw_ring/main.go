@@ -18,10 +18,10 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/igadmg/gamemath/rect2"
-	"github.com/igadmg/gamemath/vector2"
-	gui "github.com/igadmg/raylib-go/raygui"
-	rl "github.com/igadmg/raylib-go/raylib"
+	"github.com/Mishka-Squat/gamemath/rect2"
+	"github.com/Mishka-Squat/gamemath/vector2"
+	gui "github.com/Mishka-Squat/raylib-go/raygui"
+	rl "github.com/Mishka-Squat/raylib-go/raylib"
 )
 
 const (

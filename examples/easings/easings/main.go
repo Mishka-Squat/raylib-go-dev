@@ -3,10 +3,10 @@ package main
 import (
 	"strings"
 
-	"github.com/igadmg/gamemath/vector2"
-	"github.com/igadmg/raylib-go/easings"
-	"github.com/igadmg/raylib-go/raygui"
-	rl "github.com/igadmg/raylib-go/raylib"
+	"github.com/Mishka-Squat/gamemath/vector2"
+	"github.com/Mishka-Squat/raylib-go/easings"
+	"github.com/Mishka-Squat/raylib-go/raygui"
+	rl "github.com/Mishka-Squat/raylib-go/raylib"
 )
 
 func main() {

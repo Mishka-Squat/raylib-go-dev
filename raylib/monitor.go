@@ -3,7 +3,7 @@ package rl
 import (
 	"iter"
 
-	"github.com/igadmg/gamemath/vector2"
+	"github.com/Mishka-Squat/gamemath/vector2"
 )
 
 type Monitor struct {

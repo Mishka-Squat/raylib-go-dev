@@ -3,12 +3,12 @@ module examples
 go 1.25.0
 
 require (
-	github.com/igadmg/gamemath v0.0.0-20260216122339-3c36b900dade
-	github.com/igadmg/goex v0.0.0-20260216122339-107b85204131
-	github.com/igadmg/raylib-go/easings v0.0.0-20250502171607-bcf0fc4a100d
-	github.com/igadmg/raylib-go/physics v0.0.0-20250502171607-bcf0fc4a100d
-	github.com/igadmg/raylib-go/raygui v0.0.0-20250502171607-bcf0fc4a100d
-	github.com/igadmg/raylib-go/raylib v0.0.0-20250502171607-bcf0fc4a100d
+	github.com/Mishka-Squat/gamemath v0.0.0-20260216122339-3c36b900dade
+	github.com/Mishka-Squat/goex v0.0.0-20260216122339-107b85204131
+	github.com/Mishka-Squat/raylib-go/easings v0.0.0-20250502171607-bcf0fc4a100d
+	github.com/Mishka-Squat/raylib-go/physics v0.0.0-20250502171607-bcf0fc4a100d
+	github.com/Mishka-Squat/raylib-go/raygui v0.0.0-20250502171607-bcf0fc4a100d
+	github.com/Mishka-Squat/raylib-go/raylib v0.0.0-20250502171607-bcf0fc4a100d
 	github.com/jakecoffman/cp v1.2.1
 	github.com/neguse/go-box2d-lite v0.0.0-20170921151050-5d8ed9b7272b
 )
