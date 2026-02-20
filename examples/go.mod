@@ -3,7 +3,7 @@ module examples
 go 1.25.0
 
 require (
-	github.com/Mishka-Squat/gamemath v0.0.0-20260220092931-58a15e268003
+	github.com/Mishka-Squat/gamemath v0.0.0-20260220115342-d6e8c273dd36
 	github.com/Mishka-Squat/goex v0.0.0-20260220093026-a6a159ee586e
 	github.com/Mishka-Squat/raylib-go/easings v0.0.0-20260220111826-0920877398a5
 	github.com/Mishka-Squat/raylib-go/physics v0.0.0-20260220111826-0920877398a5
