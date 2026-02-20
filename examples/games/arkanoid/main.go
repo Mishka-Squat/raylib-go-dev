@@ -167,7 +167,7 @@ func (g *Game) Update() {
 				g.player.life--
 			}
 			if rl.CheckCollisionCircleRec(g.ball.position, g.ball.radius,
-				rl.NewRectangle(g.player.position.X-g.player.size.X/2, g.player.position.Y-g.player.size.Y/2, g.player.size.X, g.player.size.Y)) {
+				rl.MakeRectangle(g.player.position.X-g.player.size.X/2, g.player.position.Y-g.player.size.Y/2, g.player.size.X, g.player.size.Y)) {
 				if g.ball.speed.Y > 0 {
 					g.ball.speed.Y *= -1
 					g.ball.speed.X = (g.ball.position.X - g.player.position.X) / (g.player.size.X / 2) * 5

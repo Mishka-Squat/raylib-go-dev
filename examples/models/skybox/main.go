@@ -14,7 +14,7 @@ func main() {
 
 	rl.InitWindow(800, 450, "raylib [models] example - skybox loading and drawing")
 
-	camera := rl.NewCamera3D(
+	camera := rl.MakeCamera3D(
 		vector3.NewFloat32(1.0, 1.0, 1.0),
 		vector3.NewFloat32(4.0, 1.0, 4.0),
 		vector3.NewFloat32(0.0, 1.0, 0.0),

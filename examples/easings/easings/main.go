@@ -77,10 +77,10 @@ func main() {
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.RayWhite)
 
-		raygui.Label(rl.NewRectangle(20, 20, 200, 20), "Easing Type:")
-		comboActive = raygui.ComboBox(rl.NewRectangle(20, 40, 200, 20), strings.Join(easingTypes, ";"), comboActive)
+		raygui.Label(rl.MakeRectangle(20, 20, 200, 20), "Easing Type:")
+		comboActive = raygui.ComboBox(rl.MakeRectangle(20, 40, 200, 20), strings.Join(easingTypes, ";"), comboActive)
 
-		raygui.Label(rl.NewRectangle(20, 80, 200, 20), "Press R to reset")
+		raygui.Label(rl.MakeRectangle(20, 80, 200, 20), "Press R to reset")
 
 		rl.DrawCircleV(ballPosition, 50, rl.Maroon)
 

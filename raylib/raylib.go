@@ -798,61 +798,61 @@ const (
 // NOTE: Custom raylib color palette for amazing visuals on WHITE background
 var (
 	// Light Gray
-	LightGray = NewColor(200, 200, 200, 255)
+	LightGray = MakeColor(200, 200, 200, 255)
 	// Gray
-	Gray = NewColor(130, 130, 130, 255)
+	Gray = MakeColor(130, 130, 130, 255)
 	// Dark Gray
-	DarkGray = NewColor(80, 80, 80, 255)
+	DarkGray = MakeColor(80, 80, 80, 255)
 	// Darkest Gray
-	DarkestGray = NewColor(40, 40, 40, 255)
+	DarkestGray = MakeColor(40, 40, 40, 255)
 	// Black Gray - the darkset of all Grays
-	BlackGray = NewColor(20, 20, 20, 255)
+	BlackGray = MakeColor(20, 20, 20, 255)
 	// Yellow
-	Yellow = NewColor(253, 249, 0, 255)
+	Yellow = MakeColor(253, 249, 0, 255)
 	// Gold
-	Gold = NewColor(255, 203, 0, 255)
+	Gold = MakeColor(255, 203, 0, 255)
 	// Orange
-	Orange = NewColor(255, 161, 0, 255)
+	Orange = MakeColor(255, 161, 0, 255)
 	// Pink
-	Pink = NewColor(255, 109, 194, 255)
+	Pink = MakeColor(255, 109, 194, 255)
 	// Red
-	Red = NewColor(230, 41, 55, 255)
+	Red = MakeColor(230, 41, 55, 255)
 	// Maroon
-	Maroon = NewColor(190, 33, 55, 255)
+	Maroon = MakeColor(190, 33, 55, 255)
 	// Green
-	Green = NewColor(0, 228, 48, 255)
+	Green = MakeColor(0, 228, 48, 255)
 	// Lime
-	Lime = NewColor(0, 158, 47, 255)
+	Lime = MakeColor(0, 158, 47, 255)
 	// Dark Green
-	DarkGreen = NewColor(0, 117, 44, 255)
+	DarkGreen = MakeColor(0, 117, 44, 255)
 	// Sky Blue
-	SkyBlue = NewColor(102, 191, 255, 255)
+	SkyBlue = MakeColor(102, 191, 255, 255)
 	// Blue
-	Blue = NewColor(0, 121, 241, 255)
+	Blue = MakeColor(0, 121, 241, 255)
 	// Dark Blue
-	DarkBlue = NewColor(0, 82, 172, 255)
+	DarkBlue = MakeColor(0, 82, 172, 255)
 	// Purple
-	Purple = NewColor(200, 122, 255, 255)
+	Purple = MakeColor(200, 122, 255, 255)
 	// Violet
-	Violet = NewColor(135, 60, 190, 255)
+	Violet = MakeColor(135, 60, 190, 255)
 	// Dark Purple
-	DarkPurple = NewColor(112, 31, 126, 255)
+	DarkPurple = MakeColor(112, 31, 126, 255)
 	// Beige
-	Beige = NewColor(211, 176, 131, 255)
+	Beige = MakeColor(211, 176, 131, 255)
 	// Brown
-	Brown = NewColor(127, 106, 79, 255)
+	Brown = MakeColor(127, 106, 79, 255)
 	// Dark Brown
-	DarkBrown = NewColor(76, 63, 47, 255)
+	DarkBrown = MakeColor(76, 63, 47, 255)
 	// White
-	White = NewColor(255, 255, 255, 255)
+	White = MakeColor(255, 255, 255, 255)
 	// Black
-	Black = NewColor(0, 0, 0, 255)
+	Black = MakeColor(0, 0, 0, 255)
 	// Blank (Transparent)
-	Blank = NewColor(0, 0, 0, 0)
+	Blank = MakeColor(0, 0, 0, 0)
 	// Magenta
-	Magenta = NewColor(255, 0, 255, 255)
+	Magenta = MakeColor(255, 0, 255, 255)
 	// Ray White (RayLib Logo White)
-	RayWhite = NewColor(245, 245, 245, 255)
+	RayWhite = MakeColor(245, 245, 245, 255)
 )
 
 type Vector4 = vector4.Float32
@@ -875,8 +875,8 @@ type Matrix struct {
 	M3, M7, M11, M15 float32
 }
 
-// NewMatrix - Returns new Matrix
-func NewMatrix(m0, m4, m8, m12, m1, m5, m9, m13, m2, m6, m10, m14, m3, m7, m11, m15 float32) Matrix {
+// MakeMatrix - Returns new Matrix
+func MakeMatrix(m0, m4, m8, m12, m1, m5, m9, m13, m2, m6, m10, m14, m3, m7, m11, m15 float32) Matrix {
 	return Matrix{m0, m4, m8, m12, m1, m5, m9, m13, m2, m6, m10, m14, m3, m7, m11, m15}
 }
 
@@ -888,33 +888,33 @@ type Mat2 struct {
 	M11 float32
 }
 
-// NewMat2 - Returns new Mat2
-func NewMat2(m0, m1, m10, m11 float32) Mat2 {
+// MakeMat2 - Returns new Mat2
+func MakeMat2(m0, m1, m10, m11 float32) Mat2 {
 	return Mat2{m0, m1, m10, m11}
 }
 
 // Quaternion, 4 components (Vector4 alias)
 type Quaternion = vector4.Float32
 
-// NewQuaternion - Returns new Quaternion
-func NewQuaternion(x, y, z, w float32) Quaternion {
+// MakeQuaternion - Returns new Quaternion
+func MakeQuaternion(x, y, z, w float32) Quaternion {
 	return vector4.NewFloat32(x, y, z, w)
 }
 
-// NewColor - Returns new Color
-func NewColor(r, g, b, a uint8) colorex.RGBA {
+// MakeColor - Returns new Color
+func MakeColor(r, g, b, a uint8) colorex.RGBA {
 	return colorex.RGBA{R: r, G: g, B: b, A: a}
 }
 
 // Rectangle type
 type RectangleInt32 = rect2.Int32
 
-// NewRectangle - Returns new Rectangle
-func NewRectangle[XT, YT, WT, HT mathex.Number](x XT, y YT, width WT, height HT) rect2.Float32 {
+// MakeRectangle - Returns new Rectangle
+func MakeRectangle[XT, YT, WT, HT mathex.Number](x XT, y YT, width WT, height HT) rect2.Float32 {
 	return rect2.New(vector2.NewFloat32(x, y), vector2.NewFloat32(width, height))
 }
 
-func NewRectangleWHV[WHT mathex.SignedNumber](wh vector2.Vector[WHT]) rect2.Float32 {
+func MakeRectangleWHV[WHT mathex.SignedNumber](wh vector2.Vector[WHT]) rect2.Float32 {
 	return rect2.New(vector2.Zero[float32](), wh.ToFloat32())
 }
 
@@ -935,8 +935,8 @@ type Camera3D struct {
 // Camera type fallback, defaults to Camera3D
 type Camera = Camera3D
 
-// NewCamera3D - Returns new Camera3D
-func NewCamera3D(pos, target, up vector3.Float32, fovy float32, ct CameraProjection) Camera3D {
+// MakeCamera3D - Returns new Camera3D
+func MakeCamera3D(pos, target, up vector3.Float32, fovy float32, ct CameraProjection) Camera3D {
 	return Camera3D{pos, target, up, fovy, ct}
 }
 
@@ -952,8 +952,8 @@ type Camera2D struct {
 	Zoom float32
 }
 
-// NewCamera2D - Returns new Camera2D
-func NewCamera2D(offset, target vector2.Float32, rotation, zoom float32) Camera2D {
+// MakeCamera2D - Returns new Camera2D
+func MakeCamera2D(offset, target vector2.Float32, rotation, zoom float32) Camera2D {
 	return Camera2D{offset, target, rotation, zoom}
 }
 
@@ -965,8 +965,8 @@ type BoundingBox struct {
 	Max vector3.Float32
 }
 
-// NewBoundingBox - Returns new BoundingBox
-func NewBoundingBox(min, max vector3.Float32) BoundingBox {
+// MakeBoundingBox - Returns new BoundingBox
+func MakeBoundingBox(min, max vector3.Float32) BoundingBox {
 	return BoundingBox{min, max}
 }
 
@@ -976,17 +976,17 @@ type Asset struct {
 	fsys fs.FS
 }
 
-// NewAsset - creates a new Asset filesystem
+// MakeAsset - creates a new Asset filesystem
 // For Android: root should be empty or a directory path within assets
 // For Desktop: root should be the filesystem path to assets
-func NewAsset(root string) *Asset {
-	return &Asset{root: root}
+func MakeAsset(root string) Asset {
+	return Asset{root: root}
 }
 
-// NewAssetFromFS - creates a new Asset filesystem from a fs.FS
+// MakeAssetFromFS - creates a new Asset filesystem from a fs.FS
 // The root parameter specifies a subdirectory within the embedded filesystem (can be empty for root)
-func NewAssetFromFS(fsys fs.FS, root string) *Asset {
-	return &Asset{root: root, fsys: fsys}
+func MakeAssetFromFS(fsys fs.FS, root string) Asset {
+	return Asset{root: root, fsys: fsys}
 }
 
 // AssetFile represents an opened asset file
@@ -1656,7 +1656,7 @@ func (i Image) GetSize() vector2.Float32 {
 }
 
 func (i Image) GetRect() rect2.Float32 {
-	return NewRectangle(0, 0, i.Width, i.Height)
+	return MakeRectangle(0, 0, i.Width, i.Height)
 }
 
 func (i *Image) DrawDef(dst *Image, dstRect rect2.Float32) {
@@ -1710,7 +1710,7 @@ func (t Texture2D) GetSize() vector2.Float32 {
 }
 
 func (t Texture2D) GetRect() rect2.Float32 {
-	return NewRectangle(0, 0, t.Width, t.Height)
+	return MakeRectangle(0, 0, t.Width, t.Height)
 }
 
 func (t Texture2D) Draw(posX int, posY int, tint colorex.RGBA) {

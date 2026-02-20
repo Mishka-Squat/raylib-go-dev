@@ -161,86 +161,86 @@ func main() {
 
 		// First GUI column
 		//GuiSetStyle(CHECKBOX, TEXT_ALIGNMENT, TEXT_ALIGN_LEFT);
-		forceSquaredChecked = gui.CheckBox(rl.NewRectangle(25, 108, 15, 15), "FORCE CHECK!", forceSquaredChecked)
+		forceSquaredChecked = gui.CheckBox(rl.MakeRectangle(25, 108, 15, 15), "FORCE CHECK!", forceSquaredChecked)
 
 		gui.SetStyle(gui.TEXTBOX, gui.TEXT_ALIGNMENT, gui.TEXT_ALIGN_CENTER)
 		//GuiSetStyle(VALUEBOX, TEXT_ALIGNMENT, TEXT_ALIGN_LEFT);
-		gui.Spinner(rl.NewRectangle(25, 135, 125, 30), "", &spinner001Value, 0, 100, spinnerEditMode)
+		gui.Spinner(rl.MakeRectangle(25, 135, 125, 30), "", &spinner001Value, 0, 100, spinnerEditMode)
 
-		if gui.ValueBox(rl.NewRectangle(25, 175, 125, 30), "", &valueBox002Value, 0, 100, valueBoxEditMode) {
+		if gui.ValueBox(rl.MakeRectangle(25, 175, 125, 30), "", &valueBox002Value, 0, 100, valueBoxEditMode) {
 			valueBoxEditMode = !valueBoxEditMode
 		}
 		gui.SetStyle(gui.TEXTBOX, gui.TEXT_ALIGNMENT, gui.TEXT_ALIGN_LEFT)
-		if gui.TextBox(rl.NewRectangle(25, 215, 125, 30), &textBoxText, 64, textBoxEditMode) {
+		if gui.TextBox(rl.MakeRectangle(25, 215, 125, 30), &textBoxText, 64, textBoxEditMode) {
 			textBoxEditMode = !textBoxEditMode
 		}
 
 		gui.SetStyle(gui.BUTTON, gui.TEXT_ALIGNMENT, gui.TEXT_ALIGN_CENTER)
 
-		if gui.Button(rl.NewRectangle(25, 255, 125, 30), gui.IconText(gui.ICON_FILE_SAVE, "Save File")) {
+		if gui.Button(rl.MakeRectangle(25, 255, 125, 30), gui.IconText(gui.ICON_FILE_SAVE, "Save File")) {
 			showTextInputBox = true
 		}
 
-		gui.GroupBox(rl.NewRectangle(25, 310, 125, 150), "STATES")
+		gui.GroupBox(rl.MakeRectangle(25, 310, 125, 150), "STATES")
 		//GuiLock();
 		gui.SetState(gui.STATE_NORMAL)
-		if gui.Button(rl.NewRectangle(30, 320, 115, 30), "NORMAL") {
+		if gui.Button(rl.MakeRectangle(30, 320, 115, 30), "NORMAL") {
 		}
 		gui.SetState(gui.STATE_FOCUSED)
-		if gui.Button(rl.NewRectangle(30, 355, 115, 30), "FOCUSED") {
+		if gui.Button(rl.MakeRectangle(30, 355, 115, 30), "FOCUSED") {
 		}
 		gui.SetState(gui.STATE_PRESSED)
-		if gui.Button(rl.NewRectangle(30, 390, 115, 30), "#15#PRESSED") {
+		if gui.Button(rl.MakeRectangle(30, 390, 115, 30), "#15#PRESSED") {
 		}
 		gui.SetState(gui.STATE_DISABLED)
-		if gui.Button(rl.NewRectangle(30, 425, 115, 30), "DISABLED") {
+		if gui.Button(rl.MakeRectangle(30, 425, 115, 30), "DISABLED") {
 		}
 		gui.SetState(gui.STATE_NORMAL)
 		//GuiUnlock();
 
-		comboBoxActive = gui.ComboBox(rl.NewRectangle(25, 470, 125, 30), "ONE;TWO;THREE;FOUR", comboBoxActive)
+		comboBoxActive = gui.ComboBox(rl.MakeRectangle(25, 470, 125, 30), "ONE;TWO;THREE;FOUR", comboBoxActive)
 
 		// NOTE: gui.DropdownBox must draw after any other control that can be covered on unfolding
 		gui.SetStyle(gui.DROPDOWNBOX, gui.TEXT_ALIGNMENT, gui.TEXT_ALIGN_LEFT)
-		if gui.DropdownBox(rl.NewRectangle(25, 65, 125, 30), "#01#ONE;#02#TWO;#03#THREE;#04#FOUR", &dropdownBox001Active, dropDown001EditMode) {
+		if gui.DropdownBox(rl.MakeRectangle(25, 65, 125, 30), "#01#ONE;#02#TWO;#03#THREE;#04#FOUR", &dropdownBox001Active, dropDown001EditMode) {
 			dropDown001EditMode = !dropDown001EditMode
 		}
 
 		gui.SetStyle(gui.DROPDOWNBOX, gui.TEXT_ALIGNMENT, gui.TEXT_ALIGN_CENTER)
-		if gui.DropdownBox(rl.NewRectangle(25, 25, 125, 30), "ONE;TWO;THREE", &dropdownBox000Active, dropDown000EditMode) {
+		if gui.DropdownBox(rl.MakeRectangle(25, 25, 125, 30), "ONE;TWO;THREE", &dropdownBox000Active, dropDown000EditMode) {
 			dropDown000EditMode = !dropDown000EditMode
 		}
 
 		// Second GUI column
-		listViewActive = gui.ListView(rl.NewRectangle(165, 25, 140, 140), "Charmander;Bulbasaur;#18#Squirtel;Pikachu;Eevee;Pidgey", &listViewScrollIndex, listViewActive)
-		listViewExActive = gui.ListViewEx(rl.NewRectangle(165, 180, 140, 200), listViewExList, &listViewExFocus, &listViewExScrollIndex, listViewExActive)
+		listViewActive = gui.ListView(rl.MakeRectangle(165, 25, 140, 140), "Charmander;Bulbasaur;#18#Squirtel;Pikachu;Eevee;Pidgey", &listViewScrollIndex, listViewActive)
+		listViewExActive = gui.ListViewEx(rl.MakeRectangle(165, 180, 140, 200), listViewExList, &listViewExFocus, &listViewExScrollIndex, listViewExActive)
 
-		toggleGroupActive = gui.ToggleGroup(rl.NewRectangle(165, 400, 140, 25), "#1#ONE\n#3#TWO\n#8#THREE\n#23#", toggleGroupActive)
+		toggleGroupActive = gui.ToggleGroup(rl.MakeRectangle(165, 400, 140, 25), "#1#ONE\n#3#TWO\n#8#THREE\n#23#", toggleGroupActive)
 
 		// Third GUI column
-		gui.Panel(rl.NewRectangle(320, 25, 225, 140), "Panel Info")
-		colorPickerValue = gui.ColorPicker(rl.NewRectangle(320, 185, 196, 192), "", colorPickerValue)
+		gui.Panel(rl.MakeRectangle(320, 25, 225, 140), "Panel Info")
+		colorPickerValue = gui.ColorPicker(rl.MakeRectangle(320, 185, 196, 192), "", colorPickerValue)
 
-		sliderValue = gui.Slider(rl.NewRectangle(355, 400, 165, 20), "TEST",
+		sliderValue = gui.Slider(rl.MakeRectangle(355, 400, 165, 20), "TEST",
 			fmt.Sprintf("%2.2f", sliderValue), sliderValue, -50, 100)
-		sliderBarValue = gui.SliderBar(rl.NewRectangle(320, 430, 200, 20), "",
+		sliderBarValue = gui.SliderBar(rl.MakeRectangle(320, 430, 200, 20), "",
 			fmt.Sprintf("%2.2f", sliderBarValue), sliderBarValue, 0, 100)
-		progressValue = gui.ProgressBar(rl.NewRectangle(320, 460, 200, 20), "", "", progressValue, 0, 1)
+		progressValue = gui.ProgressBar(rl.MakeRectangle(320, 460, 200, 20), "", "", progressValue, 0, 1)
 
 		// NOTE: View rectangle could be used to perform some scissor test
 		var view rect2.Float32
-		gui.ScrollPanel(rl.NewRectangle(560, 25, 102, 354), "", rl.NewRectangle(560, 25, 300, 1200), &viewScroll, &view)
+		gui.ScrollPanel(rl.MakeRectangle(560, 25, 102, 354), "", rl.MakeRectangle(560, 25, 300, 1200), &viewScroll, &view)
 
 		var mouseCell vector2.Float32
-		gui.Grid(rl.NewRectangle(560, 25+180+195, 100, 120), "", 20, 3, &mouseCell)
+		gui.Grid(rl.MakeRectangle(560, 25+180+195, 100, 120), "", 20, 3, &mouseCell)
 
-		alphaValue = gui.ColorBarAlpha(rl.NewRectangle(320, 490, 200, 30), "", alphaValue)
+		alphaValue = gui.ColorBarAlpha(rl.MakeRectangle(320, 490, 200, 30), "", alphaValue)
 
-		gui.StatusBar(rl.NewRectangle(0, float32(rl.GetScreenHeight())-20, float32(rl.GetScreenWidth()), 20), "This is a status bar")
+		gui.StatusBar(rl.MakeRectangle(0, float32(rl.GetScreenHeight())-20, float32(rl.GetScreenWidth()), 20), "This is a status bar")
 
 		if showMessageBox {
 			rl.DrawRectangle(0, 0, int32(rl.GetScreenWidth()), int32(rl.GetScreenHeight()), rl.Fade(rl.RayWhite, 0.8))
-			var result int32 = gui.MessageBox(rl.NewRectangle(float32(rl.GetScreenWidth())/2-125, float32(rl.GetScreenHeight())/2-50, 250, 100), gui.IconText(gui.ICON_EXIT, "Close Window"), "Do you really want to exit?", "Yes;No")
+			var result int32 = gui.MessageBox(rl.MakeRectangle(float32(rl.GetScreenWidth())/2-125, float32(rl.GetScreenHeight())/2-50, 250, 100), gui.IconText(gui.ICON_EXIT, "Close Window"), "Do you really want to exit?", "Yes;No")
 
 			if (result == 0) || (result == 2) {
 				showMessageBox = false
@@ -253,7 +253,7 @@ func main() {
 			rl.DrawRectangle(0, 0, int32(rl.GetScreenWidth()), int32(rl.GetScreenHeight()), rl.Fade(rl.RayWhite, 0.8))
 			var secretViewActive bool
 			var result int32 = gui.TextInputBox(
-				rl.NewRectangle(float32(rl.GetScreenWidth())/2-120, float32(rl.GetScreenHeight())/2-60, 240, 140),
+				rl.MakeRectangle(float32(rl.GetScreenWidth())/2-120, float32(rl.GetScreenHeight())/2-60, 240, 140),
 				"Save",
 				gui.IconText(gui.ICON_FILE_SAVE, "Save file as..."),
 				"Ok;Cancel",

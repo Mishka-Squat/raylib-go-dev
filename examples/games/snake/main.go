@@ -179,8 +179,8 @@ func (g *Game) Update() {
 
 			// collision
 			if rl.CheckCollisionRecs(
-				rl.NewRectangle(g.Snake[0].Position.X, g.Snake[0].Position.Y, g.Snake[0].Size.X, g.Snake[0].Size.Y),
-				rl.NewRectangle(g.Fruit.Position.X, g.Fruit.Position.Y, g.Fruit.Size.X, g.Fruit.Size.Y),
+				rl.MakeRectangle(g.Snake[0].Position.X, g.Snake[0].Position.Y, g.Snake[0].Size.X, g.Snake[0].Size.Y),
+				rl.MakeRectangle(g.Fruit.Position.X, g.Fruit.Position.Y, g.Fruit.Size.X, g.Fruit.Size.Y),
 			) {
 				g.Snake[g.CounterTail].Position = g.SnakePosition[g.CounterTail-1]
 				g.CounterTail += 1

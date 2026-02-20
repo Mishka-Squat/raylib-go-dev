@@ -46,9 +46,9 @@ func main() {
 	rl.InitWindow(screenWidth, screenHeight, "raygui - gui.ScrollPanel()")
 
 	var (
-		panelRec        = rl.NewRectangle(20, 40, 200, 150)
-		panelContentRec = rl.NewRectangle(0, 0, 340, 340)
-		panelView       = rl.NewRectangle(0, 0, 0, 0)
+		panelRec        = rl.MakeRectangle(20, 40, 200, 150)
+		panelContentRec = rl.MakeRectangle(0, 0, 340, 340)
+		panelView       = rl.MakeRectangle(0, 0, 0, 0)
 		panelScroll     = vector2.NewFloat32(99, -20)
 		mouseCell       = vector2.NewFloat32(0, 0)
 
@@ -78,7 +78,7 @@ func main() {
 		gui.ScrollPanel(panelRec, "", panelContentRec, &panelScroll, &panelView)
 
 		rl.BeginScissorMode(int32(panelView.Position.X), int32(panelView.Position.Y), int32(panelView.Size.X), int32(panelView.Size.Y))
-		gui.Grid(rl.NewRectangle(
+		gui.Grid(rl.MakeRectangle(
 			float32(panelRec.Position.X+panelScroll.X),
 			float32(panelRec.Position.Y+panelScroll.Y),
 			float32(panelContentRec.Size.X),
@@ -98,14 +98,14 @@ func main() {
 
 		DrawStyleEditControls()
 
-		showContentArea = gui.CheckBox(rl.NewRectangle(565, 80, 20, 20), "SHOW CONTENT AREA", showContentArea)
+		showContentArea = gui.CheckBox(rl.MakeRectangle(565, 80, 20, 20), "SHOW CONTENT AREA", showContentArea)
 
-		panelContentRec.Size.X = gui.SliderBar(rl.NewRectangle(590, 385, 145, 15),
+		panelContentRec.Size.X = gui.SliderBar(rl.MakeRectangle(590, 385, 145, 15),
 			"WIDTH",
 			fmt.Sprintf("%.1f", panelContentRec.Size.X),
 			panelContentRec.Size.X,
 			1, 600)
-		panelContentRec.Size.Y = gui.SliderBar(rl.NewRectangle(590, 410, 145, 15),
+		panelContentRec.Size.Y = gui.SliderBar(rl.MakeRectangle(590, 410, 145, 15),
 			"HEIGHT",
 			fmt.Sprintf("%.1f", panelContentRec.Size.Y),
 			panelContentRec.Size.Y, 1, 400)
@@ -124,36 +124,36 @@ func main() {
 func DrawStyleEditControls() {
 	// ScrollPanel style controls
 	//----------------------------------------------------------
-	gui.GroupBox(rl.NewRectangle(550, 170, 220, 205), "SCROLLBAR STYLE")
+	gui.GroupBox(rl.MakeRectangle(550, 170, 220, 205), "SCROLLBAR STYLE")
 
 	var style int32
 
 	style = int32(gui.GetStyle(gui.SCROLLBAR, gui.BORDER_WIDTH))
-	gui.Label(rl.NewRectangle(555, 195, 110, 10), "BORDER_WIDTH")
-	gui.Spinner(rl.NewRectangle(670, 190, 90, 20), "", &style, 0, 6, false)
+	gui.Label(rl.MakeRectangle(555, 195, 110, 10), "BORDER_WIDTH")
+	gui.Spinner(rl.MakeRectangle(670, 190, 90, 20), "", &style, 0, 6, false)
 	gui.SetStyle(gui.SCROLLBAR, gui.BORDER_WIDTH, style)
 
 	style = int32(gui.GetStyle(gui.SCROLLBAR, gui.ARROWS_SIZE))
-	gui.Label(rl.NewRectangle(555, 220, 110, 10), "ARROWS_SIZE")
-	gui.Spinner(rl.NewRectangle(670, 215, 90, 20), "", &style, 4, 14, false)
+	gui.Label(rl.MakeRectangle(555, 220, 110, 10), "ARROWS_SIZE")
+	gui.Spinner(rl.MakeRectangle(670, 215, 90, 20), "", &style, 4, 14, false)
 	gui.SetStyle(gui.SCROLLBAR, gui.ARROWS_SIZE, style)
 
 	style = int32(gui.GetStyle(gui.SCROLLBAR, gui.SLIDER_PADDING))
-	gui.Label(rl.NewRectangle(555, 245, 110, 10), "SLIDER_PADDING")
-	gui.Spinner(rl.NewRectangle(670, 240, 90, 20), "", &style, 0, 14, false)
+	gui.Label(rl.MakeRectangle(555, 245, 110, 10), "SLIDER_PADDING")
+	gui.Spinner(rl.MakeRectangle(670, 240, 90, 20), "", &style, 0, 14, false)
 	gui.SetStyle(gui.SCROLLBAR, gui.SLIDER_PADDING, style)
 
-	style = boolToint32(gui.CheckBox(rl.NewRectangle(565, 280, 20, 20), "ARROWS_VISIBLE", int32Tobool(int32(gui.GetStyle(gui.SCROLLBAR, gui.ARROWS_VISIBLE)))))
+	style = boolToint32(gui.CheckBox(rl.MakeRectangle(565, 280, 20, 20), "ARROWS_VISIBLE", int32Tobool(int32(gui.GetStyle(gui.SCROLLBAR, gui.ARROWS_VISIBLE)))))
 	gui.SetStyle(gui.SCROLLBAR, gui.ARROWS_VISIBLE, style)
 
 	style = int32(gui.GetStyle(gui.SCROLLBAR, gui.SLIDER_PADDING))
-	gui.Label(rl.NewRectangle(555, 325, 110, 10), "SLIDER_PADDING")
-	gui.Spinner(rl.NewRectangle(670, 320, 90, 20), "", &style, 0, 14, false)
+	gui.Label(rl.MakeRectangle(555, 325, 110, 10), "SLIDER_PADDING")
+	gui.Spinner(rl.MakeRectangle(670, 320, 90, 20), "", &style, 0, 14, false)
 	gui.SetStyle(gui.SCROLLBAR, gui.SLIDER_PADDING, style)
 
 	style = int32(gui.GetStyle(gui.SCROLLBAR, gui.SLIDER_WIDTH))
-	gui.Label(rl.NewRectangle(555, 350, 110, 10), "SLIDER_WIDTH")
-	gui.Spinner(rl.NewRectangle(670, 345, 90, 20), "", &style, 2, 100, false)
+	gui.Label(rl.MakeRectangle(555, 350, 110, 10), "SLIDER_WIDTH")
+	gui.Spinner(rl.MakeRectangle(670, 345, 90, 20), "", &style, 2, 100, false)
 	gui.SetStyle(gui.SCROLLBAR, gui.SLIDER_WIDTH, style)
 
 	var text string
@@ -162,22 +162,22 @@ func DrawStyleEditControls() {
 	} else {
 		text = "SCROLLBAR: RIGHT"
 	}
-	style = boolToint32(gui.Toggle(rl.NewRectangle(560, 110, 200, 35), text, int32Tobool(int32(gui.GetStyle(gui.LISTVIEW, gui.SCROLLBAR_SIDE)))))
+	style = boolToint32(gui.Toggle(rl.MakeRectangle(560, 110, 200, 35), text, int32Tobool(int32(gui.GetStyle(gui.LISTVIEW, gui.SCROLLBAR_SIDE)))))
 	gui.SetStyle(gui.LISTVIEW, gui.SCROLLBAR_SIDE, style)
 	//----------------------------------------------------------
 
 	// ScrollBar style controls
 	//----------------------------------------------------------
-	gui.GroupBox(rl.NewRectangle(550, 20, 220, 135), "SCROLLPANEL STYLE")
+	gui.GroupBox(rl.MakeRectangle(550, 20, 220, 135), "SCROLLPANEL STYLE")
 
 	style = int32(gui.GetStyle(gui.LISTVIEW, gui.SCROLLBAR_WIDTH))
-	gui.Label(rl.NewRectangle(555, 35, 110, 10), "SCROLLBAR_WIDTH")
-	gui.Spinner(rl.NewRectangle(670, 30, 90, 20), "", &style, 6, 30, false)
+	gui.Label(rl.MakeRectangle(555, 35, 110, 10), "SCROLLBAR_WIDTH")
+	gui.Spinner(rl.MakeRectangle(670, 30, 90, 20), "", &style, 6, 30, false)
 	gui.SetStyle(gui.LISTVIEW, gui.SCROLLBAR_WIDTH, style)
 
 	style = int32(gui.GetStyle(gui.DEFAULT, gui.BORDER_WIDTH))
-	gui.Label(rl.NewRectangle(555, 60, 110, 10), "BORDER_WIDTH")
-	gui.Spinner(rl.NewRectangle(670, 55, 90, 20), "", &style, 0, 20, false)
+	gui.Label(rl.MakeRectangle(555, 60, 110, 10), "BORDER_WIDTH")
+	gui.Spinner(rl.MakeRectangle(670, 55, 90, 20), "", &style, 0, 20, false)
 	gui.SetStyle(gui.DEFAULT, gui.BORDER_WIDTH, style)
 	//----------------------------------------------------------
 }

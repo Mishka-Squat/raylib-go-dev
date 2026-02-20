@@ -84,7 +84,7 @@ func main() {
 		for y := 0; y < int(cubicmap.Height); y++ {
 			for x := 0; x < int(cubicmap.Width); x++ {
 				// Collision: white pixel, only check R channel
-				if mapPixels[y*int(cubicmap.Width)+x].R == 255 && (rl.CheckCollisionCircleRec(playerPos, float32(playerRadius), rl.NewRectangle(float32(mapPosition.X-0.5+float32(x)), float32(mapPosition.Z-0.5+float32(y)), 1.0, 1.0))) {
+				if mapPixels[y*int(cubicmap.Width)+x].R == 255 && (rl.CheckCollisionCircleRec(playerPos, float32(playerRadius), rl.MakeRectangle(float32(mapPosition.X-0.5+float32(x)), float32(mapPosition.Z-0.5+float32(y)), 1.0, 1.0))) {
 					// Collision detected, reset camera position
 					camera.Position = oldCamPos
 				}

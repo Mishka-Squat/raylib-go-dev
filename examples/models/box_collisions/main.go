@@ -50,10 +50,10 @@ func main() {
 
 		// Check collisions player vs enemy-box
 		if rl.CheckCollisionBoxes(
-			rl.NewBoundingBox(
+			rl.MakeBoundingBox(
 				vector3.NewFloat32(playerPosition.X-playerSize.X/2, playerPosition.Y-playerSize.Y/2, playerPosition.Z-playerSize.Z/2),
 				vector3.NewFloat32(playerPosition.X+playerSize.X/2, playerPosition.Y+playerSize.Y/2, playerPosition.Z+playerSize.Z/2)),
-			rl.NewBoundingBox(
+			rl.MakeBoundingBox(
 				vector3.NewFloat32(enemyBoxPos.X-enemyBoxSize.X/2, enemyBoxPos.Y-enemyBoxSize.Y/2, enemyBoxPos.Z-enemyBoxSize.Z/2),
 				vector3.NewFloat32(enemyBoxPos.X+enemyBoxSize.X/2, enemyBoxPos.Y+enemyBoxSize.Y/2, enemyBoxPos.Z+enemyBoxSize.Z/2)),
 		) {
@@ -62,7 +62,7 @@ func main() {
 
 		// Check collisions player vs enemy-sphere
 		if rl.CheckCollisionBoxSphere(
-			rl.NewBoundingBox(
+			rl.MakeBoundingBox(
 				vector3.NewFloat32(playerPosition.X-playerSize.X/2, playerPosition.Y-playerSize.Y/2, playerPosition.Z-playerSize.Z/2),
 				vector3.NewFloat32(playerPosition.X+playerSize.X/2, playerPosition.Y+playerSize.Y/2, playerPosition.Z+playerSize.Z/2)),
 			enemySpherePos,

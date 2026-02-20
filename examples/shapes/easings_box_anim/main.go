@@ -19,7 +19,7 @@ func main() {
 
 	rl.InitWindow(screenWidth, screenHeight, "raylib [shapes] example - easings box anim")
 
-	rec := rl.NewRectangle(float32(screenWidth/2), -100, 100, 100)
+	rec := rl.MakeRectangle(float32(screenWidth/2), -100, 100, 100)
 	rotation := float32(0)
 	alpha := float32(1)
 
@@ -77,7 +77,7 @@ func main() {
 		}
 
 		if rl.IsKeyPressed(rl.KeySpace) {
-			rec = rl.NewRectangle(float32(screenWidth/2), -100, 100, 100)
+			rec = rl.MakeRectangle(float32(screenWidth/2), -100, 100, 100)
 			rotation = 0
 			alpha = 1
 			state = 0

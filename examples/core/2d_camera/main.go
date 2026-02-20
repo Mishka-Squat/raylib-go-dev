@@ -17,7 +17,7 @@ func main() {
 
 	rl.InitWindow(screenWidth, screenHeight, "raylib [core] example - 2d camera")
 
-	player := rl.NewRectangle(400, 280, 40, 40)
+	player := rl.MakeRectangle(400, 280, 40, 40)
 
 	buildings := make([]rect2.Float32, maxBuildings)
 	buildColors := make([]colorex.RGBA, maxBuildings)
@@ -33,7 +33,7 @@ func main() {
 
 		spacing += r.Size.X
 
-		c := rl.NewColor(byte(rl.GetRandomValue(200, 240)), byte(rl.GetRandomValue(200, 240)), byte(rl.GetRandomValue(200, 250)), byte(255))
+		c := rl.MakeColor(byte(rl.GetRandomValue(200, 240)), byte(rl.GetRandomValue(200, 240)), byte(rl.GetRandomValue(200, 250)), byte(255))
 
 		buildings[i] = r
 		buildColors[i] = c

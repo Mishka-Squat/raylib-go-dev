@@ -12,11 +12,11 @@ func main() {
 
 	rl.InitWindow(screenWidth, screenHeight, "raylib [shaders] example - multiple sample2D")
 
-	imRed := rl.GenImageColor(int(screenWidth), int(screenHeight), rl.NewColor(uint8(255), uint8(0), uint8(0), uint8(255)))
+	imRed := rl.GenImageColor(int(screenWidth), int(screenHeight), rl.MakeColor(uint8(255), uint8(0), uint8(0), uint8(255)))
 	texRed := rl.LoadTextureFromImage(imRed)
 	rl.UnloadImage(&imRed)
 
-	imBlue := rl.GenImageColor(int(screenWidth), int(screenHeight), rl.NewColor(uint8(0), uint8(0), uint8(255), uint8(255)))
+	imBlue := rl.GenImageColor(int(screenWidth), int(screenHeight), rl.MakeColor(uint8(0), uint8(0), uint8(255), uint8(255)))
 	texBlue := rl.LoadTextureFromImage(imBlue)
 	rl.UnloadImage(&imBlue)
 

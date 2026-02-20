@@ -22,7 +22,7 @@ func main() {
 	scarfy := rl.LoadTexture("scarfy.png") // Texture loading
 
 	position := vector2.NewFloat32(350.0, 280.0)
-	frameRec := rl.NewRectangle(0, 0, float32(scarfy.Width/6), float32(scarfy.Height))
+	frameRec := rl.MakeRectangle(0, 0, float32(scarfy.Width/6), float32(scarfy.Height))
 	currentFrame := float32(0)
 
 	framesCounter := 0

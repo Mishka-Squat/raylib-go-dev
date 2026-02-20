@@ -82,7 +82,7 @@ func main() {
 		rl.BeginShaderMode(shader)
 
 		// NOTE: Render texture must be y-flipped due to default OpenGL coordinates (left-bottom)
-		rl.DrawTextureRec(target.Texture, rl.NewRectangle(0, 0, float32(target.Texture.Width), float32(-target.Texture.Height)), vector2.NewFloat32(0, 0), rl.White)
+		rl.DrawTextureRec(target.Texture, rl.MakeRectangle(0, 0, float32(target.Texture.Width), float32(-target.Texture.Height)), vector2.NewFloat32(0, 0), rl.White)
 
 		rl.EndShaderMode()
 

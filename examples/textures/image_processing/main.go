@@ -46,7 +46,7 @@ func main() {
 	selectRecs := make([]rect2.Float32, numProcesses)
 
 	for i := 0; i < numProcesses; i++ {
-		selectRecs[i] = rl.NewRectangle(40, 50+32*float32(i), 150, 30)
+		selectRecs[i] = rl.MakeRectangle(40, 50+32*float32(i), 150, 30)
 	}
 
 	rl.SetTargetFPS(60)

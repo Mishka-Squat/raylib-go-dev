@@ -25,8 +25,8 @@ func main() {
 
 	rl.SetTargetFPS(60)
 
-	boxA := rl.NewRectangle(10, float32(rl.GetScreenHeight()/2)-50, 200, 100)
-	boxB := rl.NewRectangle(float32(rl.GetScreenWidth()/2)-30, float32(rl.GetScreenHeight()/2)-30, 60, 60)
+	boxA := rl.MakeRectangle(10, float32(rl.GetScreenHeight()/2)-50, 200, 100)
+	boxB := rl.MakeRectangle(float32(rl.GetScreenWidth()/2)-30, float32(rl.GetScreenHeight()/2)-30, 60, 60)
 
 	for !rl.WindowShouldClose() {
 

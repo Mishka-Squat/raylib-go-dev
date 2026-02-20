@@ -7,7 +7,7 @@ import (
 
 var (
 	mouseScaleMarkSize              = float32(12)
-	rec                             = rl.NewRectangle(100, 100, 200, 80)
+	rec                             = rl.MakeRectangle(100, 100, 200, 80)
 	mouseScaleReady, MouseScaleMode = false, false
 )
 
@@ -25,7 +25,7 @@ func main() {
 
 		mousePos := rl.GetMousePosition()
 
-		if rl.CheckCollisionPointRec(mousePos, rl.NewRectangle(rec.Position.X+rec.Size.X-mouseScaleMarkSize, rec.Position.Y+rec.Size.Y-mouseScaleMarkSize, mouseScaleMarkSize, mouseScaleMarkSize)) {
+		if rl.CheckCollisionPointRec(mousePos, rl.MakeRectangle(rec.Position.X+rec.Size.X-mouseScaleMarkSize, rec.Position.Y+rec.Size.Y-mouseScaleMarkSize, mouseScaleMarkSize, mouseScaleMarkSize)) {
 			mouseScaleReady = true
 			if rl.IsMouseButtonPressed(rl.MouseLeftButton) {
 				MouseScaleMode = true

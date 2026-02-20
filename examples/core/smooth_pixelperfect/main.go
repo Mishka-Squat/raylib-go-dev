@@ -26,12 +26,12 @@ func main() {
 
 	target := rl.LoadRenderTexture(virtualScreenW, virtualScreenH)
 
-	rec1 := rl.NewRectangle(120, 60, 80, 40)
-	rec2 := rl.NewRectangle(130, 70, 90, 30)
-	rec3 := rl.NewRectangle(140, 80, 65, 45)
+	rec1 := rl.MakeRectangle(120, 60, 80, 40)
+	rec2 := rl.MakeRectangle(130, 70, 90, 30)
+	rec3 := rl.MakeRectangle(140, 80, 65, 45)
 
-	sourceRec := rl.NewRectangle(0, 0, float32(target.Texture.Width), -float32(target.Texture.Height))
-	destRec := rl.NewRectangle(-virtualRatio, -virtualRatio, float32(screenW)+(virtualRatio*2), float32(screenH)+(virtualRatio*2))
+	sourceRec := rl.MakeRectangle(0, 0, float32(target.Texture.Width), -float32(target.Texture.Height))
+	destRec := rl.MakeRectangle(-virtualRatio, -virtualRatio, float32(screenW)+(virtualRatio*2), float32(screenH)+(virtualRatio*2))
 
 	origin := vector2.NewFloat32(0, 0)
 

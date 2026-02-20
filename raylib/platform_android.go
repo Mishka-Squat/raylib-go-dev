@@ -20,8 +20,13 @@ static const char* GetInternalDataPath() {
 import "C"
 
 import (
+	"errors"
 	"fmt"
 	"io"
+	"io/fs"
+	"path"
+	"strings"
+	"time"
 	"unsafe"
 
 	"golang.org/x/exp/constraints"
@@ -122,26 +127,20 @@ func UnloadDroppedFiles() {
 }
 
 // Open implements fs.FS interface - opens the named file for reading
-func (a *Asset) Open(name string) (fs.File, error) {
+func (a Asset) Open(name string) (fs.File, error) {
 	return openAssetFile(a.root, name)
 }
 
-	if a.ptr == nil {
-		return nil, fmt.Errorf("asset file could not be opened")
-	}
 // ReadFile implements fs.ReadFileFS interface - reads the entire file
-func (a *Asset) ReadFile(name string) ([]byte, error) {
+func (a Asset) ReadFile(name string) ([]byte, error) {
 	return readAssetFile(a.root, name)
 }
 
-	return a, nil
 // ReadDir implements fs.ReadDirFS interface - reads the directory
-func (a *Asset) ReadDir(name string) ([]fs.DirEntry, error) {
+func (a Asset) ReadDir(name string) ([]fs.DirEntry, error) {
 	return readAssetDir(a.root, name)
 }
 
-type asset struct {
-	ptr *C.AAsset
 // androidAsset implements fs.File interface for Android assets
 type androidAsset struct {
 	ptr  *C.AAsset
@@ -149,8 +148,7 @@ type androidAsset struct {
 	size int64
 }
 
-func (a *asset) Read(p []byte) (n int, err error) {
-func (a *androidAsset) Read(p []byte) (n int, err error) {
+func (a androidAsset) Read(p []byte) (n int, err error) {
 	if len(p) == 0 {
 		return 0, nil
 	}
@@ -158,12 +156,12 @@ func (a *androidAsset) Read(p []byte) (n int, err error) {
 	n = int(C.AAsset_read(a.ptr, unsafe.Pointer(&p[0]), C.size_t(len(p))))
 	if n == 0 && len(p) > 0 {
 		return 0, io.EOF
-@@ -126,21 +144,176 @@ func (a *asset) Read(p []byte) (n int, err error) {
+	}
+
 	return n, nil
 }
 
-func (a *asset) Seek(offset int64, whence int) (int64, error) {
-func (a *androidAsset) Seek(offset int64, whence int) (int64, error) {
+func (a androidAsset) Seek(offset int64, whence int) (int64, error) {
 	off := C.AAsset_seek(a.ptr, C.off_t(offset), C.int(whence))
 	if off == -1 {
 		return 0, fmt.Errorf("bad result for offset=%d, whence=%d", offset, whence)
@@ -173,14 +171,13 @@ func (a *androidAsset) Seek(offset int64, whence int) (int64, error) {
 	return int64(off), nil
 }
 
-func (a *asset) Close() error {
-func (a *androidAsset) Close() error {
+func (a androidAsset) Close() error {
 	C.AAsset_close(a.ptr)
 
 	return nil
 }
 
-func (a *androidAsset) Stat() (fs.FileInfo, error) {
+func (a androidAsset) Stat() (fs.FileInfo, error) {
 	return &androidAssetInfo{
 		name: path.Base(a.name),
 		size: a.size,
@@ -196,12 +193,12 @@ type androidAssetInfo struct {
 	dir  bool
 }
 
-func (i *androidAssetInfo) Name() string       { return i.name }
-func (i *androidAssetInfo) Size() int64        { return i.size }
-func (i *androidAssetInfo) Mode() fs.FileMode  { return i.mode }
-func (i *androidAssetInfo) ModTime() time.Time { return time.Time{} }
-func (i *androidAssetInfo) IsDir() bool        { return i.dir }
-func (i *androidAssetInfo) Sys() interface{}   { return nil }
+func (i androidAssetInfo) Name() string       { return i.name }
+func (i androidAssetInfo) Size() int64        { return i.size }
+func (i androidAssetInfo) Mode() fs.FileMode  { return i.mode }
+func (i androidAssetInfo) ModTime() time.Time { return time.Time{} }
+func (i androidAssetInfo) IsDir() bool        { return i.dir }
+func (i androidAssetInfo) Sys() interface{}   { return nil }
 
 // androidDirEntry implements fs.DirEntry for Android assets
 type androidDirEntry struct {
@@ -209,12 +206,12 @@ type androidDirEntry struct {
 	dir  bool
 }
 
-func (e *androidDirEntry) Name() string               { return e.name }
-func (e *androidDirEntry) IsDir() bool                { return e.dir }
-func (e *androidDirEntry) Type() fs.FileMode          { return e.Mode().Type() }
-func (e *androidDirEntry) Info() (fs.FileInfo, error) { return e.fileInfo(), nil }
+func (e androidDirEntry) Name() string               { return e.name }
+func (e androidDirEntry) IsDir() bool                { return e.dir }
+func (e androidDirEntry) Type() fs.FileMode          { return e.Mode().Type() }
+func (e androidDirEntry) Info() (fs.FileInfo, error) { return e.fileInfo(), nil }
 
-func (e *androidDirEntry) Mode() fs.FileMode {
+func (e androidDirEntry) Mode() fs.FileMode {
 	if e.dir {
 		return fs.FileMode(0555) | fs.ModeDir
 	}
@@ -222,7 +219,7 @@ func (e *androidDirEntry) Mode() fs.FileMode {
 	return fs.FileMode(0444)
 }
 
-func (e *androidDirEntry) fileInfo() fs.FileInfo {
+func (e androidDirEntry) fileInfo() fs.FileInfo {
 	return &androidAssetInfo{
 		name: e.name,
 		size: 0,

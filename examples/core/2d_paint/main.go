@@ -38,7 +38,7 @@ func main() {
 	colorMouseHover := 0
 	brushSize := 20
 
-	var btnSaveRec = rl.NewRectangle(750, 10, 40, 30)
+	var btnSaveRec = rl.MakeRectangle(750, 10, 40, 30)
 	btnSaveMouseHover := false
 	showSaveMessage := false
 	saveMessageCounter := 0
@@ -165,7 +165,7 @@ func main() {
 		rl.ClearBackground(rl.RayWhite)
 
 		// NOTE: Render texture must be y-flipped due to default OpenGL coordinates (left-bottom)
-		rl.DrawTextureRec(target.Texture, rl.NewRectangle(0, 0, float32(target.Texture.Width), float32(-target.Texture.Height)), vector2.NewFloat32(0, 0), rl.White)
+		rl.DrawTextureRec(target.Texture, rl.MakeRectangle(0, 0, float32(target.Texture.Width), float32(-target.Texture.Height)), vector2.NewFloat32(0, 0), rl.White)
 
 		if mousePos.Y > 50 {
 			if rl.IsMouseButtonDown(rl.MouseRightButton) {
@@ -190,7 +190,7 @@ func main() {
 			rl.DrawRectangleRec(colorRecs[colorMouseHover], rl.Fade(rl.White, 0.0))
 		}
 
-		rl.DrawRectangleLinesEx(rl.NewRectangle(
+		rl.DrawRectangleLinesEx(rl.MakeRectangle(
 			colorRecs[colorSelected].Position.X-2, colorRecs[colorSelected].Position.Y-2, colorRecs[colorSelected].Size.X+4, colorRecs[colorSelected].Size.Y+4,
 		), 2, rl.Black)
 

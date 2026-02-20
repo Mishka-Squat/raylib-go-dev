@@ -71,7 +71,7 @@ func main() {
 
 	offset := vector2.Float32{X: width / 2, Y: height / 2}
 	// since the example ported from elsewhere, flip the camera 180 and offset to center it
-	camera := rl.NewCamera2D(offset, vector2.Float32{}, 180, 1)
+	camera := rl.MakeCamera2D(offset, vector2.Float32{}, 180, 1)
 
 	space := simpleTerrain()
 	for i := 0; i < 1000; i++ {

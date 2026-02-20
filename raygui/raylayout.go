@@ -128,14 +128,14 @@ func (hl *HorizontalLayoutPanel) Layout(wh vector2.Float32, justify Justyfy) rec
 	if wh.X < 0 {
 		wh = wh.SetX(hl.Bounds.Width() - float32(hl.position) + wh.X - float32(hl.spacing))
 	}
-	r := rl.NewRectangle(hl.Bounds.X()+float32(hl.position), hl.Bounds.Y()+dy, wh.X, whY)
+	r := rl.MakeRectangle(hl.Bounds.X()+float32(hl.position), hl.Bounds.Y()+dy, wh.X, whY)
 	hl.position += int(wh.X) + hl.spacing
 	return r
 }
 
 func (hl *HorizontalLayoutPanel) Fill(height float32, justify Justyfy) rect2.Float32 {
 	whY, dy := justify.Justyfy(height, hl.Bounds.Height())
-	r := rl.NewRectangle(hl.Bounds.X()+float32(hl.position), hl.Bounds.Y()+dy, hl.Bounds.Width()-float32(hl.position), whY)
+	r := rl.MakeRectangle(hl.Bounds.X()+float32(hl.position), hl.Bounds.Y()+dy, hl.Bounds.Width()-float32(hl.position), whY)
 	hl.position = int(hl.Bounds.Width())
 	return r
 }
@@ -166,14 +166,14 @@ func (vl *VerticalLayoutPanel) Layout(wh vector2.Float32, justify Justyfy) rect2
 	if wh.Y < 0 {
 		wh = wh.SetY(vl.Bounds.Height() - float32(vl.position) + wh.Y - float32(vl.spacing))
 	}
-	r := rl.NewRectangle(vl.Bounds.X()+dx, vl.Bounds.Y()+float32(vl.position), whX, wh.Y)
+	r := rl.MakeRectangle(vl.Bounds.X()+dx, vl.Bounds.Y()+float32(vl.position), whX, wh.Y)
 	vl.position += int(wh.Y) + vl.spacing
 	return r
 }
 
 func (vl *VerticalLayoutPanel) Fill(width float32, justify Justyfy) rect2.Float32 {
 	whX, dx := justify.Justyfy(width, vl.Bounds.Width())
-	r := rl.NewRectangle(vl.Bounds.X()+dx, vl.Bounds.Y()+float32(vl.position), whX, vl.Bounds.Height()-float32(vl.position))
+	r := rl.MakeRectangle(vl.Bounds.X()+dx, vl.Bounds.Y()+float32(vl.position), whX, vl.Bounds.Height()-float32(vl.position))
 	vl.position = int(vl.Bounds.Height())
 	return r
 }

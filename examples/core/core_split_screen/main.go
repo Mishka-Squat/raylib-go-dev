@@ -76,7 +76,7 @@ func main() {
 	screenPlayer2 := rl.LoadRenderTexture(screenWidth/2, screenHeight)
 
 	// Build a flipped rectangle the size of the split view to use for drawing later
-	splitScreenRect := rl.NewRectangle(0.0, 0.0, screenPlayer1.Texture.Width, -screenPlayer1.Texture.Height)
+	splitScreenRect := rl.MakeRectangle(0.0, 0.0, screenPlayer1.Texture.Width, -screenPlayer1.Texture.Height)
 
 	rl.SetTargetFPS(60) // Set our game to run at 60 frames-per-second
 	//--------------------------------------------------------------------------------------

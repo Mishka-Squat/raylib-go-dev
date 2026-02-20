@@ -30,7 +30,7 @@ func (r PackRect) Id() int {
 }
 
 func (r PackRect) Rect() rect2.Float32 {
-	return NewRectangle(int(r.x), int(r.y), int(r.w), int(r.h))
+	return MakeRectangle(int(r.x), int(r.y), int(r.w), int(r.h))
 }
 
 func (r PackRect) X() int {

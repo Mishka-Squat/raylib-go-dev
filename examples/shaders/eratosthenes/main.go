@@ -29,7 +29,7 @@ func main() {
 
 		rl.BeginShaderMode(shader)
 
-		rl.DrawTextureRec(target.Texture, rl.NewRectangle(0, 0, float32(target.Texture.Width), float32(target.Texture.Height)), vector2.Zero[float32](), rl.White)
+		rl.DrawTextureRec(target.Texture, rl.MakeRectangle(0, 0, float32(target.Texture.Width), float32(target.Texture.Height)), vector2.Zero[float32](), rl.White)
 
 		rl.EndShaderMode()
 

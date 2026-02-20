@@ -13,7 +13,7 @@ func main() {
 
 	rl.InitWindow(screenW, screenH, "raylib [core] example - scissor test")
 
-	scissorArea := rl.NewRectangle(0, 0, 300, 300)
+	scissorArea := rl.MakeRectangle(0, 0, 300, 300)
 	scissorMode := true
 
 	rl.SetTargetFPS(60)

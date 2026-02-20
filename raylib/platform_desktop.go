@@ -95,7 +95,7 @@ func UnloadDroppedFiles() {
 }
 
 // Open implements fs.FS interface - opens the named file for reading
-func (a *Asset) Open(name string) (fs.File, error) {
+func (a Asset) Open(name string) (fs.File, error) {
 	if a.fsys != nil {
 		fullPath := name
 		if a.root != "" {
@@ -109,7 +109,7 @@ func (a *Asset) Open(name string) (fs.File, error) {
 }
 
 // ReadFile implements fs.ReadFileFS interface - reads the entire file
-func (a *Asset) ReadFile(name string) ([]byte, error) {
+func (a Asset) ReadFile(name string) ([]byte, error) {
 	if a.fsys != nil {
 		fullPath := name
 		if a.root != "" {
@@ -123,7 +123,7 @@ func (a *Asset) ReadFile(name string) ([]byte, error) {
 }
 
 // ReadDir implements fs.ReadDirFS interface - reads the directory
-func (a *Asset) ReadDir(name string) ([]fs.DirEntry, error) {
+func (a Asset) ReadDir(name string) ([]fs.DirEntry, error) {
 	if a.fsys != nil {
 		fullPath := name
 		if a.root != "" {
@@ -144,11 +144,11 @@ type desktopAsset struct {
 	*os.File
 }
 
-func (d *desktopAsset) Stat() (fs.FileInfo, error) {
+func (d desktopAsset) Stat() (fs.FileInfo, error) {
 	return d.File.Stat()
 }
 
-func (d *desktopAsset) Seek(offset int64, whence int) (int64, error) {
+func (d desktopAsset) Seek(offset int64, whence int) (int64, error) {
 	return d.File.Seek(offset, whence)
 }
 

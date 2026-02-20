@@ -33,7 +33,7 @@ func main() {
 	screenCam1 := rl.LoadRenderTexture(screenW/2, screenH)
 	screenCam2 := rl.LoadRenderTexture(screenW/2, screenH)
 
-	splitScreenRec := rl.NewRectangle(0, 0, float32(screenCam1.Texture.Width), -float32(screenCam1.Texture.Height))
+	splitScreenRec := rl.MakeRectangle(0, 0, float32(screenCam1.Texture.Width), -float32(screenCam1.Texture.Height))
 
 	count := float32(5)
 	spacing := float32(4)

@@ -54,7 +54,7 @@ func main() {
 		rl.BeginDrawing()
 
 		rl.ClearBackground(rl.Black)
-		rec := rl.NewRectangle(0, 0, float32(screenW), float32(screenH))
+		rec := rl.MakeRectangle(0, 0, float32(screenW), float32(screenH))
 		switch currentScreen {
 		case LOGO:
 			txt := "YOUR LOGO GOES HERE"

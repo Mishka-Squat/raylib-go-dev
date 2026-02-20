@@ -18,10 +18,10 @@ func main() {
 	frameHeight := float32(scarfy.Height)
 
 	// NOTE: Source rectangle (part of the texture to use for drawing)
-	sourceRec := rl.NewRectangle(0, 0, frameWidth, frameHeight)
+	sourceRec := rl.MakeRectangle(0, 0, frameWidth, frameHeight)
 
 	// NOTE: Destination rectangle (screen rectangle where drawing part of texture)
-	destRec := rl.NewRectangle(float32(screenWidth)/2, float32(screenHeight)/2, frameWidth*2, frameHeight*2)
+	destRec := rl.MakeRectangle(float32(screenWidth)/2, float32(screenHeight)/2, frameWidth*2, frameHeight*2)
 
 	// NOTE: Origin of the texture (rotation/scale point), it's relative to destination rectangle size
 	origin := vector2.NewFloat32(float32(frameWidth), float32(frameHeight))

@@ -21,14 +21,14 @@ func main() {
 	rl.InitWindow(screenW, screenH, "raylib [textures] example - mouse painting")
 
 	for i := 0; i < len(colors); i++ {
-		colorRecs = append(colorRecs, rl.NewRectangle(10+(30*float32(i))+(2*float32(i)), 10, 30, 30))
+		colorRecs = append(colorRecs, rl.MakeRectangle(10+(30*float32(i))+(2*float32(i)), 10, 30, 30))
 	}
 	colorSelected, colorMouseHover := 1, 0
 	colorPrev := colorSelected
 	brushSize := float32(20)
 	mousePressed := false
 
-	btnSaveRec := rl.NewRectangle(750, 10, 40, 30)
+	btnSaveRec := rl.MakeRectangle(750, 10, 40, 30)
 	btnSaveMouseHover, showSaveMsg := false, false
 	saveMsgCount := 0
 
@@ -139,7 +139,7 @@ func main() {
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.RayWhite)
 
-		rl.DrawTextureRec(target.Texture, rl.NewRectangle(0, 0, float32(target.Texture.Width), -float32(target.Texture.Height)), vector2.Zero[float32](), rl.White)
+		rl.DrawTextureRec(target.Texture, rl.MakeRectangle(0, 0, float32(target.Texture.Width), -float32(target.Texture.Height)), vector2.Zero[float32](), rl.White)
 
 		if mousePos.Y > 50 {
 			if rl.IsMouseButtonDown(rl.MouseButtonRight) {
@@ -162,7 +162,7 @@ func main() {
 			rl.DrawRectangleRec(colorRecs[colorMouseHover], rl.Fade(rl.White, 0.6))
 		}
 
-		rl.DrawRectangleLinesEx(rl.NewRectangle(colorRecs[colorSelected].Position.X-2, colorRecs[colorSelected].Position.Y-2, colorRecs[colorSelected].Size.X+4, colorRecs[colorSelected].Size.Y+4), 2, rl.Black)
+		rl.DrawRectangleLinesEx(rl.MakeRectangle(colorRecs[colorSelected].Position.X-2, colorRecs[colorSelected].Position.Y-2, colorRecs[colorSelected].Size.X+4, colorRecs[colorSelected].Size.Y+4), 2, rl.Black)
 
 		if btnSaveMouseHover {
 			rl.DrawRectangleLinesEx(btnSaveRec, 2, rl.Red)

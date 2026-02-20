@@ -32,7 +32,7 @@ func main() {
 	// Initialize particles
 	for i := 0; i < maxParticles; i++ {
 		mouseTail[i].Position = vector2.NewFloat32(0, 0)
-		mouseTail[i].Color = rl.NewColor(byte(rl.GetRandomValue(0, 255)), byte(rl.GetRandomValue(0, 255)), byte(rl.GetRandomValue(0, 255)), 255)
+		mouseTail[i].Color = rl.MakeColor(byte(rl.GetRandomValue(0, 255)), byte(rl.GetRandomValue(0, 255)), byte(rl.GetRandomValue(0, 255)), 255)
 		mouseTail[i].Alpha = 1.0
 		mouseTail[i].Size = float32(rl.GetRandomValue(1, 30)) / 20.0
 		mouseTail[i].Rotation = float32(rl.GetRandomValue(0, 360))
@@ -97,8 +97,8 @@ func main() {
 			if mouseTail[i].Active {
 				rl.DrawTexturePro(
 					smoke,
-					rl.NewRectangle(0, 0, float32(smoke.Width), float32(smoke.Height)),
-					rl.NewRectangle(mouseTail[i].Position.X, mouseTail[i].Position.Y, float32(smoke.Width)*mouseTail[i].Size, float32(smoke.Height)*mouseTail[i].Size),
+					rl.MakeRectangle(0, 0, float32(smoke.Width), float32(smoke.Height)),
+					rl.MakeRectangle(mouseTail[i].Position.X, mouseTail[i].Position.Y, float32(smoke.Width)*mouseTail[i].Size, float32(smoke.Height)*mouseTail[i].Size),
 					vector2.NewFloat32(float32(smoke.Width)*mouseTail[i].Size/2, float32(smoke.Height)*mouseTail[i].Size/2),
 					mouseTail[i].Rotation,
 					rl.Fade(mouseTail[i].Color, mouseTail[i].Alpha),

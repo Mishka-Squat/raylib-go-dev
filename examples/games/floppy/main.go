@@ -147,10 +147,10 @@ func (g *Game) Init() {
 	g.Floppy = Floppy{vector2.NewFloat32(80, float32(screenHeight)/2-spriteSize/2)}
 
 	// Sprite rectangle
-	g.FrameRec = rl.NewRectangle(0, 0, spriteSize, spriteSize)
+	g.FrameRec = rl.MakeRectangle(0, 0, spriteSize, spriteSize)
 
 	// Cloud rectangle
-	g.CloudRec = rl.NewRectangle(0, 0, float32(screenWidth), float32(g.TxClouds.Height))
+	g.CloudRec = rl.MakeRectangle(0, 0, float32(screenWidth), float32(g.TxClouds.Height))
 
 	// Initialize particles
 	g.Particles = make([]Particle, maxParticles)
@@ -318,7 +318,7 @@ func (g *Game) Update() {
 
 				// Check Collisions
 				for i := 0; i < maxPipes*2; i++ {
-					if rl.CheckCollisionRecs(rl.NewRectangle(g.Floppy.Position.X, g.Floppy.Position.Y, spriteSize, spriteSize), g.Pipes[i].Rec) {
+					if rl.CheckCollisionRecs(rl.MakeRectangle(g.Floppy.Position.X, g.Floppy.Position.Y, spriteSize, spriteSize), g.Pipes[i].Rec) {
 						// OMG You killed Gopher you bastard!
 						g.Dead = true
 
@@ -391,8 +391,8 @@ func (g *Game) Draw() {
 		rl.DrawTextureRec(g.TxClouds, g.CloudRec, vector2.NewFloat32(0, float32(screenHeight-g.TxClouds.Height)), rl.RayWhite)
 
 		// Draw rotated clouds
-		rl.DrawTexturePro(g.TxClouds, rl.NewRectangle(-g.CloudRec.Position.X, 0, float32(g.TxClouds.Width), float32(g.TxClouds.Height)),
-			rl.NewRectangle(0, 0, float32(g.TxClouds.Width), float32(g.TxClouds.Height)), vector2.NewFloat32(float32(g.TxClouds.Width), float32(g.TxClouds.Height)), 180, rl.White)
+		rl.DrawTexturePro(g.TxClouds, rl.MakeRectangle(-g.CloudRec.Position.X, 0, float32(g.TxClouds.Width), float32(g.TxClouds.Height)),
+			rl.MakeRectangle(0, 0, float32(g.TxClouds.Width), float32(g.TxClouds.Height)), vector2.NewFloat32(float32(g.TxClouds.Width), float32(g.TxClouds.Height)), 180, rl.White)
 
 		// Draw Gopher
 		rl.DrawTextureRec(g.TxSprites, g.FrameRec, g.Floppy.Position, rl.RayWhite)
@@ -403,8 +403,8 @@ func (g *Game) Draw() {
 				if g.Particles[i].Active {
 					rl.DrawTexturePro(
 						g.TxSmoke,
-						rl.NewRectangle(0, 0, float32(g.TxSmoke.Width), float32(g.TxSmoke.Height)),
-						rl.NewRectangle(g.Particles[i].Position.X, g.Particles[i].Position.Y, float32(g.TxSmoke.Width)*g.Particles[i].Size, float32(g.TxSmoke.Height)*g.Particles[i].Size),
+						rl.MakeRectangle(0, 0, float32(g.TxSmoke.Width), float32(g.TxSmoke.Height)),
+						rl.MakeRectangle(g.Particles[i].Position.X, g.Particles[i].Position.Y, float32(g.TxSmoke.Width)*g.Particles[i].Size, float32(g.TxSmoke.Height)*g.Particles[i].Size),
 						vector2.NewFloat32(float32(g.TxSmoke.Width)*g.Particles[i].Size/2, float32(g.TxSmoke.Height)*g.Particles[i].Size/2),
 						g.Particles[i].Rotation,
 						rl.Fade(g.Particles[i].Color, g.Particles[i].Alpha),

@@ -24,7 +24,7 @@ func main() {
 
 	currentFrame, currentLine := 0, 0
 
-	frameRec := rl.NewRectangle(0, 0, frameW, frameH)
+	frameRec := rl.MakeRectangle(0, 0, frameW, frameH)
 	position := vector2.NewFloat32(0, 0)
 
 	active := false

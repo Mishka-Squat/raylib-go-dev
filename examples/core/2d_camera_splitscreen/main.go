@@ -18,8 +18,8 @@ func main() {
 
 	rl.InitWindow(screenW, screenH, "raylib [core] example - 2d camera split screen")
 
-	player1 := rl.NewRectangle(200, 200, playerSize, playerSize)
-	player2 := rl.NewRectangle(250, 200, playerSize, playerSize)
+	player1 := rl.MakeRectangle(200, 200, playerSize, playerSize)
+	player2 := rl.MakeRectangle(250, 200, playerSize, playerSize)
 
 	cam1.Target = vector2.NewFloat32(player1.Position.X, player1.Position.Y)
 	cam1.Offset = vector2.NewFloat32(200, 200)
@@ -32,7 +32,7 @@ func main() {
 	screenCam1 := rl.LoadRenderTexture(screenW/2, screenH)
 	screenCam2 := rl.LoadRenderTexture(screenW/2, screenH)
 
-	splitScreenRec := rl.NewRectangle(0, 0, float32(screenCam1.Texture.Width), -float32(screenCam1.Texture.Height))
+	splitScreenRec := rl.MakeRectangle(0, 0, float32(screenCam1.Texture.Width), -float32(screenCam1.Texture.Height))
 
 	rl.SetTargetFPS(60)
 

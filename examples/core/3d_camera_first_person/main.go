@@ -50,7 +50,7 @@ func main() {
 	for i := 0; i < maxColumns; i++ {
 		heights[i] = rndF(1, 12)
 		positions[i] = vector3.NewFloat32(rndF(-15, 15), heights[i]/2, rndF(-15, 15))
-		colors[i] = rl.NewColor(rndU(20, 255), rndU(10, 55), 30, 255)
+		colors[i] = rl.MakeColor(rndU(20, 255), rndU(10, 55), 30, 255)
 	}
 
 	rl.DisableCursor()  // Limit cursor to relative movement inside the window

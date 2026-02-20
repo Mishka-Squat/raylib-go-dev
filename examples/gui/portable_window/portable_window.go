@@ -61,7 +61,7 @@ func main() {
 		mousePosition = rl.GetMousePosition()
 
 		if rl.IsMouseButtonPressed(rl.MouseLeftButton) {
-			if rl.CheckCollisionPointRec(mousePosition, rl.NewRectangle(0, 0, screenWidth, 20)) {
+			if rl.CheckCollisionPointRec(mousePosition, rl.MakeRectangle(0, 0, screenWidth, 20)) {
 				dragWindow = true
 				panOffset = mousePosition
 			}
@@ -85,7 +85,7 @@ func main() {
 
 		rl.ClearBackground(rl.RayWhite)
 
-		exitWindow = gui.WindowBox(rl.NewRectangle(0, 0, screenWidth, screenHeight), "#198# PORTABLE WINDOW")
+		exitWindow = gui.WindowBox(rl.MakeRectangle(0, 0, screenWidth, screenHeight), "#198# PORTABLE WINDOW")
 
 		rl.DrawText(fmt.Sprintf("Mouse Position: [ %.0f, %.0f ]", mousePosition.X, mousePosition.Y), 10, 40, 10, rl.DarkGray)
 

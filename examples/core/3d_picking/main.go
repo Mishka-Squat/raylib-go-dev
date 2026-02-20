@@ -36,7 +36,7 @@ func main() {
 				// Check collision between ray and box
 				min := vector3.NewFloat32(cubePosition.X-cubeSize.X/2, cubePosition.Y-cubeSize.Y/2, cubePosition.Z-cubeSize.Z/2)
 				max := vector3.NewFloat32(cubePosition.X+cubeSize.X/2, cubePosition.Y+cubeSize.Y/2, cubePosition.Z+cubeSize.Z/2)
-				collision = rl.GetRayCollisionBox(ray, rl.NewBoundingBox(min, max))
+				collision = rl.GetRayCollisionBox(ray, rl.MakeBoundingBox(min, max))
 			} else {
 				collision.Hit = false
 			}

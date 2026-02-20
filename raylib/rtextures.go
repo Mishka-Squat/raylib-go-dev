@@ -220,7 +220,7 @@ func NewImageFromImage(img image.Image) Image {
 	for y := 0; y < size.Y; y++ {
 		for x := 0; x < size.X; x++ {
 			r, g, b, a := img.At(x, y).RGBA()
-			rcolor := NewColor(uint8(r), uint8(g), uint8(b), uint8(a))
+			rcolor := MakeColor(uint8(r), uint8(g), uint8(b), uint8(a))
 			ccolor = ccolorptr(&rcolor)
 
 			cx = (C.int)(x)
