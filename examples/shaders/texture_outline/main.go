@@ -25,9 +25,9 @@ func main() {
 	outlineColorLoc := rl.GetShaderLocation(shader, "outlineColor")
 	textureSizeLoc := rl.GetShaderLocation(shader, "textureSize")
 
-	rl.SetShaderValue(shader, outlineSizeLoc, outlineSize, rl.ShaderUniformFloat)
-	rl.SetShaderValue(shader, outlineColorLoc, outlineColor, rl.ShaderUniformVec4)
-	rl.SetShaderValue(shader, textureSizeLoc, textureSize, rl.ShaderUniformVec2)
+	rl.SetShaderValueA(shader, outlineSizeLoc, outlineSize, rl.ShaderUniformFloat)
+	rl.SetShaderValueA(shader, outlineColorLoc, outlineColor, rl.ShaderUniformVec4)
+	rl.SetShaderValueA(shader, textureSizeLoc, textureSize, rl.ShaderUniformVec2)
 
 	rl.SetTargetFPS(60)
 
@@ -42,7 +42,7 @@ func main() {
 			}
 		}
 
-		rl.SetShaderValue(shader, outlineSizeLoc, outlineSize, rl.ShaderUniformFloat)
+		rl.SetShaderValueA(shader, outlineSizeLoc, outlineSize, rl.ShaderUniformFloat)
 
 		rl.BeginDrawing()
 

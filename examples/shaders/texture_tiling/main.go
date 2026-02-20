@@ -26,7 +26,7 @@ func main() {
 
 	tiling := []float32{3, 3}
 	shader := rl.LoadShader("", "tiling.fs")
-	rl.SetShaderValue(shader, rl.GetShaderLocation(shader, "tiling"), tiling, rl.ShaderUniformVec2)
+	rl.SetShaderValueA(shader, rl.GetShaderLocation(shader, "tiling"), tiling, rl.ShaderUniformVec2)
 	model.Materials.Shader = shader
 
 	rl.DisableCursor()

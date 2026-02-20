@@ -55,7 +55,7 @@ func main() {
 		swirlCenter[1] = float32(screenHeight) - mousePosition.Y
 
 		// Send new value to the shader to be used on drawing
-		rl.SetShaderValue(shader, swirlCenterLoc, swirlCenter, rl.ShaderUniformVec2)
+		rl.SetShaderValueA(shader, swirlCenterLoc, swirlCenter, rl.ShaderUniformVec2)
 
 		rl.UpdateCamera(&camera, rl.CameraOrbital) // Update camera with orbital camera mode
 

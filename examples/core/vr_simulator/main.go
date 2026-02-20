@@ -60,22 +60,22 @@ func main() {
 	distortion := rl.LoadShader("", fileName)
 
 	// Update distortion shader with lens and distortion-scale parameters
-	rl.SetShaderValue(distortion, rl.GetShaderLocation(distortion, "leftLensCenter"),
+	rl.SetShaderValueA(distortion, rl.GetShaderLocation(distortion, "leftLensCenter"),
 		config.LeftLensCenter[:], rl.ShaderUniformVec2)
-	rl.SetShaderValue(distortion, rl.GetShaderLocation(distortion, "rightLensCenter"),
+	rl.SetShaderValueA(distortion, rl.GetShaderLocation(distortion, "rightLensCenter"),
 		config.RightLensCenter[:], rl.ShaderUniformVec2)
-	rl.SetShaderValue(distortion, rl.GetShaderLocation(distortion, "leftScreenCenter"),
+	rl.SetShaderValueA(distortion, rl.GetShaderLocation(distortion, "leftScreenCenter"),
 		config.LeftScreenCenter[:], rl.ShaderUniformVec2)
-	rl.SetShaderValue(distortion, rl.GetShaderLocation(distortion, "rightScreenCenter"),
+	rl.SetShaderValueA(distortion, rl.GetShaderLocation(distortion, "rightScreenCenter"),
 		config.RightScreenCenter[:], rl.ShaderUniformVec2)
 
-	rl.SetShaderValue(distortion, rl.GetShaderLocation(distortion, "scale"),
+	rl.SetShaderValueA(distortion, rl.GetShaderLocation(distortion, "scale"),
 		config.Scale[:], rl.ShaderUniformVec2)
-	rl.SetShaderValue(distortion, rl.GetShaderLocation(distortion, "scaleIn"),
+	rl.SetShaderValueA(distortion, rl.GetShaderLocation(distortion, "scaleIn"),
 		config.ScaleIn[:], rl.ShaderUniformVec2)
-	rl.SetShaderValue(distortion, rl.GetShaderLocation(distortion, "deviceWarpParam"),
+	rl.SetShaderValueA(distortion, rl.GetShaderLocation(distortion, "deviceWarpParam"),
 		device.LensDistortionValues[:], rl.ShaderUniformVec4)
-	rl.SetShaderValue(distortion, rl.GetShaderLocation(distortion, "chromaAbParam"),
+	rl.SetShaderValueA(distortion, rl.GetShaderLocation(distortion, "chromaAbParam"),
 		device.ChromaAbCorrection[:], rl.ShaderUniformVec4)
 
 	// Initialize frame buffer for stereo rendering

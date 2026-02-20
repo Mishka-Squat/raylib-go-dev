@@ -29,7 +29,7 @@ func main() {
 
 	ambientLoc := rl.GetShaderLocation(shader, "ambient")
 	shaderValue := []float32{0.1, 0.1, 0.1, 1.0}
-	rl.SetShaderValue(shader, ambientLoc, shaderValue, rl.ShaderUniformVec4)
+	rl.SetShaderValueA(shader, ambientLoc, shaderValue, rl.ShaderUniformVec4)
 
 	ground.Materials.Shader = shader
 	cube.Materials.Shader = shader
@@ -49,7 +49,7 @@ func main() {
 		rl.UpdateCamera(&camera, rl.CameraOrbital)
 
 		cameraPos := []float32{camera.Position.X, camera.Position.Y, camera.Position.Z}
-		rl.SetShaderValue(shader, *shader.Locs, cameraPos, rl.ShaderUniformVec3)
+		rl.SetShaderValueA(shader, *shader.Locs, cameraPos, rl.ShaderUniformVec3)
 
 		if rl.IsKeyPressed(rl.KeyY) {
 			lights[0].enabled *= -1

@@ -27,7 +27,7 @@ func main() {
 	resolutionLoc := rl.GetShaderLocation(shader, "resolution")
 
 	resolution := []float32{float32(screenWidth), float32(screenHeight)}
-	rl.SetShaderValue(shader, resolutionLoc, resolution, rl.ShaderUniformVec2)
+	rl.SetShaderValueA(shader, resolutionLoc, resolution, rl.ShaderUniformVec2)
 
 	runTimer := float32(0)
 
@@ -45,9 +45,9 @@ func main() {
 		runTimer += deltaTime
 		runTime := []float32{runTimer}
 
-		rl.SetShaderValue(shader, viewEyeLoc, camPos, rl.ShaderUniformVec3)
-		rl.SetShaderValue(shader, viewCenterLoc, camTarget, rl.ShaderUniformVec3)
-		rl.SetShaderValue(shader, runtTimeLoc, runTime, rl.ShaderUniformFloat)
+		rl.SetShaderValueA(shader, viewEyeLoc, camPos, rl.ShaderUniformVec3)
+		rl.SetShaderValueA(shader, viewCenterLoc, camTarget, rl.ShaderUniformVec3)
+		rl.SetShaderValueA(shader, runtTimeLoc, runTime, rl.ShaderUniformFloat)
 
 		rl.BeginDrawing()
 

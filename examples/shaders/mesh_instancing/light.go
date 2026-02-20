@@ -62,17 +62,17 @@ func NewLight(
 
 func (lt *Light) UpdateValues() {
 	// Send to shader light enabled state and type
-	rl.SetShaderValue(lt.shader, lt.enabledLoc, unsafe.Slice((*float32)(unsafe.Pointer(&lt.enabled)), 4), rl.ShaderUniformInt)
-	rl.SetShaderValue(lt.shader, lt.typeLoc, unsafe.Slice((*float32)(unsafe.Pointer(&lt.lightType)), 4), rl.ShaderUniformInt)
+	rl.SetShaderValueA(lt.shader, lt.enabledLoc, unsafe.Slice((*float32)(unsafe.Pointer(&lt.enabled)), 4), rl.ShaderUniformInt)
+	rl.SetShaderValueA(lt.shader, lt.typeLoc, unsafe.Slice((*float32)(unsafe.Pointer(&lt.lightType)), 4), rl.ShaderUniformInt)
 
 	// Send to shader light position values
-	rl.SetShaderValue(lt.shader, lt.posLoc, []float32{lt.position.X, lt.position.Y, lt.position.Z}, rl.ShaderUniformVec3)
+	rl.SetShaderValueA(lt.shader, lt.posLoc, []float32{lt.position.X, lt.position.Y, lt.position.Z}, rl.ShaderUniformVec3)
 
 	// Send to shader light target target values
-	rl.SetShaderValue(lt.shader, lt.targetLoc, []float32{lt.target.X, lt.target.Y, lt.target.Z}, rl.ShaderUniformVec3)
+	rl.SetShaderValueA(lt.shader, lt.targetLoc, []float32{lt.target.X, lt.target.Y, lt.target.Z}, rl.ShaderUniformVec3)
 
 	// Send to shader light color values
-	rl.SetShaderValue(lt.shader, lt.colorLoc,
+	rl.SetShaderValueA(lt.shader, lt.colorLoc,
 		[]float32{float32(lt.color.R) / 255, float32(lt.color.G) / 255, float32(lt.color.B) / 255, float32(lt.color.A) / 255},
 		rl.ShaderUniformVec4)
 }

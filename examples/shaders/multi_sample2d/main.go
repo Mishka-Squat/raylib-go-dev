@@ -42,7 +42,7 @@ func main() {
 			dividerValue[0] = 1
 		}
 
-		rl.SetShaderValue(shader, dividerLoc, dividerValue, rl.ShaderUniformFloat)
+		rl.SetShaderValueA(shader, dividerLoc, dividerValue, rl.ShaderUniformFloat)
 
 		rl.BeginDrawing()
 

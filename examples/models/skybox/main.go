@@ -117,7 +117,7 @@ func main() {
 }
 
 func setShaderIntValue(shader rl.Shader, name string, value int32) {
-	rl.SetShaderValue(
+	rl.SetShaderValueA(
 		shader,
 		rl.GetShaderLocation(shader, name),
 		unsafe.Slice((*float32)(unsafe.Pointer(&value)), 4),

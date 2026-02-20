@@ -68,7 +68,7 @@ func main() {
 
 	// ambient light level
 	ambientLoc := rl.GetShaderLocation(shader, "ambient")
-	rl.SetShaderValue(shader, ambientLoc, []float32{0.2, 0.2, 0.2, 1.0}, rl.ShaderUniformVec4)
+	rl.SetShaderValueA(shader, ambientLoc, []float32{0.2, 0.2, 0.2, 1.0}, rl.ShaderUniformVec4)
 	NewLight(LightTypeDirectional, vector3.NewFloat32(50.0, 50.0, 0.0), vector3.Zero[float32](), rl.White, shader)
 
 	material := rl.LoadMaterialDefault()
@@ -163,7 +163,7 @@ func main() {
 		}
 
 		// Update the light shader with the camera view position
-		rl.SetShaderValue(shader, shader.GetLocation(rl.ShaderLocVectorView),
+		rl.SetShaderValueA(shader, shader.GetLocation(rl.ShaderLocVectorView),
 			[]float32{camera.Position.X, camera.Position.Y, camera.Position.Z}, rl.ShaderUniformVec3)
 
 		// Apply per-instance transformations

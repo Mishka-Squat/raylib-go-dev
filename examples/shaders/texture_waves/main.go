@@ -31,13 +31,13 @@ func main() {
 
 	screensize := []float32{float32(rl.GetScreenWidth()), float32(rl.GetScreenHeight())}
 
-	rl.SetShaderValue(shader, rl.GetShaderLocation(shader, "size"), screensize, rl.ShaderUniformVec2)
-	rl.SetShaderValue(shader, freqXLoc, freqX, rl.ShaderUniformFloat)
-	rl.SetShaderValue(shader, freqYLoc, freqY, rl.ShaderUniformFloat)
-	rl.SetShaderValue(shader, ampXLoc, ampX, rl.ShaderUniformFloat)
-	rl.SetShaderValue(shader, ampYLoc, ampY, rl.ShaderUniformFloat)
-	rl.SetShaderValue(shader, speedXLoc, speedX, rl.ShaderUniformFloat)
-	rl.SetShaderValue(shader, speedYLoc, speedY, rl.ShaderUniformFloat)
+	rl.SetShaderValueA(shader, rl.GetShaderLocation(shader, "size"), screensize, rl.ShaderUniformVec2)
+	rl.SetShaderValueA(shader, freqXLoc, freqX, rl.ShaderUniformFloat)
+	rl.SetShaderValueA(shader, freqYLoc, freqY, rl.ShaderUniformFloat)
+	rl.SetShaderValueA(shader, ampXLoc, ampX, rl.ShaderUniformFloat)
+	rl.SetShaderValueA(shader, ampYLoc, ampY, rl.ShaderUniformFloat)
+	rl.SetShaderValueA(shader, speedXLoc, speedX, rl.ShaderUniformFloat)
+	rl.SetShaderValueA(shader, speedYLoc, speedY, rl.ShaderUniformFloat)
 
 	seconds := []float32{0}
 
@@ -46,7 +46,7 @@ func main() {
 	for !rl.WindowShouldClose() {
 
 		seconds[0] += rl.GetFrameTime()
-		rl.SetShaderValue(shader, secondsLoc, seconds, rl.ShaderUniformFloat)
+		rl.SetShaderValueA(shader, secondsLoc, seconds, rl.ShaderUniformFloat)
 
 		rl.BeginDrawing()
 

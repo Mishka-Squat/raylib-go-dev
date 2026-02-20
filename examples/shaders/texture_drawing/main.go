@@ -20,7 +20,7 @@ func main() {
 
 	timeLoc := rl.GetShaderLocation(shader, "uTime")
 
-	rl.SetShaderValue(shader, timeLoc, time, rl.ShaderUniformFloat)
+	rl.SetShaderValueA(shader, timeLoc, time, rl.ShaderUniformFloat)
 
 	rl.SetTargetFPS(60)
 
@@ -28,7 +28,7 @@ func main() {
 
 		time = nil
 		time = []float32{float32(rl.GetTime())}
-		rl.SetShaderValue(shader, timeLoc, time, rl.ShaderUniformFloat)
+		rl.SetShaderValueA(shader, timeLoc, time, rl.ShaderUniformFloat)
 
 		rl.BeginDrawing()
 

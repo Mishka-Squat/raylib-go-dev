@@ -1443,6 +1443,10 @@ func (s *Shader) UpdateLocation(index int32, loc int32) {
 	*(*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(s.Locs)) + uintptr(index*4))) = loc
 }
 
+func (s Shader) GetLocationUniform(name string) int32 {
+	return GetShaderLocation(s, name)
+}
+
 // GlyphInfo - Font character info
 type GlyphInfo struct {
 	// Character value (Unicode)

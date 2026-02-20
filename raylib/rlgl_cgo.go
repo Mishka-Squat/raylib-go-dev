@@ -35,6 +35,12 @@ func EndShaderMode() {
 	C.EndShaderMode()
 }
 
+func DoShaderMode(shader Shader, fn func()) {
+	BeginShaderMode(shader)
+	fn()
+	EndShaderMode()
+}
+
 // BeginBlendMode - Begin blending mode (alpha, additive, multiplied)
 func BeginBlendMode(mode BlendMode) {
 	cmode := (C.int)(mode)
