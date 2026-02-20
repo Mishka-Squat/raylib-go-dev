@@ -452,8 +452,6 @@ func UpdateAudioStream(stream AudioStream, data any) {
 		csamplesCount = (C.int)(len(d))
 	}
 	cstream := stream.cptr()
-	cdata := unsafe.Pointer(&data[0])
-	csamplesCount := (C.int)(len(data))
 	C.UpdateAudioStream(*cstream, cdata, csamplesCount)
 }
 

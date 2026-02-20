@@ -989,9 +989,13 @@ func MakeAssetFromFS(fsys fs.FS, root string) Asset {
 	return Asset{root: root, fsys: fsys}
 }
 
+func OpenAsset(name string) (fs.File, error) {
+	return MakeAsset("").Open(name)
+}
+
 // AssetFile represents an opened asset file
 type AssetFile interface {
-	io.ReadSeeker
+	io.Reader
 	io.Closer
 	Stat() (fs.FileInfo, error)
 }
