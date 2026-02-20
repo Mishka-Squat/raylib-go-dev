@@ -3,9 +3,9 @@ module github.com/Mishka-Squat/raylib-go/raylib
 go 1.25.0
 
 require (
+	github.com/Mishka-Squat/gamemath v0.0.0-20260220092931-58a15e268003
+	github.com/Mishka-Squat/goex v0.0.0-20260220093026-a6a159ee586e
 	github.com/ebitengine/purego v0.9.1
-	github.com/Mishka-Squat/gamemath v0.0.0-20260216122339-3c36b900dade
-	github.com/Mishka-Squat/goex v0.0.0-20260216122339-107b85204131
 	golang.org/x/exp v0.0.0-20260218203240-3dfff04db8fa
 	golang.org/x/sys v0.41.0
 )

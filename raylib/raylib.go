@@ -10,6 +10,7 @@ package rl
 
 import (
 	"io"
+	"io/fs"
 	"runtime"
 	"unsafe"
 
@@ -969,16 +970,39 @@ func NewBoundingBox(min, max vector3.Float32) BoundingBox {
 	return BoundingBox{min, max}
 }
 
-// Asset file
-type Asset interface {
-	io.ReadSeeker
-	io.Closer
-
-	Size() int64
+// Asset implements fs.FS interfaces
+type Asset struct {
+	root string
+	fsys fs.FS
 }
 
-func ReadAll(a Asset) ([]byte, error) {
-	b := make([]byte, a.Size())
+// NewAsset - creates a new Asset filesystem
+// For Android: root should be empty or a directory path within assets
+// For Desktop: root should be the filesystem path to assets
+func NewAsset(root string) *Asset {
+	return &Asset{root: root}
+}
+
+// NewAssetFromFS - creates a new Asset filesystem from a fs.FS
+// The root parameter specifies a subdirectory within the embedded filesystem (can be empty for root)
+func NewAssetFromFS(fsys fs.FS, root string) *Asset {
+	return &Asset{root: root, fsys: fsys}
+}
+
+// AssetFile represents an opened asset file
+type AssetFile interface {
+	io.ReadSeeker
+	io.Closer
+	Stat() (fs.FileInfo, error)
+}
+
+func ReadAll(a AssetFile) ([]byte, error) {
+	s, err := a.Stat()
+	if err != nil {
+		return nil, err
+	}
+
+	b := make([]byte, s.Size())
 	if _, err := a.Read(b); err != nil {
 		return nil, err
 	}

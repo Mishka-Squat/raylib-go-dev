@@ -32,8 +32,15 @@ const (
 	Quads     = 0x0007 // GL_QUADS
 
 	// GL equivalent data types
-	UnsignedByte = 0x1401 // GL_UNSIGNED_BYTE
-	Float        = 0x1406 // GL_FLOAT
+	Byte          = 0x1400 // GL_BYTE
+	UnsignedByte  = 0x1401 // GL_UNSIGNED_BYTE
+	Short         = 0x1402 // GL_SHORT
+	UnsignedShort = 0x1403 // GL_UNSIGNED_SHORT
+	Int           = 0x1404 // GL_INT
+	UnsignedInt   = 0x1405 // GL_UNSIGNED_INT
+	Float         = 0x1406 // GL_FLOAT
+	Double        = 0x140A // GL_DOUBLE
+	HalfFloat     = 0x140B // GL_HALF_FLOAT
 
 	// Buffer usage hint
 	StreamDraw  = 0x88E0 // GL_STREAM_DRAW

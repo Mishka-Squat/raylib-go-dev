@@ -640,6 +640,104 @@ func SetVertexAttributeDivisor(index uint32, divisor int32) {
 	C.rlSetVertexAttributeDivisor(cindex, cdivisor)
 }
 
+// LoadVertexBuffer - Load a vertex buffer object
+func LoadVertexBuffer[T any](buffer []T, dynamic bool) uint32 {
+	if len(buffer) == 0 {
+		return 0
+	}
+	cbuffer := unsafe.Pointer(&buffer[0])
+	csize := C.int(int(unsafe.Sizeof(buffer[0])) * len(buffer))
+	cdynamic := C.bool(dynamic)
+	return uint32(C.rlLoadVertexBuffer(cbuffer, csize, cdynamic))
+}
+
+// LoadVertexBufferElements - Load vertex buffer elements object
+func LoadVertexBufferElements[T any](buffer []T, dynamic bool) uint32 {
+	if len(buffer) == 0 {
+		return 0
+	}
+	cbuffer := unsafe.Pointer(&buffer[0])
+	csize := C.int(int(unsafe.Sizeof(buffer[0])) * len(buffer))
+	cdynamic := C.bool(dynamic)
+	return uint32(C.rlLoadVertexBufferElement(cbuffer, csize, cdynamic))
+}
+
+// UpdateVertexBuffer - Update vertex buffer object data on GPU buffer
+func UpdateVertexBuffer[T any](bufferId uint32, data []T, offset int32) {
+	if len(data) == 0 {
+		return
+	}
+	cbufferId := C.uint(bufferId)
+	cdata := unsafe.Pointer(&data[0])
+	cdataSize := C.int(int(unsafe.Sizeof(data[0])) * len(data))
+	coffset := C.int(offset)
+	C.rlUpdateVertexBuffer(cbufferId, cdata, cdataSize, coffset)
+}
+
+// UpdateVertexBufferElements - Update vertex buffer elements data on GPU buffer
+func UpdateVertexBufferElements[T any](id uint32, data []T, offset int32) {
+	if len(data) == 0 {
+		return
+	}
+	cid := C.uint(id)
+	cdata := unsafe.Pointer(&data[0])
+	cdataSize := C.int(int(unsafe.Sizeof(data[0])) * len(data))
+	coffset := C.int(offset)
+	C.rlUpdateVertexBufferElements(cid, cdata, cdataSize, coffset)
+}
+
+// SetVertexAttribute - Set vertex attribute data configuration
+func SetVertexAttribute(index uint32, compSize int32, attrType int32, normalized bool, stride int32, offset int32) {
+	cindex := C.uint(index)
+	ccompSize := C.int(compSize)
+	cattrType := C.int(attrType)
+	cnormalized := C.bool(normalized)
+	cstride := C.int(stride)
+	coffset := C.int(offset)
+	C.rlSetVertexAttribute(cindex, ccompSize, cattrType, cnormalized, cstride, coffset)
+}
+
+// SetVertexAttributeDefault - Set vertex attribute default value, when attribute to provided
+func SetVertexAttributeDefault(locIndex int32, value unsafe.Pointer, attribType int32, count int32) {
+	clocIndex := C.int(locIndex)
+	cvalue := value
+	cattribType := C.int(attribType)
+	ccount := C.int(count)
+	C.rlSetVertexAttributeDefault(clocIndex, cvalue, cattribType, ccount)
+}
+
+// DrawVertexArray - Draw vertex array (currently active vao)
+func DrawVertexArray(offset int32, count int32) {
+	coffset := C.int(offset)
+	ccount := C.int(count)
+	C.rlDrawVertexArray(coffset, ccount)
+}
+
+// DrawVertexArrayElements - Draw vertex array elements
+func DrawVertexArrayElements(offset int32, count int32, buffer unsafe.Pointer) {
+	coffset := C.int(offset)
+	ccount := C.int(count)
+	cbuffer := buffer
+	C.rlDrawVertexArrayElements(coffset, ccount, cbuffer)
+}
+
+// DrawVertexArrayInstanced - Draw vertex array (currently active vao) with instancing
+func DrawVertexArrayInstanced(offset int32, count int32, instances int32) {
+	coffset := C.int(offset)
+	ccount := C.int(count)
+	cinstances := C.int(instances)
+	C.rlDrawVertexArrayInstanced(coffset, ccount, cinstances)
+}
+
+// DrawVertexArrayElementsInstanced - Draw vertex array elements with instancing
+func DrawVertexArrayElementsInstanced(offset int32, count int32, buffer unsafe.Pointer, instances int32) {
+	coffset := C.int(offset)
+	ccount := C.int(count)
+	cbuffer := buffer
+	cinstances := C.int(instances)
+	C.rlDrawVertexArrayElementsInstanced(coffset, ccount, cbuffer, cinstances)
+}
+
 // LoadTextureDepth - Load depth texture/renderbuffer (to be attached to fbo)
 func LoadTextureDepth(width, height int32, useRenderBuffer bool) uint32 {
 	cwidth := C.int(width)
@@ -730,9 +828,18 @@ func GetLocationAttrib(shaderId uint32, attribName string) int32 {
 	return int32(C.rlGetLocationAttrib(cshaderId, cattribName))
 }
 
-// SetUniform - Set shader value uniform
-func SetUniform(locIndex int32, value []float32, uniformType int32) {
-	C.rlSetUniform(C.int(locIndex), unsafe.Pointer(unsafe.SliceData(value)), C.int(uniformType), C.int((len(value))))
+// SetUniform - Set shader value uniform ([]float32, []int32, []uint32)
+func SetUniform(locIndex int32, value any, uniformType, count int32) {
+	var cvalue unsafe.Pointer
+	switch v := value.(type) {
+	case []float32:
+		cvalue = unsafe.Pointer(unsafe.SliceData(v))
+	case []int32:
+		cvalue = unsafe.Pointer(unsafe.SliceData(v))
+	case []uint32:
+		cvalue = unsafe.Pointer(unsafe.SliceData(v))
+	}
+	C.rlSetUniform(C.int(locIndex), cvalue, C.int(uniformType), C.int((count)))
 }
 
 // SetUniformMatrix - Set shader value matrix

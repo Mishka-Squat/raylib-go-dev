@@ -7,6 +7,9 @@ package rl
 #include "raylib.h"
 #include <stdlib.h>
 
+#if defined(_WIN32) || defined(WIN32) || defined(__WIN32__) || defined(__NT__)
+    __declspec(dllexport)
+#endif
 extern void internalAudioStreamCallbackGo(void *, int);
 
 static void audioStreamWrapperCallback(void *data, unsigned int frames) {
@@ -17,6 +20,9 @@ static void setAudioStreamCallbackWrapper(AudioStream stream) {
 	SetAudioStreamCallback(stream, audioStreamWrapperCallback);
 }
 
+#if defined(_WIN32) || defined(WIN32) || defined(__WIN32__) || defined(__NT__)
+    __declspec(dllexport)
+#endif
 extern void internalAudioMixedProcessorGo(void *, int);
 
 static void audioMixedProcessorCallback(void *data, unsigned int frames) {
@@ -289,7 +295,7 @@ func WaveCrop(wave *Wave, initFrame int32, finalFrame int32) {
 func LoadWaveSamples(wave Wave) []float32 {
 	cwave := wave.cptr()
 	ret := C.LoadWaveSamples(*cwave)
-	v := unsafe.Slice((*float32)(unsafe.Pointer(ret)), wave.FrameCount)
+	v := unsafe.Slice((*float32)(unsafe.Pointer(ret)), wave.FrameCount*wave.Channels)
 	return v
 }
 
@@ -433,8 +439,18 @@ func UnloadAudioStream(stream *AudioStream) {
 	C.UnloadAudioStream(cstream)
 }
 
-// UpdateAudioStream - Update audio stream buffers with data
-func UpdateAudioStream(stream AudioStream, data []float32) {
+// UpdateAudioStream - Update audio stream buffers with data ([]float32 or []int16)
+func UpdateAudioStream(stream AudioStream, data any) {
+	var cdata unsafe.Pointer
+	var csamplesCount C.int
+	switch d := data.(type) {
+	case []float32:
+		cdata = unsafe.Pointer(&d[0])
+		csamplesCount = (C.int)(len(d))
+	case []int16:
+		cdata = unsafe.Pointer(&d[0])
+		csamplesCount = (C.int)(len(d))
+	}
 	cstream := stream.cptr()
 	cdata := unsafe.Pointer(&data[0])
 	csamplesCount := (C.int)(len(data))
