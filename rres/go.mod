@@ -2,9 +2,7 @@ module github.com/Mishka-Squat/raylib-go/rres
 
 go 1.25.0
 
-require (
-	github.com/Mishka-Squat/raylib-go/raylib v0.0.0-20260220111826-0920877398a5
-)
+require github.com/Mishka-Squat/raylib-go/raylib v0.0.0-20260220111826-0920877398a5
 
 require (
 	github.com/Mishka-Squat/gamemath v0.0.0-20260220115342-d6e8c273dd36 // indirect
