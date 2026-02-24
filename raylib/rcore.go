@@ -1169,7 +1169,8 @@ func PlayAutomationEvent(event AutomationEvent) {
 func IsKeyPressed(key KeyType) bool {
 	ckey := (C.int)(key)
 	ret := C.IsKeyPressed(ckey)
-	return scriptedInputKeyPressed(key, bool(ret))
+	v := bool(ret)
+	return v
 }
 
 // IsKeyPressedRepeat - Detect if a key has been pressed again (Only PLATFORM_DESKTOP)
@@ -1184,26 +1185,30 @@ func IsKeyPressedRepeat(key KeyType) bool {
 func IsKeyDown(key KeyType) bool {
 	ckey := (C.int)(key)
 	ret := C.IsKeyDown(ckey)
-	return scriptedInputKeyDown(key, bool(ret))
+	v := bool(ret)
+	return v
 }
 
 // IsKeyReleased - Detect if a key has been released once
 func IsKeyReleased(key KeyType) bool {
 	ckey := (C.int)(key)
 	ret := C.IsKeyReleased(ckey)
-	return scriptedInputKeyReleased(key, bool(ret))
+	v := bool(ret)
+	return v
 }
 
 // IsKeyUp - Detect if a key is NOT being pressed
 func IsKeyUp(key KeyType) bool {
 	ckey := (C.int)(key)
 	ret := C.IsKeyUp(ckey)
-	return scriptedInputKeyUp(key, bool(ret))
+	v := bool(ret)
+	return v
 }
 
 func GetKeyDownCount() int {
 	ret := C.GetKeyDownCount()
-	return scriptedInputKeyDownCount(int(ret))
+	v := (int)(ret)
+	return v
 }
 
 // GetKeyPressed - Get latest key pressed
@@ -1224,6 +1229,36 @@ func GetCharPressed() KeyType {
 func SetExitKey(key KeyType) {
 	ckey := (C.int)(key)
 	C.SetExitKey(ckey)
+}
+
+// DebugGenerateKeyDown - Generate keyboard down event for debugging
+func DebugGenerateKeyDown(key KeyType) {
+	C.DebugGenerateKeyDown(C.int(key))
+}
+
+// DebugGenerateKeyUp - Generate keyboard up event for debugging
+func DebugGenerateKeyUp(key KeyType) {
+	C.DebugGenerateKeyUp(C.int(key))
+}
+
+// DebugGenerateMouseDown - Generate mouse button down event for debugging
+func DebugGenerateMouseDown(button MouseButtonType) {
+	C.DebugGenerateMouseDown(C.int(button))
+}
+
+// DebugGenerateMouseUp - Generate mouse button up event for debugging
+func DebugGenerateMouseUp(button MouseButtonType) {
+	C.DebugGenerateMouseUp(C.int(button))
+}
+
+// DebugGenerateMousePosition - Generate mouse position event for debugging
+func DebugGenerateMousePosition(x, y float32) {
+	C.DebugGenerateMousePosition(C.float(x), C.float(y))
+}
+
+// DebugGenerateMouseWheelMove - Generate mouse wheel event for debugging
+func DebugGenerateMouseWheelMove(x, y float32) {
+	C.DebugGenerateMouseWheelMove(C.float(x), C.float(y))
 }
 
 // IsGamepadAvailable - Detect if a gamepad is available
@@ -1247,7 +1282,8 @@ func IsGamepadButtonPressed[GT constraints.Integer](gamepad GT, button GamepadBu
 	cgamepad := (C.int)(gamepad)
 	cbutton := (C.int)(button)
 	ret := C.IsGamepadButtonPressed(cgamepad, cbutton)
-	return scriptedInputGamepadPressed(int(gamepad), button, bool(ret))
+	v := bool(ret)
+	return v
 }
 
 // IsGamepadButtonDown - Detect if a gamepad button is being pressed
@@ -1255,7 +1291,8 @@ func IsGamepadButtonDown[GT constraints.Integer](gamepad GT, button GamepadButto
 	cgamepad := (C.int)(gamepad)
 	cbutton := (C.int)(button)
 	ret := C.IsGamepadButtonDown(cgamepad, cbutton)
-	return scriptedInputGamepadDown(int(gamepad), button, bool(ret))
+	v := bool(ret)
+	return v
 }
 
 // IsGamepadButtonReleased - Detect if a gamepad button has been released once
@@ -1263,7 +1300,8 @@ func IsGamepadButtonReleased[GT constraints.Integer](gamepad GT, button GamepadB
 	cgamepad := (C.int)(gamepad)
 	cbutton := (C.int)(button)
 	ret := C.IsGamepadButtonReleased(cgamepad, cbutton)
-	return scriptedInputGamepadReleased(int(gamepad), button, bool(ret))
+	v := bool(ret)
+	return v
 }
 
 // IsGamepadButtonUp - Detect if a gamepad button is NOT being pressed
@@ -1271,7 +1309,8 @@ func IsGamepadButtonUp[GT constraints.Integer](gamepad GT, button GamepadButtonT
 	cgamepad := (C.int)(gamepad)
 	cbutton := (C.int)(button)
 	ret := C.IsGamepadButtonUp(cgamepad, cbutton)
-	return scriptedInputGamepadUp(int(gamepad), button, bool(ret))
+	v := bool(ret)
+	return v
 }
 
 // GetGamepadButtonPressed - Get the last gamepad button pressed
@@ -1316,28 +1355,32 @@ func SetGamepadVibration(gamepad int32, leftMotor, rightMotor, duration float32)
 func IsMouseButtonPressed(button MouseButtonType) bool {
 	cbutton := (C.int)(button)
 	ret := C.IsMouseButtonPressed(cbutton)
-	return scriptedInputMousePressed(button, bool(ret))
+	v := bool(ret)
+	return v
 }
 
 // IsMouseButtonDown - Detect if a mouse button is being pressed
 func IsMouseButtonDown(button MouseButtonType) bool {
 	cbutton := (C.int)(button)
 	ret := C.IsMouseButtonDown(cbutton)
-	return scriptedInputMouseDown(button, bool(ret))
+	v := bool(ret)
+	return v
 }
 
 // IsMouseButtonReleased - Detect if a mouse button has been released once
 func IsMouseButtonReleased(button MouseButtonType) bool {
 	cbutton := (C.int)(button)
 	ret := C.IsMouseButtonReleased(cbutton)
-	return scriptedInputMouseReleased(button, bool(ret))
+	v := bool(ret)
+	return v
 }
 
 // IsMouseButtonUp - Detect if a mouse button is NOT being pressed
 func IsMouseButtonUp(button MouseButtonType) bool {
 	cbutton := (C.int)(button)
 	ret := C.IsMouseButtonUp(cbutton)
-	return scriptedInputMouseUp(button, bool(ret))
+	v := bool(ret)
+	return v
 }
 
 // GetMouseX - Returns mouse position X

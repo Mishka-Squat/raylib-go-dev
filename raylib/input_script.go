@@ -1,6 +1,11 @@
 package rl
 
-import "sort"
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"sort"
+)
 
 const inputScriptPressedHoldSeconds = 0.1
 
@@ -11,53 +16,84 @@ const (
 	InputScriptEventOnDown
 	InputScriptEventOnReleased
 	InputScriptEventOnUp
+	InputScriptEventMousePosition
+	InputScriptEventMouseWheelMove
 )
 
 type InputScriptCommand struct {
 	Time  float64
 	Key   UnifiedKeyType
 	Event InputScriptEventType
+	X     float32
+	Y     float32
 }
 
-type inputScriptKeyState struct {
-	pressed    bool
-	down       bool
-	released   bool
-	holdUntil  float64
-	manualDown bool
+type inputScriptPendingRelease struct {
+	Time float64
+	Key  UnifiedKeyType
 }
 
 type inputScriptRuntime struct {
 	commands []InputScriptCommand
-	keys     map[UnifiedKeyType]inputScriptKeyState
+	pending  []inputScriptPendingRelease
 
 	commandIndex int
 	startTime    float64
 	playhead     float64
-	loaded       bool
 	playing      bool
 }
 
-var scriptedInput = inputScriptRuntime{
-	keys: make(map[UnifiedKeyType]inputScriptKeyState),
-}
+var scriptedInput inputScriptRuntime
 
 func LoadInputScript(commands []InputScriptCommand) {
 	scriptedInput.commands = append(scriptedInput.commands[:0], commands...)
-	sort.Slice(scriptedInput.commands, func(i, j int) bool {
+	sort.SliceStable(scriptedInput.commands, func(i, j int) bool {
 		return scriptedInput.commands[i].Time < scriptedInput.commands[j].Time
 	})
 
+	scriptedInput.pending = scriptedInput.pending[:0]
 	scriptedInput.commandIndex = 0
 	scriptedInput.startTime = 0
 	scriptedInput.playhead = 0
-	scriptedInput.loaded = len(scriptedInput.commands) > 0
 	scriptedInput.playing = false
-	clear(scriptedInput.keys)
+}
+
+func LoadInputScriptFromFile(fileName string) error {
+	data, err := os.ReadFile(fileName)
+	if err != nil {
+		return fmt.Errorf("read input script file: %w", err)
+	}
+
+	var commands []InputScriptCommand
+	if err = json.Unmarshal(data, &commands); err == nil {
+		LoadInputScript(commands)
+		return nil
+	}
+
+	var payload struct {
+		Commands []InputScriptCommand `json:"commands"`
+	}
+	if err2 := json.Unmarshal(data, &payload); err2 == nil {
+		LoadInputScript(payload.Commands)
+		return nil
+	}
+
+	return fmt.Errorf("parse input script file as []InputScriptCommand or {commands:[...]}: %w", err)
+}
+
+func AddInputScriptCommand(command InputScriptCommand) {
+	scriptedInput.commands = append(scriptedInput.commands, command)
+	sort.SliceStable(scriptedInput.commands, func(i, j int) bool {
+		return scriptedInput.commands[i].Time < scriptedInput.commands[j].Time
+	})
+
+	if scriptedInput.commandIndex > len(scriptedInput.commands) {
+		scriptedInput.commandIndex = len(scriptedInput.commands)
+	}
 }
 
 func PlayInputScript() {
-	if !scriptedInput.loaded || scriptedInput.playing {
+	if len(scriptedInput.commands) == 0 || scriptedInput.playing {
 		return
 	}
 
@@ -75,13 +111,13 @@ func PauseInputScript() {
 }
 
 func RewindInputScript() {
-	if !scriptedInput.loaded {
+	if len(scriptedInput.commands) == 0 {
 		return
 	}
 
 	scriptedInput.commandIndex = 0
 	scriptedInput.playhead = 0
-	clear(scriptedInput.keys)
+	scriptedInput.pending = scriptedInput.pending[:0]
 
 	if scriptedInput.playing {
 		scriptedInput.startTime = GetTime()
@@ -96,138 +132,39 @@ func UpdateInputScript() {
 	elapsed := scriptedInput.elapsed()
 	scriptedInput.playhead = elapsed
 
-	for key, state := range scriptedInput.keys {
-		state.pressed = false
-		state.released = false
-		scriptedInput.keys[key] = state
-	}
+	for {
+		nextCommandTime := inputScriptInfinity
+		if scriptedInput.commandIndex < len(scriptedInput.commands) {
+			nextCommandTime = scriptedInput.commands[scriptedInput.commandIndex].Time
+		}
 
-	for scriptedInput.commandIndex < len(scriptedInput.commands) {
-		cmd := scriptedInput.commands[scriptedInput.commandIndex]
-		if cmd.Time > elapsed {
+		nextReleaseTime := inputScriptInfinity
+		if len(scriptedInput.pending) > 0 {
+			nextReleaseTime = scriptedInput.pending[0].Time
+		}
+
+		nextTime := nextCommandTime
+		if nextReleaseTime < nextTime {
+			nextTime = nextReleaseTime
+		}
+		if nextTime > elapsed {
 			break
 		}
-		scriptedInput.apply(cmd)
-		scriptedInput.commandIndex++
-	}
 
-	for key, state := range scriptedInput.keys {
-		nextDown := state.manualDown || elapsed < state.holdUntil
-		if state.down && !nextDown {
-			state.released = true
-		}
-		state.down = nextDown
-
-		if !state.down && !state.pressed && !state.released {
-			delete(scriptedInput.keys, key)
+		if nextReleaseTime <= nextCommandTime {
+			release := scriptedInput.pending[0]
+			scriptedInput.pending = scriptedInput.pending[1:]
+			scriptedInput.generateUp(release.Key)
 			continue
 		}
 
-		scriptedInput.keys[key] = state
+		command := scriptedInput.commands[scriptedInput.commandIndex]
+		scriptedInput.commandIndex++
+		scriptedInput.apply(command)
 	}
 }
 
-func scriptedInputEnabled() bool {
-	return scriptedInput.playing
-}
-
-func scriptedInputKeyPressed(key KeyType, realValue bool) bool {
-	if !scriptedInputEnabled() {
-		return realValue
-	}
-	return scriptedInput.query(unifiedKeyboardKey(key)).pressed
-}
-
-func scriptedInputKeyDown(key KeyType, realValue bool) bool {
-	if !scriptedInputEnabled() {
-		return realValue
-	}
-	return scriptedInput.query(unifiedKeyboardKey(key)).down
-}
-
-func scriptedInputKeyReleased(key KeyType, realValue bool) bool {
-	if !scriptedInputEnabled() {
-		return realValue
-	}
-	return scriptedInput.query(unifiedKeyboardKey(key)).released
-}
-
-func scriptedInputKeyUp(key KeyType, realValue bool) bool {
-	if !scriptedInputEnabled() {
-		return realValue
-	}
-	return !scriptedInput.query(unifiedKeyboardKey(key)).down
-}
-
-func scriptedInputKeyDownCount(realValue int) int {
-	if !scriptedInputEnabled() {
-		return realValue
-	}
-
-	count := 0
-	for key, state := range scriptedInput.keys {
-		if key.Device() == Keyboard && state.down {
-			count++
-		}
-	}
-	return count
-}
-
-func scriptedInputMousePressed(button MouseButtonType, realValue bool) bool {
-	if !scriptedInputEnabled() {
-		return realValue
-	}
-	return scriptedInput.query(unifiedMouseKey(button)).pressed
-}
-
-func scriptedInputMouseDown(button MouseButtonType, realValue bool) bool {
-	if !scriptedInputEnabled() {
-		return realValue
-	}
-	return scriptedInput.query(unifiedMouseKey(button)).down
-}
-
-func scriptedInputMouseReleased(button MouseButtonType, realValue bool) bool {
-	if !scriptedInputEnabled() {
-		return realValue
-	}
-	return scriptedInput.query(unifiedMouseKey(button)).released
-}
-
-func scriptedInputMouseUp(button MouseButtonType, realValue bool) bool {
-	if !scriptedInputEnabled() {
-		return realValue
-	}
-	return !scriptedInput.query(unifiedMouseKey(button)).down
-}
-
-func scriptedInputGamepadPressed(gamepad int, button GamepadButtonType, realValue bool) bool {
-	if !scriptedInputEnabled() {
-		return realValue
-	}
-	return scriptedInput.query(unifiedGamepadKey(gamepad, button)).pressed
-}
-
-func scriptedInputGamepadDown(gamepad int, button GamepadButtonType, realValue bool) bool {
-	if !scriptedInputEnabled() {
-		return realValue
-	}
-	return scriptedInput.query(unifiedGamepadKey(gamepad, button)).down
-}
-
-func scriptedInputGamepadReleased(gamepad int, button GamepadButtonType, realValue bool) bool {
-	if !scriptedInputEnabled() {
-		return realValue
-	}
-	return scriptedInput.query(unifiedGamepadKey(gamepad, button)).released
-}
-
-func scriptedInputGamepadUp(gamepad int, button GamepadButtonType, realValue bool) bool {
-	if !scriptedInputEnabled() {
-		return realValue
-	}
-	return !scriptedInput.query(unifiedGamepadKey(gamepad, button)).down
-}
+const inputScriptInfinity = 1e18
 
 func (s *inputScriptRuntime) elapsed() float64 {
 	elapsed := GetTime() - s.startTime
@@ -237,61 +174,43 @@ func (s *inputScriptRuntime) elapsed() float64 {
 	return elapsed
 }
 
-func (s *inputScriptRuntime) apply(cmd InputScriptCommand) {
-	state := s.keys[cmd.Key]
-
-	switch cmd.Event {
+func (s *inputScriptRuntime) apply(command InputScriptCommand) {
+	switch command.Event {
 	case InputScriptEventOnPressed:
-		state.pressed = true
-		holdUntil := cmd.Time + inputScriptPressedHoldSeconds
-		if holdUntil > state.holdUntil {
-			state.holdUntil = holdUntil
-		}
+		s.generateDown(command.Key)
+		s.queueRelease(command.Time+inputScriptPressedHoldSeconds, command.Key)
 	case InputScriptEventOnDown:
-		state.manualDown = true
-		if !state.down {
-			state.pressed = true
-		}
-	case InputScriptEventOnReleased:
-		if state.down || state.manualDown || state.holdUntil > cmd.Time {
-			state.released = true
-		}
-		state.manualDown = false
-		state.holdUntil = cmd.Time
-	case InputScriptEventOnUp:
-		state.manualDown = false
-		state.holdUntil = cmd.Time
+		s.generateDown(command.Key)
+	case InputScriptEventOnReleased, InputScriptEventOnUp:
+		s.generateUp(command.Key)
+	case InputScriptEventMousePosition:
+		DebugGenerateMousePosition(command.X, command.Y)
+	case InputScriptEventMouseWheelMove:
+		DebugGenerateMouseWheelMove(command.X, command.Y)
 	}
-
-	s.keys[cmd.Key] = state
 }
 
-func (s *inputScriptRuntime) query(key UnifiedKeyType) inputScriptKeyState {
-	state, ok := s.keys[key]
-	if !ok {
-		return inputScriptKeyState{}
-	}
-	return state
+func (s *inputScriptRuntime) queueRelease(time float64, key UnifiedKeyType) {
+	s.pending = append(s.pending, inputScriptPendingRelease{Time: time, Key: key})
+	sort.SliceStable(s.pending, func(i, j int) bool {
+		return s.pending[i].Time < s.pending[j].Time
+	})
 }
 
-func unifiedKeyboardKey(key KeyType) UnifiedKeyType {
-	return UnifiedKeyType(KeyboardMask) | UnifiedKeyType(key)
+func (s *inputScriptRuntime) generateDown(key UnifiedKeyType) {
+	switch key.Device() {
+	case Keyboard:
+		DebugGenerateKeyDown(key.Keyboard())
+	case Mouse:
+		DebugGenerateMouseDown(key.Mouse())
+	}
 }
 
-func unifiedMouseKey(button MouseButtonType) UnifiedKeyType {
-	return UnifiedKeyType(MouseMask) | UnifiedKeyType(button)
-}
-
-func unifiedGamepadKey(gamepad int, button GamepadButtonType) UnifiedKeyType {
-	gamepadIndex := gamepad
-	if gamepadIndex < 0 {
-		gamepadIndex = 0
+func (s *inputScriptRuntime) generateUp(key UnifiedKeyType) {
+	switch key.Device() {
+	case Keyboard:
+		DebugGenerateKeyUp(key.Keyboard())
+	case Mouse:
+		DebugGenerateMouseUp(key.Mouse())
 	}
-	maxIndex := (1 << InputGamepadIndexMaskWidth) - 1
-	if gamepadIndex > maxIndex {
-		gamepadIndex = maxIndex
-	}
-
-	indexBits := UnifiedKeyType(gamepadIndex) << (InputDeviceMaskShift - InputGamepadIndexMaskWidth)
-	return UnifiedKeyType(GamepadMask) | indexBits | UnifiedKeyType(button)
 }

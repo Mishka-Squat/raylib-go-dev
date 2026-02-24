@@ -156,6 +156,8 @@ var isKeyUp func(key int32) bool
 var getKeyPressed func() int32
 var getCharPressed func() int32
 var setExitKey func(key int32)
+var debugGenerateKeyDown func(key int32)
+var debugGenerateKeyUp func(key int32)
 var isGamepadAvailable func(gamepad int32) bool
 var getGamepadName func(gamepad int32) string
 var isGamepadButtonPressed func(gamepad int32, button int32) bool
@@ -171,6 +173,10 @@ var isMouseButtonPressed func(button int32) bool
 var isMouseButtonDown func(button int32) bool
 var isMouseButtonReleased func(button int32) bool
 var isMouseButtonUp func(button int32) bool
+var debugGenerateMouseDown func(button int32)
+var debugGenerateMouseUp func(button int32)
+var debugGenerateMousePosition func(x float32, y float32)
+var debugGenerateMouseWheelMove func(x float32, y float32)
 var getMouseX func() int32
 var getMouseY func() int32
 var getMousePosition func() uintptr
@@ -673,6 +679,8 @@ func init() {
 	purego.RegisterLibFunc(&getKeyPressed, raylibDll, "GetKeyPressed")
 	purego.RegisterLibFunc(&getCharPressed, raylibDll, "GetCharPressed")
 	purego.RegisterLibFunc(&setExitKey, raylibDll, "SetExitKey")
+	purego.RegisterLibFunc(&debugGenerateKeyDown, raylibDll, "DebugGenerateKeyDown")
+	purego.RegisterLibFunc(&debugGenerateKeyUp, raylibDll, "DebugGenerateKeyUp")
 	purego.RegisterLibFunc(&isGamepadAvailable, raylibDll, "IsGamepadAvailable")
 	purego.RegisterLibFunc(&getGamepadName, raylibDll, "GetGamepadName")
 	purego.RegisterLibFunc(&isGamepadButtonPressed, raylibDll, "IsGamepadButtonPressed")
@@ -688,6 +696,10 @@ func init() {
 	purego.RegisterLibFunc(&isMouseButtonDown, raylibDll, "IsMouseButtonDown")
 	purego.RegisterLibFunc(&isMouseButtonReleased, raylibDll, "IsMouseButtonReleased")
 	purego.RegisterLibFunc(&isMouseButtonUp, raylibDll, "IsMouseButtonUp")
+	purego.RegisterLibFunc(&debugGenerateMouseDown, raylibDll, "DebugGenerateMouseDown")
+	purego.RegisterLibFunc(&debugGenerateMouseUp, raylibDll, "DebugGenerateMouseUp")
+	purego.RegisterLibFunc(&debugGenerateMousePosition, raylibDll, "DebugGenerateMousePosition")
+	purego.RegisterLibFunc(&debugGenerateMouseWheelMove, raylibDll, "DebugGenerateMouseWheelMove")
 	purego.RegisterLibFunc(&getMouseX, raylibDll, "GetMouseX")
 	purego.RegisterLibFunc(&getMouseY, raylibDll, "GetMouseY")
 	purego.RegisterLibFunc(&getMousePosition, raylibDll, "GetMousePosition")
@@ -1771,7 +1783,7 @@ func PlayAutomationEvent(event AutomationEvent) {
 
 // IsKeyPressed - Check if a key has been pressed once
 func IsKeyPressed(key int32) bool {
-	return scriptedInputKeyPressed(KeyType(key), isKeyPressed(key))
+	return isKeyPressed(key)
 }
 
 // IsKeyPressedRepeat - Check if a key has been pressed again (Only PLATFORM_DESKTOP)
@@ -1781,17 +1793,17 @@ func IsKeyPressedRepeat(key int32) bool {
 
 // IsKeyDown - Check if a key is being pressed
 func IsKeyDown(key int32) bool {
-	return scriptedInputKeyDown(KeyType(key), isKeyDown(key))
+	return isKeyDown(key)
 }
 
 // IsKeyReleased - Check if a key has been released once
 func IsKeyReleased(key int32) bool {
-	return scriptedInputKeyReleased(KeyType(key), isKeyReleased(key))
+	return isKeyReleased(key)
 }
 
 // IsKeyUp - Check if a key is NOT being pressed
 func IsKeyUp(key int32) bool {
-	return scriptedInputKeyUp(KeyType(key), isKeyUp(key))
+	return isKeyUp(key)
 }
 
 // GetKeyPressed - Get key pressed (keycode), call it multiple times for keys queued, returns 0 when the queue is empty
@@ -1809,6 +1821,16 @@ func SetExitKey(key int32) {
 	setExitKey(key)
 }
 
+// DebugGenerateKeyDown - Generate keyboard down event for debugging
+func DebugGenerateKeyDown(key KeyType) {
+	debugGenerateKeyDown(int32(key))
+}
+
+// DebugGenerateKeyUp - Generate keyboard up event for debugging
+func DebugGenerateKeyUp(key KeyType) {
+	debugGenerateKeyUp(int32(key))
+}
+
 // IsGamepadAvailable - Check if a gamepad is available
 func IsGamepadAvailable(gamepad int32) bool {
 	return isGamepadAvailable(gamepad)
@@ -1821,22 +1843,22 @@ func GetGamepadName(gamepad int32) string {
 
 // IsGamepadButtonPressed - Check if a gamepad button has been pressed once
 func IsGamepadButtonPressed(gamepad int32, button int32) bool {
-	return scriptedInputGamepadPressed(int(gamepad), GamepadButtonType(button), isGamepadButtonPressed(gamepad, button))
+	return isGamepadButtonPressed(gamepad, button)
 }
 
 // IsGamepadButtonDown - Check if a gamepad button is being pressed
 func IsGamepadButtonDown(gamepad int32, button int32) bool {
-	return scriptedInputGamepadDown(int(gamepad), GamepadButtonType(button), isGamepadButtonDown(gamepad, button))
+	return isGamepadButtonDown(gamepad, button)
 }
 
 // IsGamepadButtonReleased - Check if a gamepad button has been released once
 func IsGamepadButtonReleased(gamepad int32, button int32) bool {
-	return scriptedInputGamepadReleased(int(gamepad), GamepadButtonType(button), isGamepadButtonReleased(gamepad, button))
+	return isGamepadButtonReleased(gamepad, button)
 }
 
 // IsGamepadButtonUp - Check if a gamepad button is NOT being pressed
 func IsGamepadButtonUp(gamepad int32, button int32) bool {
-	return scriptedInputGamepadUp(int(gamepad), GamepadButtonType(button), isGamepadButtonUp(gamepad, button))
+	return isGamepadButtonUp(gamepad, button)
 }
 
 // GetGamepadButtonPressed - Get the last gamepad button pressed
@@ -1866,22 +1888,42 @@ func SetGamepadVibration(gamepad int32, leftMotor, rightMotor, duration float32)
 
 // IsMouseButtonPressed - Check if a mouse button has been pressed once
 func IsMouseButtonPressed(button MouseButton) bool {
-	return scriptedInputMousePressed(MouseButtonType(button), isMouseButtonPressed(int32(button)))
+	return isMouseButtonPressed(int32(button))
 }
 
 // IsMouseButtonDown - Check if a mouse button is being pressed
 func IsMouseButtonDown(button MouseButton) bool {
-	return scriptedInputMouseDown(MouseButtonType(button), isMouseButtonDown(int32(button)))
+	return isMouseButtonDown(int32(button))
 }
 
 // IsMouseButtonReleased - Check if a mouse button has been released once
 func IsMouseButtonReleased(button MouseButton) bool {
-	return scriptedInputMouseReleased(MouseButtonType(button), isMouseButtonReleased(int32(button)))
+	return isMouseButtonReleased(int32(button))
 }
 
 // IsMouseButtonUp - Check if a mouse button is NOT being pressed
 func IsMouseButtonUp(button MouseButton) bool {
-	return scriptedInputMouseUp(MouseButtonType(button), isMouseButtonUp(int32(button)))
+	return isMouseButtonUp(int32(button))
+}
+
+// DebugGenerateMouseDown - Generate mouse button down event for debugging
+func DebugGenerateMouseDown(button MouseButtonType) {
+	debugGenerateMouseDown(int32(button))
+}
+
+// DebugGenerateMouseUp - Generate mouse button up event for debugging
+func DebugGenerateMouseUp(button MouseButtonType) {
+	debugGenerateMouseUp(int32(button))
+}
+
+// DebugGenerateMousePosition - Generate mouse position event for debugging
+func DebugGenerateMousePosition(x, y float32) {
+	debugGenerateMousePosition(x, y)
+}
+
+// DebugGenerateMouseWheelMove - Generate mouse wheel event for debugging
+func DebugGenerateMouseWheelMove(x, y float32) {
+	debugGenerateMouseWheelMove(x, y)
 }
 
 // GetMouseX - Get mouse position X
