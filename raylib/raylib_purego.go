@@ -1771,7 +1771,7 @@ func PlayAutomationEvent(event AutomationEvent) {
 
 // IsKeyPressed - Check if a key has been pressed once
 func IsKeyPressed(key int32) bool {
-	return isKeyPressed(key)
+	return scriptedInputKeyPressed(KeyType(key), isKeyPressed(key))
 }
 
 // IsKeyPressedRepeat - Check if a key has been pressed again (Only PLATFORM_DESKTOP)
@@ -1781,17 +1781,17 @@ func IsKeyPressedRepeat(key int32) bool {
 
 // IsKeyDown - Check if a key is being pressed
 func IsKeyDown(key int32) bool {
-	return isKeyDown(key)
+	return scriptedInputKeyDown(KeyType(key), isKeyDown(key))
 }
 
 // IsKeyReleased - Check if a key has been released once
 func IsKeyReleased(key int32) bool {
-	return isKeyReleased(key)
+	return scriptedInputKeyReleased(KeyType(key), isKeyReleased(key))
 }
 
 // IsKeyUp - Check if a key is NOT being pressed
 func IsKeyUp(key int32) bool {
-	return isKeyUp(key)
+	return scriptedInputKeyUp(KeyType(key), isKeyUp(key))
 }
 
 // GetKeyPressed - Get key pressed (keycode), call it multiple times for keys queued, returns 0 when the queue is empty
@@ -1821,22 +1821,22 @@ func GetGamepadName(gamepad int32) string {
 
 // IsGamepadButtonPressed - Check if a gamepad button has been pressed once
 func IsGamepadButtonPressed(gamepad int32, button int32) bool {
-	return isGamepadButtonPressed(gamepad, button)
+	return scriptedInputGamepadPressed(int(gamepad), GamepadButtonType(button), isGamepadButtonPressed(gamepad, button))
 }
 
 // IsGamepadButtonDown - Check if a gamepad button is being pressed
 func IsGamepadButtonDown(gamepad int32, button int32) bool {
-	return isGamepadButtonDown(gamepad, button)
+	return scriptedInputGamepadDown(int(gamepad), GamepadButtonType(button), isGamepadButtonDown(gamepad, button))
 }
 
 // IsGamepadButtonReleased - Check if a gamepad button has been released once
 func IsGamepadButtonReleased(gamepad int32, button int32) bool {
-	return isGamepadButtonReleased(gamepad, button)
+	return scriptedInputGamepadReleased(int(gamepad), GamepadButtonType(button), isGamepadButtonReleased(gamepad, button))
 }
 
 // IsGamepadButtonUp - Check if a gamepad button is NOT being pressed
 func IsGamepadButtonUp(gamepad int32, button int32) bool {
-	return isGamepadButtonUp(gamepad, button)
+	return scriptedInputGamepadUp(int(gamepad), GamepadButtonType(button), isGamepadButtonUp(gamepad, button))
 }
 
 // GetGamepadButtonPressed - Get the last gamepad button pressed
@@ -1866,22 +1866,22 @@ func SetGamepadVibration(gamepad int32, leftMotor, rightMotor, duration float32)
 
 // IsMouseButtonPressed - Check if a mouse button has been pressed once
 func IsMouseButtonPressed(button MouseButton) bool {
-	return isMouseButtonPressed(int32(button))
+	return scriptedInputMousePressed(MouseButtonType(button), isMouseButtonPressed(int32(button)))
 }
 
 // IsMouseButtonDown - Check if a mouse button is being pressed
 func IsMouseButtonDown(button MouseButton) bool {
-	return isMouseButtonDown(int32(button))
+	return scriptedInputMouseDown(MouseButtonType(button), isMouseButtonDown(int32(button)))
 }
 
 // IsMouseButtonReleased - Check if a mouse button has been released once
 func IsMouseButtonReleased(button MouseButton) bool {
-	return isMouseButtonReleased(int32(button))
+	return scriptedInputMouseReleased(MouseButtonType(button), isMouseButtonReleased(int32(button)))
 }
 
 // IsMouseButtonUp - Check if a mouse button is NOT being pressed
 func IsMouseButtonUp(button MouseButton) bool {
-	return isMouseButtonUp(int32(button))
+	return scriptedInputMouseUp(MouseButtonType(button), isMouseButtonUp(int32(button)))
 }
 
 // GetMouseX - Get mouse position X

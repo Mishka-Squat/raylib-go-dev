@@ -1169,8 +1169,7 @@ func PlayAutomationEvent(event AutomationEvent) {
 func IsKeyPressed(key KeyType) bool {
 	ckey := (C.int)(key)
 	ret := C.IsKeyPressed(ckey)
-	v := bool(ret)
-	return v
+	return scriptedInputKeyPressed(key, bool(ret))
 }
 
 // IsKeyPressedRepeat - Detect if a key has been pressed again (Only PLATFORM_DESKTOP)
@@ -1185,30 +1184,26 @@ func IsKeyPressedRepeat(key KeyType) bool {
 func IsKeyDown(key KeyType) bool {
 	ckey := (C.int)(key)
 	ret := C.IsKeyDown(ckey)
-	v := bool(ret)
-	return v
+	return scriptedInputKeyDown(key, bool(ret))
 }
 
 // IsKeyReleased - Detect if a key has been released once
 func IsKeyReleased(key KeyType) bool {
 	ckey := (C.int)(key)
 	ret := C.IsKeyReleased(ckey)
-	v := bool(ret)
-	return v
+	return scriptedInputKeyReleased(key, bool(ret))
 }
 
 // IsKeyUp - Detect if a key is NOT being pressed
 func IsKeyUp(key KeyType) bool {
 	ckey := (C.int)(key)
 	ret := C.IsKeyUp(ckey)
-	v := bool(ret)
-	return v
+	return scriptedInputKeyUp(key, bool(ret))
 }
 
 func GetKeyDownCount() int {
 	ret := C.GetKeyDownCount()
-	v := (int)(ret)
-	return v
+	return scriptedInputKeyDownCount(int(ret))
 }
 
 // GetKeyPressed - Get latest key pressed
@@ -1252,8 +1247,7 @@ func IsGamepadButtonPressed[GT constraints.Integer](gamepad GT, button GamepadBu
 	cgamepad := (C.int)(gamepad)
 	cbutton := (C.int)(button)
 	ret := C.IsGamepadButtonPressed(cgamepad, cbutton)
-	v := bool(ret)
-	return v
+	return scriptedInputGamepadPressed(int(gamepad), button, bool(ret))
 }
 
 // IsGamepadButtonDown - Detect if a gamepad button is being pressed
@@ -1261,8 +1255,7 @@ func IsGamepadButtonDown[GT constraints.Integer](gamepad GT, button GamepadButto
 	cgamepad := (C.int)(gamepad)
 	cbutton := (C.int)(button)
 	ret := C.IsGamepadButtonDown(cgamepad, cbutton)
-	v := bool(ret)
-	return v
+	return scriptedInputGamepadDown(int(gamepad), button, bool(ret))
 }
 
 // IsGamepadButtonReleased - Detect if a gamepad button has been released once
@@ -1270,8 +1263,7 @@ func IsGamepadButtonReleased[GT constraints.Integer](gamepad GT, button GamepadB
 	cgamepad := (C.int)(gamepad)
 	cbutton := (C.int)(button)
 	ret := C.IsGamepadButtonReleased(cgamepad, cbutton)
-	v := bool(ret)
-	return v
+	return scriptedInputGamepadReleased(int(gamepad), button, bool(ret))
 }
 
 // IsGamepadButtonUp - Detect if a gamepad button is NOT being pressed
@@ -1279,8 +1271,7 @@ func IsGamepadButtonUp[GT constraints.Integer](gamepad GT, button GamepadButtonT
 	cgamepad := (C.int)(gamepad)
 	cbutton := (C.int)(button)
 	ret := C.IsGamepadButtonUp(cgamepad, cbutton)
-	v := bool(ret)
-	return v
+	return scriptedInputGamepadUp(int(gamepad), button, bool(ret))
 }
 
 // GetGamepadButtonPressed - Get the last gamepad button pressed
@@ -1325,32 +1316,28 @@ func SetGamepadVibration(gamepad int32, leftMotor, rightMotor, duration float32)
 func IsMouseButtonPressed(button MouseButtonType) bool {
 	cbutton := (C.int)(button)
 	ret := C.IsMouseButtonPressed(cbutton)
-	v := bool(ret)
-	return v
+	return scriptedInputMousePressed(button, bool(ret))
 }
 
 // IsMouseButtonDown - Detect if a mouse button is being pressed
 func IsMouseButtonDown(button MouseButtonType) bool {
 	cbutton := (C.int)(button)
 	ret := C.IsMouseButtonDown(cbutton)
-	v := bool(ret)
-	return v
+	return scriptedInputMouseDown(button, bool(ret))
 }
 
 // IsMouseButtonReleased - Detect if a mouse button has been released once
 func IsMouseButtonReleased(button MouseButtonType) bool {
 	cbutton := (C.int)(button)
 	ret := C.IsMouseButtonReleased(cbutton)
-	v := bool(ret)
-	return v
+	return scriptedInputMouseReleased(button, bool(ret))
 }
 
 // IsMouseButtonUp - Detect if a mouse button is NOT being pressed
 func IsMouseButtonUp(button MouseButtonType) bool {
 	cbutton := (C.int)(button)
 	ret := C.IsMouseButtonUp(cbutton)
-	v := bool(ret)
-	return v
+	return scriptedInputMouseUp(button, bool(ret))
 }
 
 // GetMouseX - Returns mouse position X
