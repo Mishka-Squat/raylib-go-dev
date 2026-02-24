@@ -9,21 +9,19 @@ import (
 
 const inputScriptPressedHoldSeconds = 0.1
 
-type InputScriptEventType int32
+type InputScriptCommandType int32
 
 const (
-	InputScriptEventOnPressed InputScriptEventType = iota
-	InputScriptEventOnDown
-	InputScriptEventOnReleased
-	InputScriptEventOnUp
-	InputScriptEventMousePosition
-	InputScriptEventMouseWheelMove
+	InputScriptCommandInput InputScriptCommandType = iota
+	InputScriptCommandMousePosition
+	InputScriptCommandMouseWheelMove
 )
 
 type InputScriptCommand struct {
 	Time  float64
+	Type  InputScriptCommandType
 	Key   UnifiedKeyType
-	Event InputScriptEventType
+	Event InputEventType
 	X     float32
 	Y     float32
 }
@@ -47,7 +45,7 @@ var scriptedInput inputScriptRuntime
 
 func LoadInputScript(commands []InputScriptCommand) {
 	scriptedInput.commands = append(scriptedInput.commands[:0], commands...)
-	sort.SliceStable(scriptedInput.commands, func(i, j int) bool {
+	sort.Slice(scriptedInput.commands, func(i, j int) bool {
 		return scriptedInput.commands[i].Time < scriptedInput.commands[j].Time
 	})
 
@@ -83,7 +81,7 @@ func LoadInputScriptFromFile(fileName string) error {
 
 func AddInputScriptCommand(command InputScriptCommand) {
 	scriptedInput.commands = append(scriptedInput.commands, command)
-	sort.SliceStable(scriptedInput.commands, func(i, j int) bool {
+	sort.Slice(scriptedInput.commands, func(i, j int) bool {
 		return scriptedInput.commands[i].Time < scriptedInput.commands[j].Time
 	})
 
@@ -154,7 +152,7 @@ func UpdateInputScript() {
 		if nextReleaseTime <= nextCommandTime {
 			release := scriptedInput.pending[0]
 			scriptedInput.pending = scriptedInput.pending[1:]
-			scriptedInput.generateUp(release.Key)
+			scriptedInput.generateInputEvent(false, release.Key, InputEventUp)
 			continue
 		}
 
@@ -175,42 +173,42 @@ func (s *inputScriptRuntime) elapsed() float64 {
 }
 
 func (s *inputScriptRuntime) apply(command InputScriptCommand) {
-	switch command.Event {
-	case InputScriptEventOnPressed:
-		s.generateDown(command.Key)
-		s.queueRelease(command.Time+inputScriptPressedHoldSeconds, command.Key)
-	case InputScriptEventOnDown:
-		s.generateDown(command.Key)
-	case InputScriptEventOnReleased, InputScriptEventOnUp:
-		s.generateUp(command.Key)
-	case InputScriptEventMousePosition:
+	switch command.Type {
+	case InputScriptCommandMousePosition:
 		DebugGenerateMousePosition(command.X, command.Y)
-	case InputScriptEventMouseWheelMove:
+	case InputScriptCommandMouseWheelMove:
 		DebugGenerateMouseWheelMove(command.X, command.Y)
+	default:
+		s.generateInputEvent(false, command.Key, command.Event)
+		if command.Event == InputEventPressed {
+			s.queueRelease(command.Time+inputScriptPressedHoldSeconds, command.Key)
+		}
 	}
 }
 
 func (s *inputScriptRuntime) queueRelease(time float64, key UnifiedKeyType) {
 	s.pending = append(s.pending, inputScriptPendingRelease{Time: time, Key: key})
-	sort.SliceStable(s.pending, func(i, j int) bool {
+	sort.Slice(s.pending, func(i, j int) bool {
 		return s.pending[i].Time < s.pending[j].Time
 	})
 }
 
-func (s *inputScriptRuntime) generateDown(key UnifiedKeyType) {
+func (s *inputScriptRuntime) generateInputEvent(retValue bool, key UnifiedKeyType, event InputEventType) bool {
 	switch key.Device() {
 	case Keyboard:
-		DebugGenerateKeyDown(key.Keyboard())
+		switch event {
+		case InputEventPressed, InputEventDown:
+			DebugGenerateKeyDown(key.Keyboard())
+		case InputEventReleased, InputEventUp:
+			DebugGenerateKeyUp(key.Keyboard())
+		}
 	case Mouse:
-		DebugGenerateMouseDown(key.Mouse())
+		switch event {
+		case InputEventPressed, InputEventDown:
+			DebugGenerateMouseDown(key.Mouse())
+		case InputEventReleased, InputEventUp:
+			DebugGenerateMouseUp(key.Mouse())
+		}
 	}
-}
-
-func (s *inputScriptRuntime) generateUp(key UnifiedKeyType) {
-	switch key.Device() {
-	case Keyboard:
-		DebugGenerateKeyUp(key.Keyboard())
-	case Mouse:
-		DebugGenerateMouseUp(key.Mouse())
-	}
+	return retValue
 }
