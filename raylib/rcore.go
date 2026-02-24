@@ -1261,6 +1261,46 @@ func DebugGenerateMouseWheelMove(x, y float32) {
 	C.DebugGenerateMouseWheelMove(C.float(x), C.float(y))
 }
 
+// DebugGenerateGamepadConnect - Generate gamepad connect event for debugging
+func DebugGenerateGamepadConnect(gamepad int) {
+	C.DebugGenerateGamepadConnect(C.int(gamepad))
+}
+
+// DebugGenerateGamepadDisconnect - Generate gamepad disconnect event for debugging
+func DebugGenerateGamepadDisconnect(gamepad int) {
+	C.DebugGenerateGamepadDisconnect(C.int(gamepad))
+}
+
+// DebugGenerateGamepadButtonUp - Generate gamepad button up event for debugging
+func DebugGenerateGamepadButtonUp(gamepad int, button GamepadButtonType) {
+	C.DebugGenerateGamepadButtonUp(C.int(gamepad), C.int(button))
+}
+
+// DebugGenerateGamepadButtonDown - Generate gamepad button down event for debugging
+func DebugGenerateGamepadButtonDown(gamepad int, button GamepadButtonType) {
+	C.DebugGenerateGamepadButtonDown(C.int(gamepad), C.int(button))
+}
+
+// DebugGenerateGamepadAxisMotion - Generate gamepad axis event for debugging
+func DebugGenerateGamepadAxisMotion(gamepad int, axis GamepadAxisType, delta float32) {
+	C.DebugGenerateGamepadAxisMotion(C.int(gamepad), C.int(axis), C.float(delta))
+}
+
+// DebugGenerateTouchDown - Generate touch down event for debugging
+func DebugGenerateTouchDown(index int32) {
+	C.DebugGenerateTouchDown(C.int(index))
+}
+
+// DebugGenerateTouchUp - Generate touch up event for debugging
+func DebugGenerateTouchUp(index int32) {
+	C.DebugGenerateTouchUp(C.int(index))
+}
+
+// DebugGenerateTouchPosition - Generate touch position event for debugging
+func DebugGenerateTouchPosition(index int32, x, y float32) {
+	C.DebugGenerateTouchPosition(C.int(index), C.float(x), C.float(y))
+}
+
 // IsGamepadAvailable - Detect if a gamepad is available
 func IsGamepadAvailable[GT constraints.Integer](gamepad GT) bool {
 	cgamepad := (C.int)(gamepad)

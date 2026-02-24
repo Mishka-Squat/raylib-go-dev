@@ -15,6 +15,10 @@ const (
 	InputScriptCommandInput InputScriptCommandType = iota
 	InputScriptCommandMousePosition
 	InputScriptCommandMouseWheelMove
+	InputScriptCommandGamepadAxisMotion
+	InputScriptCommandTouchDown
+	InputScriptCommandTouchUp
+	InputScriptCommandTouchPosition
 )
 
 type InputScriptCommand struct {
@@ -24,6 +28,9 @@ type InputScriptCommand struct {
 	Event InputEventType
 	X     float32
 	Y     float32
+	Index int32
+	Axis  GamepadAxisType
+	Delta float32
 }
 
 type inputScriptPendingRelease struct {
@@ -178,6 +185,14 @@ func (s *inputScriptRuntime) apply(command InputScriptCommand) {
 		DebugGenerateMousePosition(command.X, command.Y)
 	case InputScriptCommandMouseWheelMove:
 		DebugGenerateMouseWheelMove(command.X, command.Y)
+	case InputScriptCommandGamepadAxisMotion:
+		DebugGenerateGamepadAxisMotion(command.Key.GamepadIndex(), command.Axis, command.Delta)
+	case InputScriptCommandTouchDown:
+		DebugGenerateTouchDown(command.Index)
+	case InputScriptCommandTouchUp:
+		DebugGenerateTouchUp(command.Index)
+	case InputScriptCommandTouchPosition:
+		DebugGenerateTouchPosition(command.Index, command.X, command.Y)
 	default:
 		s.generateInputEvent(false, command.Key, command.Event)
 		if command.Event == InputEventPressed {
@@ -208,6 +223,14 @@ func (s *inputScriptRuntime) generateInputEvent(retValue bool, key UnifiedKeyTyp
 			DebugGenerateMouseDown(key.Mouse())
 		case InputEventReleased, InputEventUp:
 			DebugGenerateMouseUp(key.Mouse())
+		}
+	case Gamepad:
+		gamepadIndex := key.GamepadIndex()
+		switch event {
+		case InputEventPressed, InputEventDown:
+			DebugGenerateGamepadButtonDown(gamepadIndex, key.Gamepad())
+		case InputEventReleased, InputEventUp:
+			DebugGenerateGamepadButtonUp(gamepadIndex, key.Gamepad())
 		}
 	}
 	return retValue
