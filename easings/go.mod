@@ -1,6 +1,6 @@
 module github.com/Mishka-Squat/raylib-go/easings
 
-go 1.25.0
+go 1.26
 
 require github.com/Mishka-Squat/goex v0.0.0-20260220093026-a6a159ee586e
 

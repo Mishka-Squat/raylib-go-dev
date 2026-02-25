@@ -1,6 +1,6 @@
 module examples
 
-go 1.25.0
+go 1.26
 
 require (
 	github.com/Mishka-Squat/gamemath v0.0.0-20260220115342-d6e8c273dd36

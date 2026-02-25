@@ -1,6 +1,6 @@
 module github.com/Mishka-Squat/raylib-go/rres
 
-go 1.25.0
+go 1.26
 
 require github.com/Mishka-Squat/raylib-go/raylib v0.0.0-20260220111826-0920877398a5
 
