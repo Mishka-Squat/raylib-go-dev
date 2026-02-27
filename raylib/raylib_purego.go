@@ -156,6 +156,13 @@ var isKeyUp func(key int32) bool
 var getKeyPressed func() int32
 var getCharPressed func() int32
 var setExitKey func(key int32)
+var debugGenerateKeyDown func(key int32)
+var debugGenerateKeyUp func(key int32)
+var debugGenerateGamepadConnect func(gamepad int32)
+var debugGenerateGamepadDisconnect func(gamepad int32)
+var debugGenerateGamepadButtonUp func(gamepad int32, button int32)
+var debugGenerateGamepadButtonDown func(gamepad int32, button int32)
+var debugGenerateGamepadAxisMotion func(gamepad int32, axis int32, delta float32)
 var isGamepadAvailable func(gamepad int32) bool
 var getGamepadName func(gamepad int32) string
 var isGamepadButtonPressed func(gamepad int32, button int32) bool
@@ -171,6 +178,13 @@ var isMouseButtonPressed func(button int32) bool
 var isMouseButtonDown func(button int32) bool
 var isMouseButtonReleased func(button int32) bool
 var isMouseButtonUp func(button int32) bool
+var debugGenerateMouseDown func(button int32)
+var debugGenerateMouseUp func(button int32)
+var debugGenerateMousePosition func(x float32, y float32)
+var debugGenerateMouseWheelMove func(x float32, y float32)
+var debugGenerateTouchDown func(index int32)
+var debugGenerateTouchUp func(index int32)
+var debugGenerateTouchPosition func(index int32, x float32, y float32)
 var getMouseX func() int32
 var getMouseY func() int32
 var getMousePosition func() uintptr
@@ -673,6 +687,13 @@ func init() {
 	purego.RegisterLibFunc(&getKeyPressed, raylibDll, "GetKeyPressed")
 	purego.RegisterLibFunc(&getCharPressed, raylibDll, "GetCharPressed")
 	purego.RegisterLibFunc(&setExitKey, raylibDll, "SetExitKey")
+	purego.RegisterLibFunc(&debugGenerateKeyDown, raylibDll, "DebugGenerateKeyDown")
+	purego.RegisterLibFunc(&debugGenerateKeyUp, raylibDll, "DebugGenerateKeyUp")
+	purego.RegisterLibFunc(&debugGenerateGamepadConnect, raylibDll, "DebugGenerateGamepadConnect")
+	purego.RegisterLibFunc(&debugGenerateGamepadDisconnect, raylibDll, "DebugGenerateGamepadDisconnect")
+	purego.RegisterLibFunc(&debugGenerateGamepadButtonUp, raylibDll, "DebugGenerateGamepadButtonUp")
+	purego.RegisterLibFunc(&debugGenerateGamepadButtonDown, raylibDll, "DebugGenerateGamepadButtonDown")
+	purego.RegisterLibFunc(&debugGenerateGamepadAxisMotion, raylibDll, "DebugGenerateGamepadAxisMotion")
 	purego.RegisterLibFunc(&isGamepadAvailable, raylibDll, "IsGamepadAvailable")
 	purego.RegisterLibFunc(&getGamepadName, raylibDll, "GetGamepadName")
 	purego.RegisterLibFunc(&isGamepadButtonPressed, raylibDll, "IsGamepadButtonPressed")
@@ -688,6 +709,13 @@ func init() {
 	purego.RegisterLibFunc(&isMouseButtonDown, raylibDll, "IsMouseButtonDown")
 	purego.RegisterLibFunc(&isMouseButtonReleased, raylibDll, "IsMouseButtonReleased")
 	purego.RegisterLibFunc(&isMouseButtonUp, raylibDll, "IsMouseButtonUp")
+	purego.RegisterLibFunc(&debugGenerateMouseDown, raylibDll, "DebugGenerateMouseDown")
+	purego.RegisterLibFunc(&debugGenerateMouseUp, raylibDll, "DebugGenerateMouseUp")
+	purego.RegisterLibFunc(&debugGenerateMousePosition, raylibDll, "DebugGenerateMousePosition")
+	purego.RegisterLibFunc(&debugGenerateMouseWheelMove, raylibDll, "DebugGenerateMouseWheelMove")
+	purego.RegisterLibFunc(&debugGenerateTouchDown, raylibDll, "DebugGenerateTouchDown")
+	purego.RegisterLibFunc(&debugGenerateTouchUp, raylibDll, "DebugGenerateTouchUp")
+	purego.RegisterLibFunc(&debugGenerateTouchPosition, raylibDll, "DebugGenerateTouchPosition")
 	purego.RegisterLibFunc(&getMouseX, raylibDll, "GetMouseX")
 	purego.RegisterLibFunc(&getMouseY, raylibDll, "GetMouseY")
 	purego.RegisterLibFunc(&getMousePosition, raylibDll, "GetMousePosition")
@@ -1809,6 +1837,41 @@ func SetExitKey(key int32) {
 	setExitKey(key)
 }
 
+// DebugGenerateKeyDown - Generate keyboard down event for debugging
+func DebugGenerateKeyDown(key KeyType) {
+	debugGenerateKeyDown(int32(key))
+}
+
+// DebugGenerateKeyUp - Generate keyboard up event for debugging
+func DebugGenerateKeyUp(key KeyType) {
+	debugGenerateKeyUp(int32(key))
+}
+
+// DebugGenerateGamepadConnect - Generate gamepad connect event for debugging
+func DebugGenerateGamepadConnect(gamepad int) {
+	debugGenerateGamepadConnect(int32(gamepad))
+}
+
+// DebugGenerateGamepadDisconnect - Generate gamepad disconnect event for debugging
+func DebugGenerateGamepadDisconnect(gamepad int) {
+	debugGenerateGamepadDisconnect(int32(gamepad))
+}
+
+// DebugGenerateGamepadButtonUp - Generate gamepad button up event for debugging
+func DebugGenerateGamepadButtonUp(gamepad int, button GamepadButtonType) {
+	debugGenerateGamepadButtonUp(int32(gamepad), int32(button))
+}
+
+// DebugGenerateGamepadButtonDown - Generate gamepad button down event for debugging
+func DebugGenerateGamepadButtonDown(gamepad int, button GamepadButtonType) {
+	debugGenerateGamepadButtonDown(int32(gamepad), int32(button))
+}
+
+// DebugGenerateGamepadAxisMotion - Generate gamepad axis event for debugging
+func DebugGenerateGamepadAxisMotion(gamepad int, axis GamepadAxisType, delta float32) {
+	debugGenerateGamepadAxisMotion(int32(gamepad), int32(axis), delta)
+}
+
 // IsGamepadAvailable - Check if a gamepad is available
 func IsGamepadAvailable(gamepad int32) bool {
 	return isGamepadAvailable(gamepad)
@@ -1882,6 +1945,41 @@ func IsMouseButtonReleased(button MouseButton) bool {
 // IsMouseButtonUp - Check if a mouse button is NOT being pressed
 func IsMouseButtonUp(button MouseButton) bool {
 	return isMouseButtonUp(int32(button))
+}
+
+// DebugGenerateMouseDown - Generate mouse button down event for debugging
+func DebugGenerateMouseDown(button MouseButtonType) {
+	debugGenerateMouseDown(int32(button))
+}
+
+// DebugGenerateMouseUp - Generate mouse button up event for debugging
+func DebugGenerateMouseUp(button MouseButtonType) {
+	debugGenerateMouseUp(int32(button))
+}
+
+// DebugGenerateMousePosition - Generate mouse position event for debugging
+func DebugGenerateMousePosition(x, y float32) {
+	debugGenerateMousePosition(x, y)
+}
+
+// DebugGenerateMouseWheelMove - Generate mouse wheel event for debugging
+func DebugGenerateMouseWheelMove(x, y float32) {
+	debugGenerateMouseWheelMove(x, y)
+}
+
+// DebugGenerateTouchDown - Generate touch down event for debugging
+func DebugGenerateTouchDown(index int32) {
+	debugGenerateTouchDown(index)
+}
+
+// DebugGenerateTouchUp - Generate touch up event for debugging
+func DebugGenerateTouchUp(index int32) {
+	debugGenerateTouchUp(index)
+}
+
+// DebugGenerateTouchPosition - Generate touch position event for debugging
+func DebugGenerateTouchPosition(index int32, x, y float32) {
+	debugGenerateTouchPosition(index, x, y)
 }
 
 // GetMouseX - Get mouse position X
