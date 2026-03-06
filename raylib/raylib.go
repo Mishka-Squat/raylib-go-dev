@@ -59,7 +59,7 @@ func (w Wave) IsValid() bool {
 }
 
 func (w *Wave) Unload() {
-	UnloadWave(w)
+	*w = UnloadWave(*w)
 }
 
 // AudioCallback function.
@@ -79,7 +79,7 @@ func (s Sound) IsValid() bool {
 }
 
 func (s *Sound) Unload() {
-	UnloadSound(s)
+	*s = UnloadSound(*s)
 }
 
 // Music type (file streaming from memory)
@@ -100,7 +100,7 @@ func (m Music) IsValid() bool {
 }
 
 func (m *Music) Unload() {
-	UnloadMusicStream(m)
+	*m = UnloadMusicStream(*m)
 }
 
 // AudioStream type
@@ -128,7 +128,7 @@ func (s AudioStream) IsValid() bool {
 }
 
 func (a *AudioStream) Unload() {
-	UnloadAudioStream(a)
+	*a = UnloadAudioStream(*a)
 }
 
 type maDataConverter struct {
@@ -1200,7 +1200,7 @@ func (m Mesh) IsValid() bool {
 }
 
 func (m *Mesh) Unload() {
-	UnloadMesh(m)
+	*m = UnloadMesh(*m)
 }
 
 // Material type
@@ -1228,7 +1228,7 @@ func (m Material) IsValid() bool {
 }
 
 func (m *Material) Unload() {
-	UnloadMaterial(m)
+	*m = UnloadMaterial(*m)
 }
 
 // GetMap - Get pointer to MaterialMap by map type
@@ -1299,7 +1299,7 @@ func (model Model) IsValid() bool {
 }
 
 func (m *Model) Unload() {
-	UnloadModel(m)
+	*m = UnloadModel(*m)
 }
 
 // GetMeshes returns the meshes of a model as go slice
@@ -1355,10 +1355,6 @@ type ModelAnimation struct {
 	Bones      *BoneInfo
 	FramePoses **Transform
 	Name       [32]uint8
-}
-
-func (m *ModelAnimation) Unload() {
-	UnloadModelAnimation(m)
 }
 
 // GetBones returns the bones information (skeleton) of a ModelAnimation as go slice
@@ -1429,8 +1425,8 @@ func (s Shader) IsValid() bool {
 		s.Locs != nil
 }
 
-func (m *Shader) Unload() {
-	UnloadShader(m)
+func (s *Shader) Unload() {
+	*s = UnloadShader(*s)
 }
 
 // GetLocation - Get shader value's location
@@ -1497,8 +1493,8 @@ func (f Font) IsValid() bool {
 		f.Glyphs != nil // Validate glyph data is loaded
 }
 
-func (m *Font) Unload() {
-	UnloadFont(m)
+func (f *Font) Unload() {
+	*f = UnloadFont(*f)
 }
 
 // DrawTextEx - Draw text using Font and additional parameters
@@ -1648,7 +1644,7 @@ func (image Image) IsValid() bool {
 }
 
 func (i *Image) Unload() {
-	UnloadImage(i)
+	*i = UnloadImage(*i)
 }
 
 func (t Image) IsNull() bool {
@@ -1698,7 +1694,7 @@ func NewTexture2D[T constraints.Integer](width, height, mipmaps T, format PixelF
 }
 
 func (t *Texture2D) Unload() {
-	UnloadTexture(t)
+	*t = UnloadTexture(*t)
 }
 
 func (t Texture2D) IsValidFast() bool {
@@ -1801,7 +1797,7 @@ func (r RenderTexture2D) IsValid() bool {
 }
 
 func (r *RenderTexture2D) Unload() {
-	UnloadRenderTexture(r)
+	*r = UnloadRenderTexture(*r)
 }
 
 // TraceLogCallbackFun - function that will recive the trace log messages

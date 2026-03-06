@@ -146,9 +146,10 @@ func UnloadFontData(glyphs []GlyphInfo) {
 }
 
 // UnloadFont - Unload Font from GPU memory (VRAM)
-func UnloadFont(font *Font) {
+func UnloadFont(font Font) Font {
 	cfont := font.cptr()
-	C.UnloadFont(cfont)
+	ret := C.UnloadFont(*cfont)
+	return *newFontFromPointer(&ret)
 }
 
 // DrawFPS - Shows current FPS

@@ -353,9 +353,10 @@ func LoadTextureCubemap(image Image, layout int32) Texture2D {
 }
 
 // UnloadImage - Unload image from CPU memory (RAM)
-func UnloadImage(image *Image) {
+func UnloadImage(image Image) Image {
 	cimage := image.cptr()
-	C.UnloadImage(cimage)
+	ret := C.UnloadImage(*cimage)
+	return *newImageFromPointer(&ret)
 }
 
 // IsTextureValid - Check if a texture is valid (loaded in GPU)
@@ -367,9 +368,10 @@ func IsTextureValid(texture *Texture2D) bool {
 }
 
 // UnloadTexture - Unload texture from GPU memory
-func UnloadTexture(texture *Texture2D) {
+func UnloadTexture(texture Texture2D) Texture2D {
 	ctexture := texture.cptr()
-	C.UnloadTexture(ctexture)
+	ret := C.UnloadTexture(*ctexture)
+	return *newTexture2DFromPointer(&ret)
 }
 
 // IsRenderTextureValid - Check if a render texture is valid (loaded in GPU)
@@ -381,9 +383,10 @@ func IsRenderTextureValid(target *RenderTexture2D) bool {
 }
 
 // UnloadRenderTexture - Unload render texture from GPU memory
-func UnloadRenderTexture(target *RenderTexture2D) {
+func UnloadRenderTexture(target RenderTexture2D) RenderTexture2D {
 	ctarget := target.cptr()
-	C.UnloadRenderTexture(ctarget)
+	ret := C.UnloadRenderTexture(*ctarget)
+	return *newRenderTexture2DFromPointer(&ret)
 }
 
 // LoadImageColors - Get pixel data from image as a Color slice

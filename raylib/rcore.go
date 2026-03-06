@@ -841,9 +841,10 @@ func SetShaderValueTexture(shader Shader, locIndex int32, texture *Texture2D) {
 }
 
 // UnloadShader - Unload a custom shader from memory
-func UnloadShader(shader *Shader) {
+func UnloadShader(shader Shader) Shader {
 	cshader := shader.cptr()
-	C.UnloadShader(cshader)
+	ret := C.UnloadShader(*cshader)
+	return *newShaderFromPointer(&ret)
 }
 
 // GetMouseRay - Get a ray trace from mouse position
@@ -1125,8 +1126,9 @@ func LoadAutomationEventList(fileName string) AutomationEventList {
 }
 
 // UnloadAutomationEventList - Unload automation events list from file
-func UnloadAutomationEventList(list *AutomationEventList) {
-	C.UnloadAutomationEventList((*C.AutomationEventList)(list))
+func UnloadAutomationEventList(list AutomationEventList) AutomationEventList {
+	ret := C.UnloadAutomationEventList(*list.cptr())
+	return *newAutomationEventListFromPointer(&ret)
 }
 
 // ExportAutomationEventList - Export automation events list as text file

@@ -190,21 +190,24 @@ func UpdateSound(sound Sound, data []byte, samplesCount int32) {
 }
 
 // UnloadWave - Unload wave data
-func UnloadWave(wave *Wave) {
+func UnloadWave(wave Wave) Wave {
 	cwave := wave.cptr()
-	C.UnloadWave(cwave)
+	ret := C.UnloadWave(*cwave)
+	return *newWaveFromPointer(&ret)
 }
 
 // UnloadSound - Unload sound
-func UnloadSound(sound *Sound) {
+func UnloadSound(sound Sound) Sound {
 	csound := sound.cptr()
-	C.UnloadSound(csound)
+	ret := C.UnloadSound(*csound)
+	return *newSoundFromPointer(&ret)
 }
 
 // UnloadSoundAlias - Unload a sound alias (does not deallocate sample data)
-func UnloadSoundAlias(sound *Sound) {
+func UnloadSoundAlias(sound Sound) Sound {
 	csound := sound.cptr()
-	C.UnloadSoundAlias(csound)
+	ret := C.UnloadSoundAlias(*csound)
+	return *newSoundFromPointer(&ret)
 }
 
 // ExportWave - Export wave data to file
@@ -329,9 +332,10 @@ func IsMusicValid(music Music) bool {
 }
 
 // UnloadMusicStream - Unload music stream
-func UnloadMusicStream(music *Music) {
+func UnloadMusicStream(music Music) Music {
 	cmusic := music.cptr()
-	C.UnloadMusicStream(cmusic)
+	ret := C.UnloadMusicStream(*cmusic)
+	return *newMusicFromPointer(&ret)
 }
 
 // PlayMusicStream - Start music playing
@@ -434,9 +438,10 @@ func IsAudioStreamValid(stream AudioStream) bool {
 }
 
 // UnloadAudioStream - Unload audio stream and free memory
-func UnloadAudioStream(stream *AudioStream) {
+func UnloadAudioStream(stream AudioStream) AudioStream {
 	cstream := stream.cptr()
-	C.UnloadAudioStream(cstream)
+	ret := C.UnloadAudioStream(*cstream)
+	return *newAudioStreamFromPointer(&ret)
 }
 
 // UpdateAudioStream - Update audio stream buffers with data ([]float32 or []int16)

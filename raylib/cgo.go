@@ -252,8 +252,8 @@ func newFontFromPointer(ptr *C.Font) *Font {
 }
 
 // cptr returns C pointer
-func (s *Font) cptr() *C.Font {
-	return (*C.Font)(unsafe.Pointer(s))
+func (f *Font) cptr() *C.Font {
+	return (*C.Font)(unsafe.Pointer(f))
 }
 
 // audio

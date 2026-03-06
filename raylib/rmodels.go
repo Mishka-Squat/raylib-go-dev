@@ -225,9 +225,10 @@ func IsModelValid(model Model) bool {
 }
 
 // UnloadModel - Unload model from memory (RAM and/or VRAM)
-func UnloadModel(model *Model) {
+func UnloadModel(model Model) Model {
 	cmodel := model.cptr()
-	C.UnloadModel(cmodel)
+	ret := C.UnloadModel(*cmodel)
+	return *newModelFromPointer(&ret)
 }
 
 // GetModelBoundingBox - Compute model bounding box limits (considers all meshes
@@ -348,7 +349,7 @@ func UpdateMeshBuffer(mesh Mesh, index int, data []byte, offset int) {
 }
 
 // UnloadMesh - Unload mesh from memory (RAM and/or VRAM)
-func UnloadMesh(mesh *Mesh) {
+func UnloadMesh(mesh Mesh) Mesh {
 	// Check list of go-managed mesh IDs
 	if slices.Contains(goManagedMeshIDs, mesh.VaoID) {
 		// C.UnloadMesh() only needs to read the VaoID & VboID
@@ -358,13 +359,15 @@ func UnloadMesh(mesh *Mesh) {
 			VboID: mesh.VboID,
 		}
 		cmesh := tempMesh.cptr()
-		C.UnloadMesh(cmesh)
+		ret := C.UnloadMesh(*cmesh)
 
 		// remove mesh VaoID from list
 		goManagedMeshIDs = slices.DeleteFunc(goManagedMeshIDs, func(id uint32) bool { return id == mesh.VaoID })
+		return *newMeshFromPointer(&ret)
 	} else {
 		cmesh := mesh.cptr()
-		C.UnloadMesh(cmesh)
+		ret := C.UnloadMesh(*cmesh)
+		return *newMeshFromPointer(&ret)
 	}
 }
 
@@ -526,9 +529,10 @@ func IsMaterialValid(material Material) bool {
 }
 
 // UnloadMaterial - Unload material textures from VRAM
-func UnloadMaterial(material *Material) {
+func UnloadMaterial(material Material) Material {
 	cmaterial := material.cptr()
-	C.UnloadMaterial(cmaterial)
+	ret := C.UnloadMaterial(*cmaterial)
+	return *newMaterialFromPointer(&ret)
 }
 
 // SetMaterialTexture - Set texture for a material map type (MATERIAL_MAP_DIFFUSE, MATERIAL_MAP_SPECULAR...)
@@ -557,30 +561,17 @@ func LoadModelAnimations(fileName string) []ModelAnimation {
 }
 
 // UpdateModelAnimation - Update model animation pose (CPU)
-func UpdateModelAnimation(model Model, anim ModelAnimation, frame int32) {
+func UpdateModelAnimation(model Model, anim ModelAnimation, frame float32) {
 	cmodel := model.cptr()
 	canim := anim.cptr()
-	cframe := (C.int)(frame)
+	cframe := (C.float)(frame)
 	C.UpdateModelAnimation(*cmodel, *canim, cframe)
 }
 
-// UpdateModelAnimationBones - Update model animation mesh bone matrices (GPU skinning)
-func UpdateModelAnimationBones(model Model, anim ModelAnimation, frame int32) {
-	cmodel := model.cptr()
-	canim := anim.cptr()
-	cframe := (C.int)(frame)
-	C.UpdateModelAnimationBones(*cmodel, *canim, cframe)
-}
-
-// UnloadModelAnimation - Unload animation data
-func UnloadModelAnimation(anim *ModelAnimation) {
-	canim := anim.cptr()
-	C.UnloadModelAnimation(canim)
-}
-
 // UnloadModelAnimations - Unload animation array data
-func UnloadModelAnimations(animations []ModelAnimation) {
+func UnloadModelAnimations(animations []ModelAnimation) []ModelAnimation {
 	C.UnloadModelAnimations((*C.ModelAnimation)(unsafe.Pointer(&animations[0])), (C.int)(len(animations)))
+	return []ModelAnimation{}
 }
 
 // IsModelAnimationValid - Check model animation skeleton match
