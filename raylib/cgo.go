@@ -130,14 +130,21 @@ func (a *AutomationEvent) cptr() *C.AutomationEvent {
 	return (*C.AutomationEvent)(unsafe.Pointer(a))
 }
 
-// newAutomationEventListFromPointer - Returns new AutomationEventList from pointer
-func newAutomationEventListFromPointer(ptr *C.AutomationEventList) *AutomationEventList {
-	return (*AutomationEventList)(unsafe.Pointer(ptr))
+// newAutomationEventSliceFromPointer - Returns new AutomationEventList from pointer
+func newAutomationEventSliceFromPointer(ptr *C.AutomationEventList) []AutomationEvent {
+	return unsafe.Slice((*AutomationEvent)(unsafe.Pointer(ptr.events)), ptr.capacity)[:ptr.count]
 }
 
 // cptr returns C pointer
-func (a *AutomationEventList) cptr() *C.AutomationEventList {
-	return (*C.AutomationEventList)(unsafe.Pointer(a))
+func makeCAutomationEventList(l []AutomationEvent) C.AutomationEventList {
+	if cap(l) == 0 {
+		return C.AutomationEventList{}
+	}
+	return C.AutomationEventList{
+		capacity: C.uint(cap(l)),
+		count:    C.uint(len(l)),
+		events:   (*C.AutomationEvent)(unsafe.Pointer(unsafe.SliceData(l))),
+	}
 }
 
 // model

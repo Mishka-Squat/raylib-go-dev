@@ -323,10 +323,6 @@ import (
 	"golang.org/x/exp/constraints"
 )
 
-// AutomationEvent - Automation event
-type AutomationEvent C.AutomationEvent
-type AutomationEventList C.AutomationEventList
-
 // WindowShouldClose - Check if KeyEscape pressed or Close icon pressed
 func WindowShouldClose() bool {
 	ret := C.WindowShouldClose()
@@ -1117,33 +1113,54 @@ func TakeScreenshot(name string) {
 	C.TakeScreenshot(cname)
 }
 
-// LoadAutomationEventList - Load automation events list from file, NULL for empty list, capacity = MAX_AUTOMATION_EVENTS
-func LoadAutomationEventList(fileName string) AutomationEventList {
+// NewAutomationEventList - Create default automation events list
+func NewAutomationEventList() []AutomationEvent {
+	ret := C.LoadAutomationEventList(nil)
+	return newAutomationEventSliceFromPointer(&ret)
+}
+
+// LoadAutomationEventList - Load automation events list from file
+// Do not pass nil or empty fileName here
+// Use NewAutomationEventList to create default list.
+func LoadAutomationEventList(fileName string) []AutomationEvent {
 	cfileName := textAlloc(fileName)
 
 	ret := C.LoadAutomationEventList(cfileName)
-	return *newAutomationEventListFromPointer(&ret)
+	return newAutomationEventSliceFromPointer(&ret)
 }
 
 // UnloadAutomationEventList - Unload automation events list from file
-func UnloadAutomationEventList(list AutomationEventList) AutomationEventList {
-	ret := C.UnloadAutomationEventList(*list.cptr())
-	return *newAutomationEventListFromPointer(&ret)
+func UnloadAutomationEventList(list []AutomationEvent) []AutomationEvent {
+	ret := C.UnloadAutomationEventList(makeCAutomationEventList(list))
+	return newAutomationEventSliceFromPointer(&ret)
 }
 
 // ExportAutomationEventList - Export automation events list as text file
-func ExportAutomationEventList(list AutomationEventList, fileName string) bool {
+func ExportAutomationEventList(list []AutomationEvent, fileName string) bool {
 	cfileName := textAlloc(fileName)
 
-	ret := C.ExportAutomationEventList(*list.cptr(), cfileName)
+	ret := C.ExportAutomationEventList(makeCAutomationEventList(list), cfileName)
 	v := bool(ret)
 
 	return v
 }
 
 // SetAutomationEventList - Set automation event list to record to
-func SetAutomationEventList(list *AutomationEventList) {
-	C.SetAutomationEventList(list.cptr())
+func CurrentAutomationEventList() []AutomationEvent {
+	ret := C.CurrentAutomationEventList()
+	return newAutomationEventSliceFromPointer(&ret)
+}
+
+// SetAutomationEventList - Set automation event list to record to
+func SetAutomationEventList(list []AutomationEvent) {
+	C.SetAutomationEventList(makeCAutomationEventList(list))
+}
+
+// ReleaseAutomationEventList - releases current automation event list, does not free memory
+func ReleaseAutomationEventList() []AutomationEvent {
+	ret := C.CurrentAutomationEventList()
+	C.SetAutomationEventList(makeCAutomationEventList(nil))
+	return newAutomationEventSliceFromPointer(&ret)
 }
 
 // SetAutomationEventBaseFrame - Set automation event internal base frame to start recording

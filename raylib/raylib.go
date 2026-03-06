@@ -220,25 +220,43 @@ type AudioProcessor struct {
 }
 
 // AutomationEvent - Automation event
-//type AutomationEvent struct {
-//	Frame  uint32
-//	Type   uint32
-//	Params [4]int32
-//}
+type AutomationEvent struct {
+	Frame  uint32
+	Type   AutomationEventType
+	Params [4]int32
+}
 
-// AutomationEventList - Automation event list
-//type AutomationEventList struct {
-//	Capacity uint32
-//	Count    uint32
-//	// Events array (c array)
-//	//
-//	// Use AutomationEventList.GetEvents instead (go slice)
-//	Events *AutomationEvent
-//}
+type AutomationEventType uint32
 
-//func (a *AutomationEventList) GetEvents() []AutomationEvent {
-//	return unsafe.Slice(a.Events, a.Count)
-//}
+const (
+	EVENT_NONE AutomationEventType = iota
+	// Input events
+	INPUT_KEY_UP              // param[0]: key
+	INPUT_KEY_DOWN            // param[0]: key
+	INPUT_KEY_PRESSED         // param[0]: key
+	INPUT_KEY_RELEASED        // param[0]: key
+	INPUT_MOUSE_BUTTON_UP     // param[0]: button
+	INPUT_MOUSE_BUTTON_DOWN   // param[0]: button
+	INPUT_MOUSE_POSITION      // param[0]: x, param[1]: y
+	INPUT_MOUSE_WHEEL_MOTION  // param[0]: x delta, param[1]: y delta
+	INPUT_GAMEPAD_CONNECT     // param[0]: gamepad
+	INPUT_GAMEPAD_DISCONNECT  // param[0]: gamepad
+	INPUT_GAMEPAD_BUTTON_UP   // param[0]: button
+	INPUT_GAMEPAD_BUTTON_DOWN // param[0]: button
+	INPUT_GAMEPAD_AXIS_MOTION // param[0]: axis, param[1]: delta
+	INPUT_TOUCH_UP            // param[0]: id
+	INPUT_TOUCH_DOWN          // param[0]: id
+	INPUT_TOUCH_POSITION      // param[0]: x, param[1]: y
+	INPUT_GESTURE             // param[0]: gesture
+	// Window events
+	WINDOW_CLOSE    // no params
+	WINDOW_MAXIMIZE // no params
+	WINDOW_MINIMIZE // no params
+	WINDOW_RESIZE   // param[0]: width, param[1]: height
+	// Custom events
+	ACTION_TAKE_SCREENSHOT // no params
+	ACTION_SETTARGETFPS    // param[0]: fps
+)
 
 // CameraMode type
 type CameraMode int32
