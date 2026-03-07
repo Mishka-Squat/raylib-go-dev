@@ -258,6 +258,20 @@ const (
 	ACTION_SETTARGETFPS    // param[0]: fps
 )
 
+func TrimAutomationEventList(list []AutomationEvent, trimFn func(event AutomationEvent) bool) []AutomationEvent {
+	si := 0
+	for si < len(list) && trimFn(list[si]) {
+		si++
+	}
+
+	ei := len(list) - 1
+	for ei >= si && trimFn(list[ei]) {
+		ei--
+	}
+
+	return list[si : ei+1]
+}
+
 // CameraMode type
 type CameraMode int32
 
@@ -520,6 +534,7 @@ const (
 	Mouse
 	Gamepad
 	Gesture
+	Touch
 )
 
 type InputDeviceMask int32
@@ -533,6 +548,7 @@ const (
 	MouseMask                    = InputDeviceMask(Mouse) << InputDeviceMaskShift
 	GamepadMask                  = InputDeviceMask(Gamepad) << InputDeviceMaskShift
 	GestureMask                  = InputDeviceMask(Gesture) << InputDeviceMaskShift
+	TouchMask                    = InputDeviceMask(Touch) << InputDeviceMaskShift
 )
 
 type UnifiedKeyType int32
@@ -555,6 +571,10 @@ func (k UnifiedKeyType) Gamepad() GamepadButtonType {
 
 func (k UnifiedKeyType) GamepadIndex() int {
 	return int(k&InputKeyMask) >> (InputDeviceMaskShift - InputGamepadIndexMaskWidth)
+}
+
+func (k UnifiedKeyType) SetGamepadIndex(index int) UnifiedKeyType {
+	return k | UnifiedKeyType(index<<(InputDeviceMaskShift-InputGamepadIndexMaskWidth))
 }
 
 func (k UnifiedKeyType) Gesture() Gestures {
@@ -804,12 +824,16 @@ const (
 )
 const (
 	// Gestures which can be processed as virtual key inputs. These will only respond any event like on Pressed event
-	Gesture_Tap = iota + UnifiedKeyType(GestureMask)
-	Gesture_DoubleTap
-	Gesture_SwipeRight
-	Gesture_SwipeLeft
-	Gesture_SwipeUp
-	Gesture_SwipeDown
+	Gesture_Tap        = UnifiedKeyType(GestureMask) | UnifiedKeyType(GestureTap)
+	Gesture_DoubleTap  = UnifiedKeyType(GestureMask) | UnifiedKeyType(GestureDoubleTap)
+	Gesture_Hold       = UnifiedKeyType(GestureMask) | UnifiedKeyType(GestureHold)
+	Gesture_Drag       = UnifiedKeyType(GestureMask) | UnifiedKeyType(GestureDrag)
+	Gesture_SwipeRight = UnifiedKeyType(GestureMask) | UnifiedKeyType(GestureSwipeRight)
+	Gesture_SwipeLeft  = UnifiedKeyType(GestureMask) | UnifiedKeyType(GestureSwipeLeft)
+	Gesture_SwipeUp    = UnifiedKeyType(GestureMask) | UnifiedKeyType(GestureSwipeUp)
+	Gesture_SwipeDown  = UnifiedKeyType(GestureMask) | UnifiedKeyType(GestureSwipeDown)
+	Gesture_PinchIn    = UnifiedKeyType(GestureMask) | UnifiedKeyType(GesturePinchIn)
+	Gesture_PinchOut   = UnifiedKeyType(GestureMask) | UnifiedKeyType(GesturePinchOut)
 )
 
 // Some Basic Colors
