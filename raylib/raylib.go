@@ -569,6 +569,10 @@ func (k UnifiedKeyType) Gamepad() GamepadButtonType {
 	return GamepadButtonType(k & InputKeyMask)
 }
 
+func (k UnifiedKeyType) Key() int {
+	return int(k & InputKeyMask)
+}
+
 func (k UnifiedKeyType) GamepadIndex() int {
 	return int(k&InputKeyMask) >> (InputDeviceMaskShift - InputGamepadIndexMaskWidth)
 }

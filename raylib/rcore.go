@@ -117,7 +117,7 @@ package rl
 #cgo nocallback PlayAutomationEvent
 #cgo nocallback PollInputEvents
 #cgo nocallback RestoreWindow
-#cgo nocallback SetAutomationEventBaseFrame
+#cgo nocallback ResetAutomationEventBaseFrame
 #cgo nocallback SetAutomationEventList
 #cgo nocallback SetClipboardText
 #cgo nocallback SetConfigFlags
@@ -270,7 +270,7 @@ package rl
 #cgo noescape PlayAutomationEvent
 #cgo noescape PollInputEvents
 #cgo noescape RestoreWindow
-#cgo noescape SetAutomationEventBaseFrame
+#cgo noescape ResetAutomationEventBaseFrame
 #cgo noescape SetAutomationEventList
 #cgo noescape SetClipboardText
 #cgo noescape SetConfigFlags
@@ -1163,10 +1163,13 @@ func ReleaseAutomationEventList() []AutomationEvent {
 	return newAutomationEventSliceFromPointer(&ret)
 }
 
-// SetAutomationEventBaseFrame - Set automation event internal base frame to start recording
-func SetAutomationEventBaseFrame(frame int) {
-	cframe := (C.int)(frame)
-	C.SetAutomationEventBaseFrame(cframe)
+// ResetAutomationEventBaseFrame - Set automation event internal base frame to start recording
+func ResetAutomationEventBaseFrame() {
+	C.ResetAutomationEventBaseFrame()
+}
+
+func GetAutomationEventFrame() uint32 {
+	return (uint32)(C.GetAutomationEventFrame())
 }
 
 // StartAutomationEventRecording - Start recording automation events (AutomationEventList must be set)
