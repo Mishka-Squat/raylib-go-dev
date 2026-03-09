@@ -960,7 +960,7 @@ func MakeRectangle[XT, YT, WT, HT mathex.Number](x XT, y YT, width WT, height HT
 	return rect2.New(vector2.NewFloat32(x, y), vector2.NewFloat32(width, height))
 }
 
-func MakeRectangleWHV[WHT mathex.SignedNumber](wh vector2.Vector[WHT]) rect2.Float32 {
+func MakeRectangleWHV[WHT mathex.SignedNumber](wh vector2.Of[WHT]) rect2.Float32 {
 	return rect2.New(vector2.Zero[float32](), wh.ToFloat32())
 }
 

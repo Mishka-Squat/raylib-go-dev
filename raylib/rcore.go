@@ -1168,6 +1168,11 @@ func ResetAutomationEventBaseFrame() {
 	C.ResetAutomationEventBaseFrame()
 }
 
+// SetAutomationEventBaseFrame - Set automation event internal base frame to start recording
+func SetAutomationEventBaseFrame(frame uint32) {
+	C.SetAutomationEventBaseFrame((C.uint)(frame))
+}
+
 func GetAutomationEventFrame() uint32 {
 	return (uint32)(C.GetAutomationEventFrame())
 }

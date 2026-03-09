@@ -340,7 +340,7 @@ func LoadRenderTexture[WT, HT mathex.SignedNumber](width WT, height HT) RenderTe
 	return *newRenderTexture2DFromPointer(&ret)
 }
 
-func LoadRenderTextureV[T mathex.SignedNumber](wh vector2.Vector[T]) RenderTexture2D {
+func LoadRenderTextureV[T mathex.SignedNumber](wh vector2.Of[T]) RenderTexture2D {
 	return LoadRenderTexture(wh.X, wh.Y)
 }
 
