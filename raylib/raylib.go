@@ -258,18 +258,22 @@ const (
 	ACTION_SETTARGETFPS    // param[0]: fps
 )
 
-func TrimAutomationEventList(list []AutomationEvent, trimFn func(event AutomationEvent) bool) []AutomationEvent {
+func TrimAutomationEventListLeft(list []AutomationEvent, trimFn func(event AutomationEvent) bool) []AutomationEvent {
 	si := 0
 	for si < len(list) && trimFn(list[si]) {
 		si++
 	}
 
+	return list[si:]
+}
+
+func TrimAutomationEventListRight(list []AutomationEvent, trimFn func(event AutomationEvent) bool) []AutomationEvent {
 	ei := len(list) - 1
-	for ei >= si && trimFn(list[ei]) {
+	for ei >= 0 && trimFn(list[ei]) {
 		ei--
 	}
 
-	return list[si : ei+1]
+	return list[0 : ei+1]
 }
 
 // CameraMode type

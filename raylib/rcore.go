@@ -1187,6 +1187,14 @@ func StopAutomationEventRecording() {
 	C.StopAutomationEventRecording()
 }
 
+func PlayAutomationEventList(list []AutomationEvent) {
+	C.PlayAutomationEventList(makeCAutomationEventList(list))
+}
+
+func StopAutomationEventList() {
+	C.StopAutomationEventList()
+}
+
 // PlayAutomationEvent - Play a recorded automation event
 func PlayAutomationEvent(event AutomationEvent) {
 	C.PlayAutomationEvent(*event.cptr())
