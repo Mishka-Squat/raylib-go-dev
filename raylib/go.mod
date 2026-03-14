@@ -3,11 +3,11 @@ module github.com/Mishka-Squat/raylib-go/raylib
 go 1.26
 
 require (
-	github.com/Mishka-Squat/gamemath v0.0.0-20260225094721-ae81770f08a5
-	github.com/Mishka-Squat/goex v0.0.0-20260226220030-0e1bc9a956a3
+	github.com/Mishka-Squat/gamemath v0.0.0-20260309191408-2b2b0e77d8cc
+	github.com/Mishka-Squat/goex v0.0.0-20260312232603-01345e9ec059
 	github.com/ebitengine/purego v0.10.0
-	golang.org/x/exp v0.0.0-20260218203240-3dfff04db8fa
-	golang.org/x/sys v0.41.0
+	golang.org/x/exp v0.0.0-20260312153236-7ab1446f8b90
+	golang.org/x/sys v0.42.0
 )
 
 require (
