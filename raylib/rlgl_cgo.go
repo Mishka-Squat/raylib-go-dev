@@ -780,38 +780,11 @@ func UnloadFramebuffer(id uint32) {
 	C.rlUnloadFramebuffer(cid)
 }
 
-// LoadShaderCode - Load shader from code strings
-func LoadShaderCode(vsCode string, fsCode string) uint32 {
-	var cvsCode *C.char = nil
-	var cfsCode *C.char = nil
-
-	if vsCode != "" {
-		cvsCode = C.CString(vsCode)
-		defer C.free(unsafe.Pointer(cvsCode))
-	}
-	if fsCode != "" {
-		cfsCode = C.CString(fsCode)
-		defer C.free(unsafe.Pointer(cfsCode))
-	}
-	return uint32(C.rlLoadShaderCode(cvsCode, cfsCode))
-}
-
-// CompileShader - Compile custom shader and return shader id (type: VERTEX_SHADER, FRAGMENT_SHADER, COMPUTE_SHADER)
-func CompileShader(shaderCode string, type_ int32) uint32 {
-	var cshaderCode *C.char = nil
-	if shaderCode != "" {
-		cshaderCode = C.CString(shaderCode)
-		defer C.free(unsafe.Pointer(cshaderCode))
-	}
-	ctype_ := C.int(type_)
-	return uint32(C.rlCompileShader(cshaderCode, ctype_))
-}
-
 // LoadShaderProgram - Load custom shader program
-func LoadShaderProgram(vShaderId uint32, fShaderId uint32) uint32 {
+func LoadShaderProgramEx(vShaderId uint32, fShaderId uint32) uint32 {
 	cvShaderId := C.uint(vShaderId)
 	cfShaderId := C.uint(fShaderId)
-	return uint32(C.rlLoadShaderProgram(cvShaderId, cfShaderId))
+	return uint32(C.rlLoadShaderProgramEx(cvShaderId, cfShaderId))
 }
 
 // UnloadShaderProgram - Unload shader program
@@ -865,12 +838,6 @@ func SetUniformSampler(locIndex int32, textureId uint32) {
 	clocIndex := C.int(locIndex)
 	ctextureId := C.uint(textureId)
 	C.rlSetUniformSampler(clocIndex, ctextureId)
-}
-
-// LoadComputeShaderProgram -
-func LoadComputeShaderProgram(shaderID uint32) uint32 {
-	cshaderID := C.uint(shaderID)
-	return uint32(C.rlLoadComputeShaderProgram(cshaderID))
 }
 
 // ComputeShaderDispatch - Dispatch compute shader (equivalent to *draw* for graphics pilepine)
