@@ -44,7 +44,8 @@ GLFWbool _glfwConnectNull(int platformID, _GLFWplatform* platform) {
 
 #cgo linux,x11 CFLAGS: -D_GLFW_X11
 #cgo linux,wayland CFLAGS: -D_GLFW_WAYLAND
-#cgo linux,!x11,!wayland CFLAGS: -D_GLFW_X11 -D_GLFW_WAYLAND
+//cgo linux,!x11,!wayland CFLAGS: -D_GLFW_X11 -D_GLFW_WAYLAND
+#cgo linux,!x11,!wayland CFLAGS: -D_GLFW_WAYLAND
 
 #cgo linux,!es2,!es3,!wayland LDFLAGS: -lGL
 
