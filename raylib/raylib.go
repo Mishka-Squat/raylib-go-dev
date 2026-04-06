@@ -1698,7 +1698,7 @@ func (i *Image) Unload() {
 }
 
 func (t Image) IsNull() bool {
-	return t.cptr().data == nil
+	return t.Data == nil
 }
 
 func (t Image) IsReady() bool {

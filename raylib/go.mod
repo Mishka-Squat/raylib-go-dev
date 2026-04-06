@@ -11,6 +11,7 @@ require (
 )
 
 require (
+	github.com/BrownNPC/wasm-ffi-go v1.2.0 // indirect
 	github.com/chewxy/math32 v1.11.1 // indirect
 	go.yaml.in/yaml/v4 v4.0.0-rc.4 // indirect
 )

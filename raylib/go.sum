@@ -1,3 +1,5 @@
+github.com/BrownNPC/wasm-ffi-go v1.2.0 h1:Lknst90sTLTkE870OKNP/Vw36TohQIJ4ln8W1IG9Zl0=
+github.com/BrownNPC/wasm-ffi-go v1.2.0/go.mod h1:D5+RBMb672fgw6vPz4HOWYxpyrmPrIao8VqlXihOFFg=
 github.com/Mishka-Squat/gamemath v0.0.0-20260309191408-2b2b0e77d8cc h1:iodY/eJbsDtAZTym5O+OxS2jjbP0B7P2KMULoTXVkwo=
 github.com/Mishka-Squat/gamemath v0.0.0-20260309191408-2b2b0e77d8cc/go.mod h1:+oYtVsXjJE6OQKJ43+D9doTuUY2T5G1rizDAtnzf52g=
 github.com/Mishka-Squat/goex v0.0.0-20260312232603-01345e9ec059 h1:PGSR+wlbVsmEnqdA4wf8KGHcPT6snD4s0xpETDJ0YbI=

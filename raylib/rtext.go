@@ -180,11 +180,6 @@ func DrawTextEx(font Font, text string, position vector2.Float32, fontSize float
 	C.DrawTextEx(*cfont, ctext, *cposition, cfontSize, cspacing, *ctint)
 }
 
-func DrawTextLayout(font Font, text string, fontSize float32, spacing float32, tint colorex.RGBA, layoutFn func(wh vector2.Float32) rect2.Float32) {
-	rect := layoutFn(MeasureTextEx(font, text, fontSize, spacing))
-	DrawTextEx(font, text, rect.Position, fontSize, spacing, tint)
-}
-
 // DrawTextPro - Draw text using Font and pro parameters (rotation)
 func DrawTextPro(font Font, text string, position vector2.Float32, origin vector2.Float32, rotation, fontSize float32, spacing float32, tint colorex.RGBA) {
 	cfont := font.cptr()
