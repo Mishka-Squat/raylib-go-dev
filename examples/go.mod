@@ -3,14 +3,14 @@ module examples
 go 1.26
 
 require (
-	github.com/Mishka-Squat/gamemath v0.0.0-20260309191408-2b2b0e77d8cc
-	github.com/Mishka-Squat/goex v0.0.0-20260312232603-01345e9ec059
+	github.com/Mishka-Squat/gamemath v0.0.0-20260314181207-3a77621846c3
+	github.com/Mishka-Squat/goex v0.0.0-20260408093508-20944c6d514d
 	github.com/Mishka-Squat/raylib-go/easings v0.0.0-20260220111826-0920877398a5
 	github.com/Mishka-Squat/raylib-go/physics v0.0.0-20260220111826-0920877398a5
 	github.com/Mishka-Squat/raylib-go/raygui v0.0.0-20260220111826-0920877398a5
 	github.com/Mishka-Squat/raylib-go/raylib v0.0.0-20260220111826-0920877398a5
 	github.com/jakecoffman/cp v1.2.1
-	github.com/neguse/go-box2d-lite v0.0.0-20170921151050-5d8ed9b7272b
+	github.com/neguse/go-box2d-lite v0.0.0-20260315142500-8c06e40d0e7b
 )
 
 require (
