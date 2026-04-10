@@ -4,11 +4,11 @@ go 1.26
 
 require (
 	github.com/BrownNPC/wasm-ffi-go v1.2.0
-	github.com/Mishka-Squat/gamemath v0.0.0-20260314181207-3a77621846c3
-	github.com/Mishka-Squat/goex v0.0.0-20260408093508-20944c6d514d
+	github.com/Mishka-Squat/gamemath v0.0.0-20260410141831-df6b051dcd73
+	github.com/Mishka-Squat/goex v0.0.0-20260410140447-afaf9800e846
 	github.com/ebitengine/purego v0.10.0
-	golang.org/x/exp v0.0.0-20260312153236-7ab1446f8b90
-	golang.org/x/sys v0.42.0
+	golang.org/x/exp v0.0.0-20260410095643-746e56fc9e2f
+	golang.org/x/sys v0.43.0
 )
 
 require (
