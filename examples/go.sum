@@ -8,6 +8,8 @@ github.com/Mishka-Squat/gamemath v0.0.0-20260314181207-3a77621846c3 h1:xe2wWfpiX
 github.com/Mishka-Squat/gamemath v0.0.0-20260314181207-3a77621846c3/go.mod h1:psh8ksx83EQTjvHWIQmnPLJ1GyWB9iBe1qy0GjNF9GI=
 github.com/Mishka-Squat/gamemath v0.0.0-20260410141831-df6b051dcd73 h1:uO5WjRwcRSHwhOM9Xd9jAouddSVw95nHSSBtcj4U+G8=
 github.com/Mishka-Squat/gamemath v0.0.0-20260410141831-df6b051dcd73/go.mod h1:AlMN8IhTqSPaT+ffvu7YpOp6E3HpBrqa5zgeLMFh/pA=
+github.com/Mishka-Squat/gamemath v0.0.0-20260410153339-fe866f803731 h1:wfojR1O/qZerxVI/vyEGqJEpZzzog/+I8gvV15Dw4GE=
+github.com/Mishka-Squat/gamemath v0.0.0-20260410153339-fe866f803731/go.mod h1:hzC9I4btyvebg2AeUAEjRZJAgB2fp/Lp8I8EECIW2tw=
 github.com/Mishka-Squat/goex v0.0.0-20260220093026-a6a159ee586e h1:wmZKOBGuan16eHb084X+wKIb56E8YB9sMSNxPsDOcbk=
 github.com/Mishka-Squat/goex v0.0.0-20260220093026-a6a159ee586e/go.mod h1:UlntSj+kA1/qMnEKQEEF0LQ4t7SB7R1moXwvJAphYsc=
 github.com/Mishka-Squat/goex v0.0.0-20260226220030-0e1bc9a956a3 h1:LowjKsJLUUDPi+2ttb+KHWFPhaiew1kbcRk6VfUtwuQ=
@@ -18,6 +20,8 @@ github.com/Mishka-Squat/goex v0.0.0-20260408093508-20944c6d514d h1:KH1jGU9N7g07X
 github.com/Mishka-Squat/goex v0.0.0-20260408093508-20944c6d514d/go.mod h1:6S8pDMEP6L0FLSDTjtDumRaVPJQSkft/hfeW8lZlaLU=
 github.com/Mishka-Squat/goex v0.0.0-20260410140447-afaf9800e846 h1:YzklFIOzET0gCLedlMOJdc3fnzpmOOnTsuG7++EoVDg=
 github.com/Mishka-Squat/goex v0.0.0-20260410140447-afaf9800e846/go.mod h1:6S8pDMEP6L0FLSDTjtDumRaVPJQSkft/hfeW8lZlaLU=
+github.com/Mishka-Squat/goex v0.0.0-20260416221119-e795dc6e095d h1:Z59mkOjp68pGvbVpysmJpKgVJwx7t61+odRp9pXAck0=
+github.com/Mishka-Squat/goex v0.0.0-20260416221119-e795dc6e095d/go.mod h1:Q5XPU/eWhTu/Efmp9yqmGXppuEs1QXYlj64BRZpgsGQ=
 github.com/Mishka-Squat/raylib-go/easings v0.0.0-20260220111826-0920877398a5 h1:Wo38CD7xVbsc3X4bUGrKH7bEyCn1NKgg8lJ07wUum5s=
 github.com/Mishka-Squat/raylib-go/easings v0.0.0-20260220111826-0920877398a5/go.mod h1:mvcAf13fp7U0yZeBE59ELXzzgvDm+wk2vY5pFCasMwE=
 github.com/Mishka-Squat/raylib-go/physics v0.0.0-20260220111826-0920877398a5 h1:v7IFkYNoEzgG3lvZHvoHS08jxRglyDeV1/Ir0/lWix8=

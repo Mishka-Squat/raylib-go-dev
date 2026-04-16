@@ -3,8 +3,8 @@ module github.com/Mishka-Squat/raylib-go/raygui
 go 1.26
 
 require (
-	github.com/Mishka-Squat/gamemath v0.0.0-20260410141831-df6b051dcd73
-	github.com/Mishka-Squat/goex v0.0.0-20260410140447-afaf9800e846
+	github.com/Mishka-Squat/gamemath v0.0.0-20260410153339-fe866f803731
+	github.com/Mishka-Squat/goex v0.0.0-20260416221119-e795dc6e095d
 	github.com/Mishka-Squat/raylib-go/raylib v0.0.0-20260220111826-0920877398a5
 	golang.org/x/exp v0.0.0-20260410095643-746e56fc9e2f
 )
